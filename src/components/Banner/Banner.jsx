@@ -16,7 +16,6 @@ import slide5 from '../../assets/banner/5.jpg';
 import slide6 from '../../assets/banner/6.jpg';
 
 // import Nav from '../Nav/Nav';
-import { FaSearch } from 'react-icons/fa';
 
 const Banner = () => {
   return (
@@ -65,6 +64,9 @@ const Banner = () => {
                   <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
                     {`Explore SnowyNest's curated listings to effortlessly find and purchase the ideal property that matches your preferences and fits your lifestyle perfectly.`}
                   </p>
+                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
+                    All Queries
+                  </button>
                 </div>
               </div>
             </div>
@@ -215,19 +217,9 @@ const Banner = () => {
           </div>
         </SwiperSlide>
       </Swiper>
-      <div className="w-10/12 sm:w-3/4 lg:w-1/2 absolute top-[65%] left-1/2 -translate-x-1/2 z-10">
-        <div className="relative">
-          <input
-            type="text"
-            name="search"
-            className="w-full h-12 rounded-full outline-none bg-transparent border-2 my-7 px-7 placeholder-slate-300 text-white"
-            placeholder="Search Your Keyword"
-          />
-          <span className="absolute cursor-pointer top-1/2 -translate-y-1/2 right-5 md:right-10 text-redLi ">
-            <FaSearch />
-          </span>
-        </div>
-      </div>
+      {/* <div className="w-10/12 sm:w-3/4 lg:w-1/2 absolute top-[65%] left-1/2 -translate-x-1/2 z-10">
+       
+      </div> */}
     </div>
   );
 };
