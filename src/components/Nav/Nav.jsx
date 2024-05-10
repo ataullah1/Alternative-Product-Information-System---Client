@@ -34,9 +34,11 @@ const Nav = () => {
           </Link>
         </ul>
         <div>
-          <button className="py-2 w-24 bg-mainColor rounded-md text-white font-bold">
-            Login
-          </button>
+          <Link to={'/login'}>
+            <button className="py-2 w-24 bg-mainColor rounded-md text-white font-bold">
+              Login
+            </button>
+          </Link>
         </div>
       </div>
     </div>
