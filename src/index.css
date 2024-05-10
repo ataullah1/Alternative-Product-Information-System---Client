@@ -6,9 +6,29 @@
 
 /* @media (max-height: 680px) {
 } */
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #38b6ff #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #358ec2;
+  border-radius: 100%;
+  border: 0px solid #473e3e00;
+}
 
 ul a.active {
   border: 2px solid #38b6ff;
+}
+.smallScreenMenu > a.active {
+  background-color: #38b6ff;color: #ffffff;
 }
 
 /* .dropdownMenu > a.active {
@@ -24,4 +44,16 @@ h2,
 h3,
 button {
   font-family: 'Salsa', cursive;
+}
+
+/* Banner arrow edit */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: #38b6ff;
+}
+@media screen and (max-width: 640px) {
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    transform: scale(0.6);
+  }
 }

@@ -61,13 +61,38 @@ const Nav = () => {
     }
   });
 
+  // Scroll function  \
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
-    <div className="fixed top-0 left-0 z-30 w-full bg-[#00000039] py-2">
-      <div className="w-11/12 mx-auto flex items-center justify-between">
+    <div
+      className={
+        scrolled
+          ? 'fixed shadow-xl top-0 left-0 right-0 bg-[#5a5a5a71] dark:bg-[#8e8e8e75] z-50 w-full py-2 mx-auto'
+          : 'bg-transparent fixed top-0 left-0 right-0 z-50 w-full mx-auto py-2 sm:py-5'
+      }
+    >
+      <div className="w-11/12 mx-auto max-w-[1700px] flex items-center justify-between">
         <div>
           <img src={logo} alt="" className="h-12 md:h-16" />
         </div>
-        <ul className="hidden md:flex items-center justify-around gap-3 mx-auto">
+        <ul
+          className={`hidden md:flex items-center justify-around gap-3 mx-auto ${!scrolled&&'bg-[#04070a55]'} dark:bg-transparent px-6 py-1 rounded-2xl`}
+        >
           <NavLink
             className="border-2 w-24 py-1.5 text-center text-white hover:border-mainColor duration-200"
             to={'/'}
@@ -229,7 +254,7 @@ const Nav = () => {
               </a>
             </div>
 
-            <div className="invisible right-0 absolute z-50 flex w-60 flex-col bg-gray-100 shadow-4xl group-hover:visible text-center">
+            <div className="invisible right-0 absolute z-50 flex w-60 flex-col bg-gray-100 shadow-4xl group-hover:visible text-center smallScreenMenu">
               <NavLink
                 to={'/'}
                 className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"

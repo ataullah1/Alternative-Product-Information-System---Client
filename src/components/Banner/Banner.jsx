@@ -9,10 +9,10 @@ import { Autoplay, Pagination, Navigation, Keyboard } from 'swiper/modules';
 
 // image input
 import slide1 from '../../assets/banner/1.jpg';
-import slide2 from '../../assets/banner/2.jpg';
+import slide2 from '../../assets/banner/5.jpg';
 import slide3 from '../../assets/banner/3.jpg';
 import slide4 from '../../assets/banner/4.jpg';
-import slide5 from '../../assets/banner/5.jpg';
+import slide5 from '../../assets/banner/2.jpg';
 import slide6 from '../../assets/banner/6.jpg';
 import { Link } from 'react-router-dom';
 
@@ -20,11 +20,7 @@ import { Link } from 'react-router-dom';
 
 const Banner = () => {
   return (
-    <div className="relative text-white">
-      {/* <div className="fixed w-full max-w-[1500px] mx-auto z-50">
-        <Nav />
-      </div> */}
-
+    <div className="relative text-white ">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -41,11 +37,11 @@ const Banner = () => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation, Keyboard]}
-        className="mySwiper h-[400px] md:min-h-screen"
+        className="mySwiper h-[420px] md:min-h-screen"
       >
         <SwiperSlide>
           <div
-            className="h-[400px] md:min-h-screen relative overflow-hidden bg-cover bg-no-repeat p-12 text-center"
+            className="h-[420px] md:min-h-screen relative overflow-hidden bg-cover bg-no-repeat p-12 text-center"
             style={{
               backgroundImage: `url(${slide1})`,
               backgroundPosition: 'center',
@@ -54,11 +50,11 @@ const Banner = () => {
             }}
           >
             <div
-              className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
+              className="absolute bottom-0 space-y-2left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[900px] space-y-5">
+                <div className="text-white px-4 max-w-[900px] space-y-0 sm:space-y-5">
                   <h1
                     data-aos="zoom-in-down"
                     data-aos-duration="1000"
@@ -75,7 +71,7 @@ const Banner = () => {
                   </p>
                   <div data-aos="zoom-in-up" data-aos-duration="1000">
                     <Link to={'/queries'}>
-                      <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                      <button className="text-xl mt-0 sm:mt-8 py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
                         All Queries
                       </button>{' '}
                     </Link>
@@ -87,7 +83,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className="h-[400px] md:min-h-screen relative overflow-hidden  bg-cover bg-no-repeat p-12 text-center"
+            className="h-[420px] md:min-h-screen relative overflow-hidden  bg-cover bg-no-repeat p-12 text-center"
             style={{
               backgroundImage: `url(${slide2})`,
               backgroundPosition: 'center',
@@ -100,7 +96,7 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[900px] space-y-5">
+                <div className="text-white px-4 max-w-[900px] space-y-0 sm:space-y-5">
                   <h1
                     data-aos="zoom-in-down"
                     data-aos-duration="3000"
@@ -117,7 +113,7 @@ const Banner = () => {
                   </p>
 
                   <Link to={'/queries'}>
-                    <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                    <button className="text-xl mt-0 sm:mt-8 py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
                       All Queries
                     </button>{' '}
                   </Link>
@@ -128,7 +124,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className="h-[400px] md:min-h-screen relative overflow-hidden  bg-cover bg-no-repeat p-12 text-center"
+            className="h-[420px] md:min-h-screen relative overflow-hidden  bg-cover bg-no-repeat p-12 text-center"
             style={{
               backgroundImage: `url(${slide3})`,
               backgroundPosition: 'center',
@@ -141,7 +137,7 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[900px] space-y-5">
+                <div className="text-white px-4 max-w-[900px] space-y-0 sm:space-y-5">
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
                     Curating Excellence, Unveiling Hidden Treasures
                   </h1>
@@ -151,7 +147,7 @@ const Banner = () => {
                     enhancing your shopping experience.
                   </p>
                   <Link to={'/queries'}>
-                    <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                    <button className="text-xl mt-0 sm:mt-8 py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
                       All Queries
                     </button>{' '}
                   </Link>
@@ -162,7 +158,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className="h-[400px] md:min-h-screen relative overflow-hidden  bg-cover bg-no-repeat p-12 text-center"
+            className="h-[420px] md:min-h-screen relative overflow-hidden  bg-cover bg-no-repeat p-12 text-center"
             style={{
               backgroundImage: `url(${slide4})`,
               backgroundPosition: 'center',
@@ -175,7 +171,7 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[900px] space-y-5">
+                <div className="text-white px-4 max-w-[900px] space-y-0 sm:space-y-5">
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
                     Forge Meaningful Connections, Share Experiences
                   </h1>
@@ -185,7 +181,7 @@ const Banner = () => {
                     vibrant and supportive community.
                   </p>
                   <Link to={'/queries'}>
-                    <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                    <button className="text-xl mt-0 sm:mt-8 py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
                       All Queries
                     </button>{' '}
                   </Link>
@@ -196,7 +192,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className="h-[400px] md:min-h-screen relative overflow-hidden  bg-cover bg-no-repeat p-12 text-center"
+            className="h-[420px] md:min-h-screen relative overflow-hidden  bg-cover bg-no-repeat p-12 text-center"
             style={{
               backgroundImage: `url(${slide5})`,
               backgroundPosition: 'center',
@@ -209,7 +205,7 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[900px] space-y-5">
+                <div className="text-white px-4 max-w-[900px] space-y-0 sm:space-y-5">
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
                     Discover Unique Finds for Every Niche
                   </h1>
@@ -219,7 +215,7 @@ const Banner = () => {
                     unearth hidden gems.
                   </p>
                   <Link to={'/queries'}>
-                    <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                    <button className="text-xl mt-0 sm:mt-8 py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
                       All Queries
                     </button>{' '}
                   </Link>
@@ -230,7 +226,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className="h-[400px] md:min-h-screen relative overflow-hidden  bg-cover bg-no-repeat p-12 text-center"
+            className="h-[420px] md:min-h-screen relative overflow-hidden  bg-cover bg-no-repeat p-12 text-center"
             style={{
               backgroundImage: `url(${slide6})`,
               backgroundPosition: 'center',
@@ -243,7 +239,7 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[900px] space-y-5">
+                <div className="text-white px-4 max-w-[900px] space-y-0 sm:space-y-5">
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
                     Empowering Consumer Voices, Shaping Quality
                   </h1>
@@ -253,7 +249,7 @@ const Banner = () => {
                     recommendations within our vibrant community.
                   </p>
                   <Link to={'/queries'}>
-                    <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                    <button className="text-xl mt-0 sm:mt-8 py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
                       All Queries
                     </button>{' '}
                   </Link>
