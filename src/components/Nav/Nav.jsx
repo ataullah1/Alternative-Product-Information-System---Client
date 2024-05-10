@@ -132,6 +132,9 @@ const Nav = () => {
               <Link className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
                 Contact Us
               </Link>
+              <Link className="block lg:hidden hover:bg-mClr py-1.5 hover:text-white font-semibold border-b bg-mainColor text-white">
+                Login
+              </Link>
             </div>
           </div>
         </div>
