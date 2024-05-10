@@ -2,23 +2,24 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
-    <div>
-      <div>
+    <div className="w-11/12 mx-auto">
+      <div className="flex items-center gap-5">
         <div
-          className={`hidden lg:block absolute w-1/2 h-full top-0 z-50 duration-500 overflow-hidden bg-black/20`}
+          className="w-full md:w-1/2 h-96"
+          style={{
+            backgroundImage:
+              'url(' + 'https://source.unsplash.com/random' + ')',
+            backgroundPosition: 'center',
+          }}
         >
-          <img
+          {/* <img
             src="https://source.unsplash.com/random"
             className="object-cover h-full"
             alt="card navigate ui"
-          />
+          /> */}
         </div>
         {/* login form */}
-        <form
-          className={`p-8 w-full mr-0 ml-auto duration-500 ${
-            register ? 'lg:translate-x-full hidden lg:block' : ''
-          }`}
-        >
+        <form className={`md:w-1/2 p-8 w-full mr-0 ml-auto duration-500`}>
           <h1 className="backdrop-blur-sm text-2xl lg:text-4xl pb-4">Login</h1>
           <div className="space-y-5">
             <label htmlFor="_email" className="block">
