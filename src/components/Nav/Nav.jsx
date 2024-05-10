@@ -4,6 +4,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { RiMenuAddFill } from 'react-icons/ri';
 import { HiPlus } from 'react-icons/hi';
 import { useEffect, useState } from 'react';
+import useAuth from '../../Hooks/useAuth';
 const Nav = () => {
   // Dark mood Light mood implement
   const [theme, setTheme] = useState(
@@ -78,6 +79,9 @@ const Nav = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const { userDta } = useAuth();
+  console.log(userDta);
   return (
     <div
       className={
