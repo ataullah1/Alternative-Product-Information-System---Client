@@ -32,14 +32,13 @@ const Register = () => {
     logOutAcc,
     userDta,
     profileUpdate,
-    setReload,
-    reload,
-    setIsLoading,
+    setLoading,
     setRegisterDta,
   } = useContext(ContextAuth);
 
   // Naviget, login done then go to Login
   const naviget = useNavigate();
+
   useEffect(() => {
     if (userDta) {
       naviget('/');
@@ -88,15 +87,13 @@ const Register = () => {
             console.log(err);
           });
         logOutAcc();
-        setReload(!reload);
-        setRegisterDta(false);
-
         naviget('/login');
+        setRegisterDta(false);
       })
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage);
-        setIsLoading(false);
+        setLoading(false);
         Swal.fire({
           title: 'Oops...!',
           text: 'Sorry, your account could not be Created !',
@@ -140,7 +137,7 @@ const Register = () => {
   return (
     <div>
       <div className="w-11/12 mx-auto">
-        <div className="h-28"></div>
+        <div className="h-28 sm:h-36"></div>
         <div className="flex flex-col md:flex-row-reverse items-center md:w-11/12 lg:w-9/12 mx-auto border-mClr border-2 rounded gap-6 shadow-2xl">
           <div
             className="w-full md:w-1/2 h-72 sm:h-96 md:h-[600px]"

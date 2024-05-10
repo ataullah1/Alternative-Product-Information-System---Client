@@ -117,7 +117,7 @@ const Login = () => {
   };
   return (
     <div className="w-11/12 mx-auto">
-      <div className="h-28"></div>
+      <div className="h-28 sm:h-36"></div>
       <div className="flex flex-col md:flex-row items-center md:w-11/12 lg:w-9/12 mx-auto border-mClr border-2 rounded gap-6 shadow-2xl">
         <div
           className="w-full md:w-1/2 h-72 sm:h-96 md:h-[600px]"

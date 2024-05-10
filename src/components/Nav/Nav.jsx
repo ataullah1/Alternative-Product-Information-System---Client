@@ -5,6 +5,7 @@ import { RiMenuAddFill } from 'react-icons/ri';
 import { HiPlus } from 'react-icons/hi';
 import { useEffect, useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
+import ProfileMenu from '../ProfleMenu/ProfileMenu';
 const Nav = () => {
   // Dark mood Light mood implement
   const [theme, setTheme] = useState(
@@ -81,13 +82,13 @@ const Nav = () => {
   }, []);
 
   const { userDta } = useAuth();
-  console.log(userDta);
+  // console.log(userDta);
   return (
     <div
       className={
         scrolled
-          ? 'fixed shadow-xl top-0 left-0 right-0 bg-[#5a5a5a71] dark:bg-[#8e8e8e75] z-50 w-full py-2 mx-auto'
-          : 'bg-transparent fixed top-0 left-0 right-0 z-50 w-full mx-auto py-2 sm:py-5'
+          ? 'fixed shadow-xl top-0 left-0 right-0 bg-[#5a5a5a71] dark:bg-[#8e8e8e75] z-50 w-full py-1 mx-auto'
+          : 'bg-transparent fixed top-0 left-0 right-0 z-50 w-full mx-auto py-2 sm:py-3'
       }
     >
       <div className="w-11/12 mx-auto max-w-[1700px] flex items-center justify-between">
@@ -208,11 +209,15 @@ const Nav = () => {
               </div>
             </div>
           </div>
-          <Link to={'/login'}>
-            <button className="hover:-skew-x-12 duration-500 py-2 w-28 text-lg bg-mainColor text-white font-bold">
-              Login
-            </button>
-          </Link>
+          {userDta ? (
+            <ProfileMenu />
+          ) : (
+            <Link to={'/login'}>
+              <button className="hover:-skew-x-12 duration-500 py-2 w-28 text-lg bg-mainColor text-white font-bold">
+                Login
+              </button>
+            </Link>
+          )}
         </div>
 
         {/* Responsive  */}
@@ -252,67 +257,71 @@ const Nav = () => {
               </div>
             </div>
           </div>
-          <div className="group relative cursor-pointer py-1.5 w-34">
-            <div className="flex items-center justify-between pl-2 lg:pl-0 pr-2 w-full py-1.5 text-center text-white duration-200">
-              <a
-                className="menu-hover text-3xl font-medium text-white lg:mx-4"
-                onClick={() => {}}
-              >
-                <RiMenuAddFill />
-              </a>
-            </div>
+          {userDta ? (
+            <ProfileMenu />
+          ) : (
+            <div className="group relative cursor-pointer py-1.5 w-34">
+              <div className="flex items-center justify-between pl-2 lg:pl-0 pr-2 w-full py-1.5 text-center text-white duration-200">
+                <a
+                  className="menu-hover text-3xl font-medium text-white lg:mx-4"
+                  onClick={() => {}}
+                >
+                  <RiMenuAddFill />
+                </a>
+              </div>
 
-            <div className="invisible right-0 absolute z-50 flex w-60 flex-col bg-gray-100 shadow-4xl group-hover:visible text-center smallScreenMenu">
-              <NavLink
-                to={'/'}
-                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-              >
-                Home
-              </NavLink>
-              <NavLink
-                to={'/queries'}
-                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-              >
-                Queries
-              </NavLink>
-              <NavLink
-                to={'/recommendations-for-me'}
-                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-              >
-                Recommendations For Me
-              </NavLink>
-              <NavLink
-                to={'/my-queries'}
-                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-              >
-                My Queries
-              </NavLink>
-              <NavLink
-                to={'/my-recommendations'}
-                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-              >
-                My recommendations
-              </NavLink>
-              <NavLink
-                to={'/about'}
-                className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-              >
-                About Us
-              </NavLink>
-              <NavLink
-                to={'/contact'}
-                className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-              >
-                Contact Us
-              </NavLink>
-              <Link
-                to={'/login'}
-                className="block lg:hidden hover:bg-mClr py-1.5 hover:text-white font-semibold border-b bg-mainColor text-white"
-              >
-                Login
-              </Link>
+              <div className="invisible right-0 absolute z-50 flex w-60 flex-col bg-gray-100 shadow-4xl group-hover:visible text-center smallScreenMenu">
+                <NavLink
+                  to={'/'}
+                  className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  to={'/queries'}
+                  className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                >
+                  Queries
+                </NavLink>
+                <NavLink
+                  to={'/recommendations-for-me'}
+                  className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                >
+                  Recommendations For Me
+                </NavLink>
+                <NavLink
+                  to={'/my-queries'}
+                  className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                >
+                  My Queries
+                </NavLink>
+                <NavLink
+                  to={'/my-recommendations'}
+                  className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                >
+                  My recommendations
+                </NavLink>
+                <NavLink
+                  to={'/about'}
+                  className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                >
+                  About Us
+                </NavLink>
+                <NavLink
+                  to={'/contact'}
+                  className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                >
+                  Contact Us
+                </NavLink>
+                <Link
+                  to={'/login'}
+                  className="block lg:hidden hover:bg-mClr py-1.5 hover:text-white font-semibold border-b bg-mainColor text-white"
+                >
+                  Login
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
