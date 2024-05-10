@@ -2,7 +2,65 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/finalLogo.png';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { RiMenuAddFill } from 'react-icons/ri';
+import { HiPlus } from 'react-icons/hi';
+import { useEffect, useState } from 'react';
 const Nav = () => {
+  const [theme, setTheme] = useState(
+    localStorage.getItem('theme') ? localStorage.getItem('theme') : 'system'
+  );
+  const element = document.documentElement;
+  const darkQuery = window.matchMedia('(prefers-color-scheme:dark)');
+  const moods = [
+    {
+      icon: 'desktop-outline',
+      text: 'system',
+    },
+    {
+      icon: 'sunny',
+      text: 'light',
+    },
+    {
+      icon: 'moon',
+      text: 'dark',
+    },
+  ];
+  function onWindowMatch() {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) && darkQuery.matches)
+    ) {
+      element.classList.add('dark');
+    } else {
+      element.classList.remove('dark');
+    }
+  }
+
+  useEffect(() => {
+    switch (theme) {
+      case 'dark':
+        element.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        break;
+      case 'light':
+        element.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        break;
+      default:
+        localStorage.removeItem('theme');
+        onWindowMatch();
+        break;
+    }
+  }, [theme, element.classList]);
+  darkQuery.addEventListener('change', (e) => {
+    if (!('theme' in localStorage)) {
+      if (e.matches) {
+        element.classList.add('dark');
+      } else {
+        element.classList.remove('dark');
+      }
+    }
+  });
+
   return (
     <div className="fixed top-0 left-0 z-30 w-full bg-[#00000039] py-2">
       <div className="w-11/12 mx-auto flex items-center justify-between">
@@ -66,18 +124,41 @@ const Nav = () => {
             Contact
           </Link>
         </ul>
-        <div className="hidden md:flex items-center gap-4">
-          <div className="text-white">
-            <span>
-              <svg
-                className="swap-on fill-current w-10 h-10"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-              </svg>
-            </span>
-            <span></span>
+        <div className="hidden md:flex items-center gap-2">
+          <div className="relative w-10 h-10">
+            <div className="absolute">
+              <div className="group flex flex-col items-center justify-center w-max mx-auto">
+                {/* + icon  */}
+                <div className="flex justify-center w-10 h-10 bg-mainColor rounded-full items-center group-hover:rotate-[135deg] hover:bg-[#0095FF]/80 duration-500 text-3xl">
+                  <HiPlus />
+                </div>
+                {/* icon container  */}
+                <div className=" text-white text-3xl duration-500 h-0 group-hover:my-4 group-hover:h-full bg-slate-800">
+                  {/* Icon Map */}
+                  {moods?.map((opt, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => setTheme(opt.text)}
+                      className={`${
+                        theme === opt.text && 'text-white bg-mainColor'
+                      } w-10 h-10 flex items-center justify-center scale-0 group-hover:scale-100 duration-300 shadow-[0px_2px_8px_0px_rgba(99,99,99,0.4)] opacity-0 group-hover:opacity-100 ${
+                        idx === 0
+                          ? 'delay-[400ms] group-hover:delay-100'
+                          : idx === 1
+                          ? 'delay-300 group-hover:delay-200'
+                          : idx === 2
+                          ? 'delay-200 group-hover:delay-300'
+                          : idx === 3
+                          ? 'delay-100 group-hover:delay-[400ms]'
+                          : 'delay-[400ms] group-hover:delay-100'
+                      }`}
+                    >
+                      <ion-icon name={opt.icon}></ion-icon>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
           <Link to={'/login'}>
             <button className="py-2 w-28 text-lg bg-mainColor text-white font-bold">
