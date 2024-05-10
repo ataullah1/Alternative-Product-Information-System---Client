@@ -88,10 +88,14 @@ const Nav = () => {
     >
       <div className="w-11/12 mx-auto max-w-[1700px] flex items-center justify-between">
         <div>
-          <img src={logo} alt="" className="h-12 md:h-16" />
+          <Link to={'/'}>
+            <img src={logo} alt="" className="h-12 md:h-16" />
+          </Link>
         </div>
         <ul
-          className={`hidden md:flex items-center justify-around gap-3 mx-auto ${!scrolled&&'bg-[#04070a55]'} dark:bg-transparent px-6 py-1 rounded-2xl`}
+          className={`hidden md:flex items-center justify-around gap-3 mx-auto ${
+            !scrolled && 'bg-[#04070a55]'
+          } dark:bg-transparent px-6 py-1 rounded-2xl`}
         >
           <NavLink
             className="border-2 w-24 py-1.5 text-center text-white hover:border-mainColor duration-200"

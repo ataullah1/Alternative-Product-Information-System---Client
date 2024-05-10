@@ -141,7 +141,7 @@ const Register = () => {
     <div>
       <div className="w-11/12 mx-auto">
         <div className="h-28"></div>
-        <div className="flex flex-col md:flex-row items-center md:w-11/12 lg:w-9/12 mx-auto border-mClr border-2 rounded gap-6 shadow-2xl">
+        <div className="flex flex-col md:flex-row-reverse items-center md:w-11/12 lg:w-9/12 mx-auto border-mClr border-2 rounded gap-6 shadow-2xl">
           <div
             className="w-full md:w-1/2 h-72 sm:h-96 md:h-[600px]"
             style={{
@@ -244,7 +244,7 @@ const Register = () => {
               <p></p>
               <label>
                 <input type="checkbox" /> I agree to the
-                <Link to={'/privecy-policy'} className="text-redLi">
+                <Link to={'/privecy-policy'} className="text-mClr">
                   {' '}
                   Privacy Policy
                 </Link>
@@ -253,13 +253,13 @@ const Register = () => {
                 // onClick={handeleNameImg}
                 type="submit"
                 value="Register"
-                className="w-full py-2 px-4 rounded-md text-center text-white hover:text-redLi font-bold bg-redLi active:scale-95 duration-150 cursor-pointer hover:bg-transparent border-2 border-redLi"
+                className="w-full py-2 px-4 rounded-md text-center text-white hover:text-mClr font-bold bg-mClr active:scale-95 duration-150 cursor-pointer hover:bg-transparent border-2 border-mClr"
               />
             </form>
             <p className="pt-3">
-              {`Don't have an account? `}
-              <Link to={'/register'} className="underline text-mClr">
-                Create Account
+              Already have an account?{' '}
+              <Link to={'/login'} className="underline text-mClr">
+                Login
               </Link>
             </p>
             <div className="divider before:bg-mClr after:bg-mClr divider-secondary">

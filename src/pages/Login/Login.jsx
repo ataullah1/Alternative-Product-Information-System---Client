@@ -8,8 +8,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaGithub } from 'react-icons/fa';
 import { ContextAuth } from '../../provider/Provider';
 import { useNavigate } from 'react-router-dom';
-// Sweetalert import
 import Swal from 'sweetalert2';
+
 const Login = () => {
   // Naviget, login done then go to Home
   const naviget = useNavigate();
