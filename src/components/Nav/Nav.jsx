@@ -76,7 +76,7 @@ const Nav = () => {
           </NavLink>
           <NavLink
             className="border-2 w-24 py-1.5 text-center text-white hover:border-mainColor duration-200"
-            to={'/about'}
+            to={'/queries'}
           >
             Queries
           </NavLink>
@@ -94,19 +94,34 @@ const Nav = () => {
             </div>
 
             <div className="invisible absolute z-50 flex w-60 flex-col bg-gray-100 shadow-4xl group-hover:visible text-center dropdownMenu">
-              <Link className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              <Link
+                to={'/recommendations-for-me'}
+                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 Recommendations For Me
               </Link>
-              <Link className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              <Link
+                to={'/my-queries'}
+                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 My Queries
               </Link>
-              <Link className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
-                My recommendations
+              <Link
+                to={'/my-recommendations'}
+                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
+                My Recommendations
               </Link>
-              <Link className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              <Link
+                to={'/about'}
+                className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 About Us
               </Link>
-              <Link className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              <Link
+                to={'/contact'}
+                className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 Contact Us
               </Link>
             </div>
@@ -119,7 +134,7 @@ const Nav = () => {
           </NavLink>
           <NavLink
             className="hidden lg:block border-2 w-24 py-1.5 text-center text-white hover:border-mainColor duration-200"
-            to={'/about'}
+            to={'/contact'}
           >
             Contact
           </NavLink>
@@ -215,28 +230,52 @@ const Nav = () => {
             </div>
 
             <div className="invisible right-0 absolute z-50 flex w-60 flex-col bg-gray-100 shadow-4xl group-hover:visible text-center">
-              <Link className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              <NavLink
+                to={'/'}
+                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 Home
-              </Link>
-              <Link className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              </NavLink>
+              <NavLink
+                to={'/queries'}
+                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 Queries
-              </Link>
-              <Link className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              </NavLink>
+              <NavLink
+                to={'/recommendations-for-me'}
+                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 Recommendations For Me
-              </Link>
-              <Link className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              </NavLink>
+              <NavLink
+                to={'/my-queries'}
+                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 My Queries
-              </Link>
-              <Link className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              </NavLink>
+              <NavLink
+                to={'/my-recommendations'}
+                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 My recommendations
-              </Link>
-              <Link className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              </NavLink>
+              <NavLink
+                to={'/about'}
+                className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 About Us
-              </Link>
-              <Link className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b">
+              </NavLink>
+              <NavLink
+                to={'/contact'}
+                className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+              >
                 Contact Us
-              </Link>
-              <Link className="block lg:hidden hover:bg-mClr py-1.5 hover:text-white font-semibold border-b bg-mainColor text-white">
+              </NavLink>
+              <Link
+                to={'/login'}
+                className="block lg:hidden hover:bg-mClr py-1.5 hover:text-white font-semibold border-b bg-mainColor text-white"
+              >
                 Login
               </Link>
             </div>

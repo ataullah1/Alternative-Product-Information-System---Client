@@ -31,7 +31,21 @@ const Home = () => {
   return (
     <div>
       {/*Banner part  */}
-      <div className="h-72 w-full md:h-[500px] lg:h-screen relative overflow-hidden">
+      <div className=" bg-red-300 w-full md:h-[500px] lg:h-screen relative overflow-hidden">
+        {/* dots */}
+        <div className="z-20 absolute bottom-3 left-1/2 -translate-x-1/2">
+          <div className="flex justify-center items-center rounded-full w-full gap-1">
+            {carouselImages.map((_, inx) => (
+              <button
+                key={_}
+                onClick={() => setCurrentSlider(inx)}
+                className={`rounded-full duration-500 bg-white ${
+                  currentSlider === inx ? 'w-8' : 'w-2'
+                } h-2`}
+              ></button>
+            ))}
+          </div>
+        </div>
         {/* arrow left */}
         <button
           onClick={prevSlider}
@@ -83,18 +97,7 @@ const Home = () => {
             </g>
           </svg>
         </button>
-        {/* dots */}
-        <div className="flex justify-center items-center rounded-full z-50 absolute bottom-4 w-full gap-1">
-          {carouselImages.map((_, inx) => (
-            <button
-              key={_}
-              onClick={() => setCurrentSlider(inx)}
-              className={`rounded-full duration-500 bg-white ${
-                currentSlider === inx ? 'w-8' : 'wz-2'
-              } h-2`}
-            ></button>
-          ))}
-        </div>
+
         {/* Carousel container */}
         <div
           className="ease-linear duration-500 flex transform-gpu"
