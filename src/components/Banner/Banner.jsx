@@ -14,6 +14,7 @@ import slide3 from '../../assets/banner/3.jpg';
 import slide4 from '../../assets/banner/4.jpg';
 import slide5 from '../../assets/banner/5.jpg';
 import slide6 from '../../assets/banner/6.jpg';
+import { Link } from 'react-router-dom';
 
 // import Nav from '../Nav/Nav';
 
@@ -29,7 +30,7 @@ const Banner = () => {
         centeredSlides={true}
         loop={true}
         autoplay={{
-          delay: 3300,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -57,17 +58,28 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[800px]">
-                  <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
-                    Buy the property of your choice.
+                <div className="text-white px-4 max-w-[900px] space-y-5">
+                  <h1
+                    data-aos="zoom-in-down"
+                    data-aos-duration="1000"
+                    className="text-3xl sm:text-5xl lg:text-6xl font-bold"
+                  >
+                    Unraveling the Essence of Exceptional Products
                   </h1>
-                  <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
-                    {`Explore SnowyNest's curated listings to effortlessly find and purchase the ideal property that matches your preferences and fits your lifestyle perfectly.`}
+                  <p
+                    data-aos="zoom-in-down"
+                    data-aos-duration="900"
+                    className="max-w-[700px] mx-auto p-4 text-base md:text-lg"
+                  >
+                    {`Delve into the essence of each product through comprehensive reviews and insightful recommendations, guiding others toward remarkable discoveries.`}
                   </p>
-
-                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
-                    All Queries
-                  </button>
+                  <div data-aos="zoom-in-up" data-aos-duration="1000">
+                    <Link to={'/queries'}>
+                      <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                        All Queries
+                      </button>{' '}
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -88,18 +100,27 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[800px]">
-                  <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
-                    Your Property, Our Priority.
+                <div className="text-white px-4 max-w-[900px] space-y-5">
+                  <h1
+                    data-aos="zoom-in-down"
+                    data-aos-duration="3000"
+                    className="text-3xl sm:text-5xl lg:text-6xl font-bold"
+                  >
+                    Elevate Your Shopping Experience with Insights
                   </h1>
-                  <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
-                    Your property aspirations are our top priority at SnowyNest.
-                    Trust us to prioritize your needs and guide you to your
-                    perfect home.
+                  <p
+                    data-aos="zoom-in-down"
+                    data-aos-duration="900"
+                    className="max-w-[700px] mx-auto p-4 text-base md:text-lg"
+                  >
+                    {`Enhance your shopping journey with user-generated insights, empowering you to make informed decisions and uncover the best products suited to your needs.`}
                   </p>
-                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
-                    All Queries
-                  </button>
+
+                  <Link to={'/queries'}>
+                    <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                      All Queries
+                    </button>{' '}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -120,18 +141,20 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[800px]">
+                <div className="text-white px-4 max-w-[900px] space-y-5">
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
-                    Discover Your Dream Home at SnowyNest!
+                    Curating Excellence, Unveiling Hidden Treasures
                   </h1>
                   <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
-                    Discover Your Dream Home at SnowyNest! Explore our diverse
-                    range of properties and find the perfect place to call your
-                    own.
+                    Experience curated collections of exceptional products
+                    curated by our community, revealing hidden treasures and
+                    enhancing your shopping experience.
                   </p>
-                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
-                    All Queries
-                  </button>
+                  <Link to={'/queries'}>
+                    <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                      All Queries
+                    </button>{' '}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -152,18 +175,20 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[800px]">
+                <div className="text-white px-4 max-w-[900px] space-y-5">
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
-                    Find Your Perfect Property Today!
+                    Forge Meaningful Connections, Share Experiences
                   </h1>
                   <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
-                    Find Your Perfect Property Today! Start your journey to
-                    homeownership with SnowyNest and uncover the ideal living
-                    space for you.
+                    Forge connections with fellow enthusiasts, exchange
+                    experiences, and discover new products together, fostering a
+                    vibrant and supportive community.
                   </p>
-                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
-                    All Queries
-                  </button>
+                  <Link to={'/queries'}>
+                    <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                      All Queries
+                    </button>{' '}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -184,17 +209,20 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[800px]">
+                <div className="text-white px-4 max-w-[900px] space-y-5">
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
-                    Your Gateway to Home Bliss!
+                    Discover Unique Finds for Every Niche
                   </h1>
                   <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
-                    Your Gateway to Home Bliss! Experience the joy of finding
-                    your dream home with us. Begin your search now!
+                    Explore a diverse array of products tailored to your
+                    interests, from tech gadgets to artisanal crafts, and
+                    unearth hidden gems.
                   </p>
-                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
-                    All Queries
-                  </button>
+                  <Link to={'/queries'}>
+                    <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                      All Queries
+                    </button>{' '}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -215,27 +243,26 @@ const Banner = () => {
               style={{ backgroundColor: ' rgba(0, 0, 0, 0.6)' }}
             >
               <div className="flex h-full items-center justify-center relative">
-                <div className="text-white px-4 max-w-[800px]">
+                <div className="text-white px-4 max-w-[900px] space-y-5">
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
-                    Your Home Awaits at SnowyNest!
+                    Empowering Consumer Voices, Shaping Quality
                   </h1>
                   <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
-                    Unlock Endless Possibilities with SnowyNest! Let SnowyNest
-                    guide you to the home of your dreams. Your next adventure
-                    starts here!
+                    Engage in lively discussions, share insights, and influence
+                    product standards by contributing your reviews and
+                    recommendations within our vibrant community.
                   </p>
-                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
-                    All Queries
-                  </button>
+                  <Link to={'/queries'}>
+                    <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12 hover:bg-[#1aa3f3]">
+                      All Queries
+                    </button>{' '}
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </SwiperSlide>
       </Swiper>
-      {/* <div className="w-10/12 sm:w-3/4 lg:w-1/2 absolute top-[65%] left-1/2 -translate-x-1/2 z-10">
-       
-      </div> */}
     </div>
   );
 };
