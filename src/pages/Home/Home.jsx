@@ -1,155 +1,114 @@
-import { useState } from 'react';
-
+import { useCallback, useEffect, useState } from 'react';
 const Home = () => {
-  const [isOpen, setIsOpen] = useState(null);
-
-  const handleToggle = (idx) =>
-    setIsOpen((prevIdx) => (prevIdx === idx ? null : idx));
-
-  const datas = [
-    {
-      title: 'Connected Devices',
-      color: 'green',
-      description:
-        'To create an account, click on the "Sign Up" button and fill out the required information. Once done, you can enjoy the benefits of being a registered member.',
-    },
-    {
-      title: 'Apps Permissions',
-      color: 'sky',
-      description:
-        'Our return policy allows you to return items within 30 days of purchase. Please visit our returns page for detailed instructions and to initiate a return.',
-    },
-    {
-      title: 'Pending task',
-      color: 'purple',
-      description:
-        'Yes, you can change your shipping address before your order is shipped. Go to your account settings and update the shipping information accordingly.',
-    },
-    {
-      title: 'Card expired',
-      color: 'amber',
-      description:
-        'We appreciate our loyal customers! Stay tuned for exclusive discounts, promotions, and special offers available to members of our loyalty program.',
-    },
-    {
-      title: 'Card expired',
-      color: 'red',
-      description:
-        'We appreciate our loyal customers! Stay tuned for exclusive discounts, promotions, and special offers available to members of our loyalty program.',
-    },
+  const [currentSlider, setCurrentSlider] = useState(0);
+  const carouselImages = [
+    'https://source.unsplash.com/1200x540/?nature',
+    'https://source.unsplash.com/1200x540/?hill',
+    'https://source.unsplash.com/1200x540/?mountain',
+    'https://source.unsplash.com/1200x540/?river',
+    'https://source.unsplash.com/1200x540/?sea',
   ];
+  const prevSlider = () =>
+    setCurrentSlider((currentSlider) =>
+      currentSlider === 0 ? carouselImages.length - 1 : currentSlider - 1
+    );
+  const nextSlider = useCallback(
+    () =>
+      setCurrentSlider((currentSlider) =>
+        currentSlider === carouselImages.length - 1 ? 0 : currentSlider + 1
+      ),
+    [carouselImages.length]
+  );
+
+  // if you don't want to change the slider automatically then you can just remove the useEffect
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      nextSlider();
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, [nextSlider]);
+
   return (
-    <div className="space-y-4 p-2 md:p-6">
-      {datas?.map((data, idx) => (
-        <div key={idx}>
-          {/* header / Title */}
-          <div
-            onClick={() => handleToggle(idx)}
-            className={`px-4 md:px-8 py-6 ${
-              idx === 0
-                ? 'bg-green-50 border-green-500'
-                : idx === 1
-                ? 'bg-sky-50 border-sky-500'
-                : idx === 2
-                ? 'bg-purple-50 border-purple-500'
-                : idx === 3
-                ? 'bg-amber-50 border-amber-500'
-                : idx === 4
-                ? 'bg-red-50 border-red-500'
-                : 'bg-orange-50 border-orange-500'
-            } border-l-[3px] cursor-pointer`}
-          >
-            <div className="flex items-center">
-              <span>
-                <svg
-                  className={`mr-4 ${
-                    idx === 0
-                      ? 'fill-green-900'
-                      : idx === 1
-                      ? 'fill-sky-900'
-                      : idx === 2
-                      ? 'fill-purple-900'
-                      : idx === 3
-                      ? 'fill-amber-900'
-                      : idx === 4
-                      ? 'fill-red-900'
-                      : 'fill-orange-900'
-                  } shrink-0`}
-                  width="16"
-                  height="16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    y="7"
-                    width="16"
-                    height="2"
-                    rx="1"
-                    className={`transform origin-center transition duration-200 ease-out ${
-                      isOpen === idx && '!rotate-180'
-                    }`}
-                  />
-                  <rect
-                    y="7"
-                    width="16"
-                    height="2"
-                    rx="1"
-                    className={`transform origin-center rotate-90 transition duration-200 ease-out ${
-                      isOpen === idx && '!rotate-180'
-                    }`}
-                  />
-                </svg>
-              </span>
-              <h4
-                className={`${
-                  idx === 0
-                    ? 'text-green-900'
-                    : idx === 1
-                    ? 'text-sky-900'
-                    : idx === 2
-                    ? 'text-purple-900'
-                    : idx === 3
-                    ? 'text-amber-900'
-                    : idx === 4
-                    ? 'text-red-900'
-                    : 'text-orange-900'
-                } text-xl`}
-              >
-                {data.title}
-              </h4>
-            </div>
-          </div>
-          {/* body / content  */}
-          <div
-            className={`grid overflow-hidden transition-all duration-300 ease-in-out   ${
-              isOpen === idx
-                ? 'grid-rows-[1fr] opacity-100'
-                : 'grid-rows-[0fr] opacity-0'
-            }`}
-          >
-            <div className="overflow-hidden">
-              <div
-                className={`pb-6 pr-4 pl-14 md:pl-16 border-l-[3px] text-sm  ${
-                  idx === 0
-                    ? 'text-green-900 bg-green-50 border-green-500'
-                    : idx === 1
-                    ? 'text-sky-900 bg-sky-50 border-sky-500'
-                    : idx === 2
-                    ? 'text-purple-900 bg-purple-50 border-purple-500'
-                    : idx === 3
-                    ? 'text-amber-900 bg-amber-50 border-amber-500'
-                    : idx === 4
-                    ? 'text-red-900 bg-red-50 border-red-500'
-                    : 'text-orange-900 bg-orange-50 border-orange-500'
-                } `}
-              >
-                {data?.description}
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+    <div className="h-72 w-full md:h-[500px] lg:h-screen relative overflow-hidden">
+      {/* arrow left */}
+      <button
+        onClick={prevSlider}
+        className="absolute top-1/2 left-3 z-50 flex justify-center items-center bg-white rounded-full w-6 h-6 md:w-8 md:h-8"
+      >
+        <svg
+          className="w-4 h-4 md:w-6 md:h-6 icon"
+          viewBox="0 0 1024 1024"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#000000"
+        >
+          <g strokeWidth="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              fill="#0095FF"
+              d="M685.248 104.704a64 64 0 010 90.496L368.448 512l316.8 316.8a64 64 0 01-90.496 90.496L232.704 557.248a64 64 0 010-90.496l362.048-362.048a64 64 0 0190.496 0z"
+            ></path>
+          </g>
+        </svg>
+      </button>
+      {/* arrow right */}
+      <button
+        onClick={nextSlider}
+        className="absolute top-1/2 z-50 right-3  flex justify-center items-center bg-white rounded-full w-6 h-6 md:w-8 md:h-8"
+      >
+        <svg
+          className="w-4 h-4 md:w-6 md:h-6 icon"
+          viewBox="0 0 1024 1024"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#000000"
+          transform="rotate(180)"
+        >
+          <g strokeWidth="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              fill="#0095FF"
+              d="M685.248 104.704a64 64 0 010 90.496L368.448 512l316.8 316.8a64 64 0 01-90.496 90.496L232.704 557.248a64 64 0 010-90.496l362.048-362.048a64 64 0 0190.496 0z"
+            ></path>
+          </g>
+        </svg>
+      </button>
+      {/* dots */}
+      <div className="flex justify-center items-center rounded-full z-50 absolute bottom-4 w-full gap-1">
+        {carouselImages.map((_, inx) => (
+          <button
+            key={_}
+            onClick={() => setCurrentSlider(inx)}
+            className={`rounded-full duration-500 bg-white ${
+              currentSlider === inx ? 'w-8' : 'wz-2'
+            } h-2`}
+          ></button>
+        ))}
+      </div>
+      {/* Carousel container */}
+      <div
+        className="ease-linear duration-500 flex transform-gpu"
+        style={{ transform: `translateX(-${currentSlider * 100}%)` }}
+      >
+        {/* sliders */}
+        {carouselImages.map((slide, inx) => (
+          <img
+            key={slide}
+            src={slide}
+            className="min-w-full h-72 bg-black/20 sm:h-96 md:h-screen object-cover"
+            alt={`Slider - ${inx + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
-
 export default Home;
