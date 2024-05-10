@@ -64,6 +64,7 @@ const Banner = () => {
                   <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
                     {`Explore SnowyNest's curated listings to effortlessly find and purchase the ideal property that matches your preferences and fits your lifestyle perfectly.`}
                   </p>
+
                   <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
                     All Queries
                   </button>
@@ -96,6 +97,9 @@ const Banner = () => {
                     Trust us to prioritize your needs and guide you to your
                     perfect home.
                   </p>
+                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
+                    All Queries
+                  </button>
                 </div>
               </div>
             </div>
@@ -125,6 +129,9 @@ const Banner = () => {
                     range of properties and find the perfect place to call your
                     own.
                   </p>
+                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
+                    All Queries
+                  </button>
                 </div>
               </div>
             </div>
@@ -154,6 +161,9 @@ const Banner = () => {
                     homeownership with SnowyNest and uncover the ideal living
                     space for you.
                   </p>
+                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
+                    All Queries
+                  </button>
                 </div>
               </div>
             </div>
@@ -182,6 +192,9 @@ const Banner = () => {
                     Your Gateway to Home Bliss! Experience the joy of finding
                     your dream home with us. Begin your search now!
                   </p>
+                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
+                    All Queries
+                  </button>
                 </div>
               </div>
             </div>
@@ -211,6 +224,9 @@ const Banner = () => {
                     guide you to the home of your dreams. Your next adventure
                     starts here!
                   </p>
+                  <button className="text-xl py-2 px-11 bg-mainColor rounded duration-300 hover:-skew-x-12">
+                    All Queries
+                  </button>
                 </div>
               </div>
             </div>
