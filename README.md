@@ -3,3 +3,4 @@
 ## Package use
 
 - React Icon
+- Swiper
