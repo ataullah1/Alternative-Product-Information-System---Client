@@ -7,6 +7,7 @@ import { Autoplay } from 'swiper/modules';
 import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
 import useAuth from '../../Hooks/useAuth';
+import axios from 'axios';
 
 const AddQueries = () => {
   const { userDta } = useAuth();
@@ -32,28 +33,44 @@ const AddQueries = () => {
       userImg,
       recommendationCount,
     };
-    console.log(formData);
+    // console.log(formData);
 
-    fetch('https://coffee-store-serve-side.vercel.app/cffees', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((dta) => {
-        // console.log(dta);
-        if (dta.acknowledged) {
-          Swal.fire({
-            // position: 'top-end',
-            icon: 'success',
-            title: 'Your Coffee has been successfully Added',
-            showConfirmButton: false,
-            timer: 1200,
-          });
-        }
+    axios
+      .post('/http://localhost:9000/queries', { formData })
+      .then(function (response) {
+        console.log(response);
+        Swal.fire({
+          // position: 'top-end',
+          icon: 'success',
+          title: 'Your Coffee has been successfully Added',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
       });
+
+    // fetch('http://localhost:9000/queries', {
+    //   method: 'POST',
+    //   headers: {
+    //     'content-type': 'application/json',
+    //   },
+    //   body: JSON.stringify(formData),
+    // })
+    //   .then((res) => res.json())
+    //   .then((dta) => {
+    //     // console.log(dta);
+    //     if (dta.acknowledged) {
+    //       Swal.fire({
+    //         // position: 'top-end',
+    //         icon: 'success',
+    //         title: 'Your Coffee has been successfully Added',
+    //         showConfirmButton: false,
+    //         timer: 1200,
+    //       });
+    //     }
+    //   });
     dta.reset();
   };
 

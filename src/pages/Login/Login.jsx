@@ -9,6 +9,7 @@ import { FaGithub } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
+import Loding from '../Loding/Loding';
 
 const Login = () => {
   // Naviget, login done then go to Home
@@ -20,8 +21,14 @@ const Login = () => {
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
 
-  const { gitHubLogin, googleLogin, emlPassLogin, userDta, setLoading } =
-    useAuth();
+  const {
+    gitHubLogin,
+    googleLogin,
+    emlPassLogin,
+    userDta,
+    setLoading,
+    isLoading,
+  } = useAuth();
 
   useEffect(() => {
     if (userDta && !location.state) {
@@ -109,6 +116,11 @@ const Login = () => {
         });
       });
   };
+
+  if (userDta || isLoading) {
+    <Loding />;
+    return;
+  }
   return (
     <div className="w-11/12 mx-auto">
       <div className="h-28 sm:h-36"></div>

@@ -15,6 +15,7 @@ import { useContext, useEffect, useState } from 'react';
 import { ContextAuth } from '../../provider/Provider';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Loding from '../Loding/Loding';
 
 const Register = () => {
   const [eye, setEye] = useState(false);
@@ -33,6 +34,7 @@ const Register = () => {
     userDta,
     profileUpdate,
     setLoading,
+    isLoading,
   } = useContext(ContextAuth);
 
   // Naviget, login done then go to Login
@@ -138,6 +140,11 @@ const Register = () => {
         });
       });
   };
+
+  if (userDta || isLoading) {
+    <Loding />;
+    return;
+  }
   return (
     <div>
       <div className="w-11/12 mx-auto">
