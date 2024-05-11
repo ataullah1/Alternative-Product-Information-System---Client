@@ -12,6 +12,7 @@ import {
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
 import auth from '../firebase/firebase.config';
+import Swal from 'sweetalert2';
 
 export const ContextAuth = createContext();
 const Provider = ({ children }) => {
@@ -47,6 +48,11 @@ const Provider = ({ children }) => {
     return signOut(auth)
       .then(() => {
         // Sign-out successful.
+        Swal.fire({
+          title: 'Logged Out',
+          text: 'Your account has been successfully logged out.',
+          icon: 'success',
+        });
       })
       .catch((err) => {
         console.log(err.message);
