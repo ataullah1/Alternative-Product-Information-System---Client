@@ -11,7 +11,7 @@ import axios from 'axios';
 
 const AddQueries = () => {
   const { userDta } = useAuth();
-  const handleAddQuery = (e) => {
+  const handleAddQuery = async (e) => {
     e.preventDefault();
     const dta = e.target;
     const productName = dta.productName.value;
@@ -35,51 +35,23 @@ const AddQueries = () => {
     };
     console.log(formData);
 
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/queries`, {
-        productBrand: productBrand,
-        productName: productName,
-        productImage: productImage,
-        queryName: queryName,
-        detail: detail,
-        userName: userName,
-        userImg: userImg,
-        recommendationCount: recommendationCount,
-      })
-      .then(function (response) {
-        console.log(response);
-        Swal.fire({
-          // position: 'top-end',
-          icon: 'success',
-          title: 'Your Coffee has been successfully Added',
-          showConfirmButton: false,
-          timer: 1200,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/queries`,
+        formData
+      );
+      console.log(data);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your Coffee has been successfully Added',
+        showConfirmButton: false,
+        timer: 1200,
       });
+    } catch (err) {
+      console.log(err);
+    }
 
-    // fetch('http://localhost:9000/queries', {
-    //   method: 'POST',
-    //   headers: {
-    //     'content-type': 'application/json',
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then((res) => res.json())
-    //   .then((dta) => {
-    //     // console.log(dta);
-    //     if (dta.acknowledged) {
-    //       Swal.fire({
-    //         // position: 'top-end',
-    //         icon: 'success',
-    //         title: 'Your Coffee has been successfully Added',
-    //         showConfirmButton: false,
-    //         timer: 1200,
-    //       });
-    //     }
-    //   });
     dta.reset();
   };
 
