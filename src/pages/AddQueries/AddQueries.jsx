@@ -6,8 +6,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
+import useAuth from '../../Hooks/useAuth';
 
 const AddQueries = () => {
+  const { userDta } = useAuth();
   const handleAddQuery = (e) => {
     e.preventDefault();
     const dta = e.target;
@@ -16,12 +18,19 @@ const AddQueries = () => {
     const productImage = dta.productImage.value;
     const queryName = dta.queryName.value;
     const detail = dta.detail.value;
+    const userName = userDta.displayName;
+    const userImg = userDta.photoURL;
+    const recommendationCount = 0;
+
     const formData = {
       productBrand,
       productName,
       productImage,
       queryName,
       detail,
+      userName,
+      userImg,
+      recommendationCount,
     };
     console.log(formData);
 
@@ -330,6 +339,7 @@ const AddQueries = () => {
                 multiline
                 required
                 name="detail"
+                rows={3}
                 className="text-3xl"
               />
 

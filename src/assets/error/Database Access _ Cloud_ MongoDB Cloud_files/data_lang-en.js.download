@@ -1,0 +1,11 @@
+(function(a) {
+            if(a && typeof a['wm-deepui-um-cb'] !== 'undefined'){
+                ;
+                var obj = {};
+                ;
+                obj.getData = function() { return {"executeOnFindElementFailure":true,"quotaTimeParams":{"period":20000,"deepUiTimeQuota":18000},"feRunQuotaParams":{"period":2000,"timeQuota":1000,"longDurationTime":400,"aggregateDataTimeIntervalSec":60},"checkPhrasesThreshold":0.1,"useHarvesterThreshold":0.01,"minCheckPhrasesInterval":5000,"reportResultsThreshold":1,"reportResultsInterval":2000,"reportResultsBufferThreshold":1,"reportResultsCachePeriod":0,"sendEndUserDataWithResults":true,"mapCaptureIdAndJqueryToInt":{"0 0":0,"0 1":1,"1 0":2,"1 1":1},"playerReportResultsThreshold":0,"feCacheResultParams":{"period":1600,"cleanCachedElementsInterval":10000},"feCacheResultEnabled":true,"blackList":[],"useDeepUiExecution":true,"ignoreIframe":false,"whiteList":[],"regexPatterns":[],"automaton4":true,"cacheCssOnS3":{"enabled":true},"earlyCapture":true,"encryptedDom":true,"expectedHash":true,"splitDataFile":true,"quickAutomaton":true,"useCombinedCapture":true,"superEnhancedStyles":true,"automatonPerformanceTracking":true,"elements":{},"platforms":[],"timestamp":1714899557511,"inProgress":false,"lastUpdatedAt":null,"salt":"rpqkgq","bFParams":{},"encryptedAttributes":[],"filterTemplates":[],"deployableTransitionIds":[],"transitionIdentifiers":[]} };
+                
+                ;
+                a['wm-deepui-um-cb'](obj);
+            }
+        })(window && window._walkmeInternals);
