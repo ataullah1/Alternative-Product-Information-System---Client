@@ -1,64 +1,58 @@
-
-{
-  "product_name": "Dishwasher Detergent",
-  "product_brand": "XYZ Clean",
-  "product_image_url": "https://example.com/dishwasher_detergent.jpg",
-  "boycotting_reason_details": "The Dishwasher Detergent by XYZ Clean leaves a residue on dishes, even after multiple rinses. It fails to effectively remove grease and food stains, resulting in unsatisfactory cleaning outcomes. Additionally, its strong chemical scent lingers on dishes, making them unpleasant to use. Switching to a natural, eco-friendly detergent not only ensures cleaner dishes but also promotes a healthier environment.",
-  "query_title": "Seeking a more effective dishwasher detergent?"
-  }
-  
+[
   {
-  "product_name": "Shampoo",
-  "product_brand": "Foamy Luxe",
-  "product_image_url": "https://example.com/shampoo.jpg",
-  "boycotting_reason_details": "Foamy Luxe Shampoo claims to offer hydration and shine but falls short in delivering on its promises. Users have reported that it leaves hair feeling dry and brittle, stripping away natural oils. Furthermore, its overpowering fragrance causes irritation to sensitive scalps. Transitioning to a sulfate-free, nourishing shampoo would result in healthier, more vibrant hair without the negative side effects.",
-  "query_title": "Looking for a gentler shampoo alternative?"
-  }
-  
+    "Product Name": "ClearView Glasses",
+    "Product Brand": "VisionMax",
+    "Product Image-URL": "images/clearview-glasses.jpg",
+    "Query Title": "Are there superior vision-enhancing alternatives?",
+    "Boycotting_Reason_Details": "The ClearView Glasses from VisionMax promised enhanced night vision for safer driving. However, after several uses, it became clear that they do not reduce glare as advertised. Instead, they distort vision and the flimsy material feels cheap and unreliable for long-term use."
+  },
   {
-  "product_name": "Face Moisturizer",
-  "product_brand": "Glowy Skin",
-  "product_image_url": "https://example.com/face_moisturizer.jpg",
-  "boycotting_reason_details": "Glowy Skin Face Moisturizer claims to provide hydration and a radiant complexion, but its formula falls short for many users. It leaves a greasy residue on the skin, causing breakouts and clogged pores. Additionally, some have experienced allergic reactions due to its harsh chemical ingredients. Switching to a non-comedogenic, hypoallergenic moisturizer would prevent skin irritation and promote a healthier complexion.",
-  "query_title": "In search of a non-greasy face moisturizer?"
-  }
-  
+    "Product Name": "UltraClean Detergent",
+    "Product Brand": "CleanHome",
+    "Product Image-URL": "images/ultraclean-detergent.jpg",
+    "Query Title": "Seeking a detergent that truly cleans?",
+    "Boycotting_Reason_Details": "UltraClean Detergent claims to remove tough stains and brighten clothes. Unfortunately, it fails to deliver on both fronts. I've noticed no difference in stain removal compared to other brands, and it even caused colors to fade. The search for a reliable detergent continues."
+  },
   {
-  "product_name": "Energy Drink",
-  "product_brand": "BoostUp",
-  "product_image_url": "https://example.com/energy_drink.jpg",
-  "boycotting_reason_details": "BoostUp Energy Drink claims to provide a quick energy boost, but its high sugar content and artificial additives pose health risks. Users have reported experiencing energy crashes shortly after consumption, along with increased heart palpitations and jitteriness. Moreover, its excessive caffeine content can lead to dependency and disrupted sleep patterns. Switching to natural energy alternatives like green tea or coconut water offers sustained energy without the adverse effects.",
-  "query_title": "Seeking a healthier energy drink substitute?"
-  }
-  
+    "Product Name": "EverLast Batteries",
+    "Product Brand": "PowerCell",
+    "Product Image-URL": "images/everlast-batteries.jpg",
+    "Query Title": "Need batteries that won't fail unexpectedly?",
+    "Boycotting_Reason_Details": "EverLast Batteries are marketed as long-lasting, but my experience says otherwise. They barely hold a charge and are outperformed by cheaper alternatives. It's frustrating when you rely on them for important devices only to be let down."
+  },
   {
-  "product_name": "Laundry Detergent",
-  "product_brand": "FreshClean",
-  "product_image_url": "https://example.com/laundry_detergent.jpg",
-  "boycotting_reason_details": "FreshClean Laundry Detergent claims to provide a deep clean and lasting freshness, but many users have experienced adverse effects. It often fails to remove tough stains and leaves clothes with a strong chemical odor. Furthermore, its formula contains harsh ingredients that can irritate sensitive skin, leading to rashes and discomfort. Transitioning to a gentle, fragrance-free detergent ensures cleaner laundry without compromising on skin health.",
-  "query_title": "In need of a gentler laundry detergent?"
-  }
-  
+    "Product Name": "SmoothBlend Mixer",
+    "Product Brand": "KitchenPro",
+    "Product Image-URL": "images/smoothblend-mixer.jpg",
+    "Query Title": "Looking for a mixer that can handle tough blending?",
+    "Boycotting_Reason_Details": "The SmoothBlend Mixer from KitchenPro struggles with basic blending tasks. It overheats quickly and leaves chunks unprocessed. For a kitchen appliance, reliability is key, and this mixer just doesn't cut it."
+  },
   {
-  "product_name": "Toothpaste",
-  "product_brand": "BrightSmile",
-  "product_image_url": "https://example.com/toothpaste.jpg",
-  "boycotting_reason_details": "BrightSmile Toothpaste promises whitening and cavity protection, but falls short on both fronts. Users have reported minimal improvement in teeth whitening, despite regular use. Additionally, it lacks fluoride, a crucial ingredient for cavity prevention, leaving teeth vulnerable to decay. Moreover, its strong mint flavor can cause sensitivity in some individuals. Switching to a fluoride-enriched toothpaste with proven whitening efficacy ensures optimal dental health and a brighter smile.",
-  "query_title": "Seeking a more effective toothpaste for whitening?"
-  }
-  
+    "Product Name": "Purity Water Filter",
+    "Product Brand": "AquaSafe",
+    "Product Image-URL": "images/purity-water-filter.jpg",
+    "Query Title": "Desire a water filter that lives up to its name?",
+    "Boycotting_Reason_Details": "The Purity Water Filter was a disappointment. It's supposed to provide clean, taste-free water, but there's a noticeable chemical taste post-filtration. Additionally, the filter life is much shorter than advertised, leading to frequent and costly replacements."
+  },
   {
-  "product_name": "Hand Sanitizer",
-  "product_brand": "GermGuard",
-  "product_image_url": "https://example.com/hand_sanitizer.jpg",
-  "boycotting_reason_details": "GermGuard Hand Sanitizer claims to kill 99.9% of germs, but its formula may do more harm than good. Users have reported skin dryness and irritation after repeated use, attributed to its high alcohol content. Furthermore, some studies suggest that frequent use of alcohol-based sanitizers may lead to antibiotic resistance and disrupted skin microbiota. Switching to a moisturizing, alcohol-free sanitizer maintains hand hygiene without compromising skin health.",
-  "query_title": "In search of a gentler hand sanitizer?"
-  }
-  
+    "Product Name": "ComfySole Insoles",
+    "Product Brand": "FootRelief",
+    "Product Image-URL": "images/comfysole-insoles.jpg",
+    "Query Title": "In search of insoles that offer real comfort?",
+    "Boycotting_Reason_Details": "ComfySole Insoles fall short of providing the promised all-day comfort. They flatten out quickly and offer minimal arch support. My feet end up sore after just a few hours of wear, which is unacceptable for a product designed for relief."
+  },
   {
-  "product_name": "Microwave Popcorn",
-  "product_brand": "PopAway",
-  "product_image_url": "https://example.com/microwave_popcorn.jpg",
-  "boycotting_reason_details": "PopAway Microwave Popcorn offers convenience but comes with health risks. Its microwave packaging contains perfluorooctanoic acid (PFOA), a chemical linked to adverse health effects including cancer and reproductive issues. Additionally, the artificial butter flavoring contains diacetyl, a compound known to cause respiratory problems. Switching to air-popped popcorn seasoned with natural herbs and spices provides a healthier alternative without sacrificing taste.",
-  "query_title": "Seeking a safer alternative to microwave popcorn?"
+    "Product Name": "QuickHeat Space Heater",
+    "Product Brand": "WarmUp",
+    "Product Image-URL": "images/quickheat-space-heater.jpg",
+    "Query Title": "Want a heater that warms up your space efficiently?",
+    "Boycotting_Reason_Details": "The QuickHeat Space Heater from WarmUp is neither quick nor efficient. It consumes a lot of power without significantly warming up the room. It's also quite noisy, which is a major drawback for a device that should quietly blend into the background."
+  },
+  {
+    "Product Name": "SunBurst Sunscreen",
+    "Product Brand": "SkinGuard",
+    "Product Image-URL": "images/sunburst-sunscreen.jpg",
+    "Query Title": "Is there a sunscreen that actually protects?",
+    "Boycotting_Reason_Details": "SunBurst Sunscreen boasts an SPF 50 rating, but it fails to protect against sunburn. It's greasy, difficult to apply evenly, and washes off easily with water, making it impractical for outdoor activities. A sunscreen should shield you reliably, and this one does not."
   }
+]

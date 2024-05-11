@@ -10,6 +10,16 @@ import useAuth from '../../Hooks/useAuth';
 import axios from 'axios';
 
 const AddQueries = () => {
+  const dateTime = new Date().toLocaleString('en-BD', {
+    timeZone: 'Asia/Dhaka',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true, // Include AM/PM indicator
+  });
+  console.log(dateTime); // Output: 11/05/2024 11:42 PM (assuming current Bangladesh time)
   const { userDta } = useAuth();
   const handleAddQuery = async (e) => {
     e.preventDefault();
@@ -17,20 +27,23 @@ const AddQueries = () => {
     const productName = dta.productName.value;
     const productBrand = dta.productBrand.value;
     const productImage = dta.productImage.value;
-    const queryName = dta.queryName.value;
-    const detail = dta.detail.value;
+    const queryTitle = dta.queryTitle.value;
+    const details = dta.detail.value;
     const userName = userDta.displayName;
+    const userEmail = userDta.email;
     const userImg = userDta.photoURL;
     const recommendationCount = 0;
 
     const formData = {
-      productBrand,
       productName,
+      productBrand,
       productImage,
-      queryName,
-      detail,
+      queryTitle,
+      details,
       userName,
+      userEmail,
       userImg,
+      dateTime,
       recommendationCount,
     };
     console.log(formData);
@@ -42,14 +55,25 @@ const AddQueries = () => {
       );
       console.log(data);
       Swal.fire({
-        position: 'top-end',
         icon: 'success',
-        title: 'Your Coffee has been successfully Added',
-        showConfirmButton: false,
-        timer: 1200,
+        title: 'Good Job',
+        text: 'Your Query has been successfully posted.',
+        timer: 2200,
       });
     } catch (err) {
       console.log(err);
+      if (err.code === 'ERR_NETWORK') {
+        Swal.fire({
+          title: 'NETWORK PROBLEM',
+          text: 'The data could not be added due to your network problem.',
+          icon: 'error',
+        });
+      }
+      Swal.fire({
+        title: 'Oppps ....!',
+        text: 'Check your network!',
+        icon: 'error',
+      });
     }
 
     dta.reset();
@@ -279,35 +303,39 @@ const AddQueries = () => {
         </div>
       </div>
       <div className="w-11/12 lg:w-[700px] mx-auto my-10">
-        <div className="w-full rounded-[5px] py-4 md:py-6 px-4 md:px-8 lg:px-20 mb-28 border-2 border-mClr">
+        <div className="w-full rounded-[5px] py-4 md:py-6 px-4 md:px-8 lg:px-20 mb-28 border-2 border-mClr dark:bg-slate-300">
           <div>
-            <h1 className="text-[40px] text-slate-800 dark:text-slate-100 text-center">
+            <h1 className="text-[40px] text-slate-800 dark:text-slate-800 text-center">
               Add New Queries
             </h1>
-            <p className="max-w-[650px] text-center text-slate-700 dark:text-slate-200 text-opacity-70 sm:text-lg font-normal mx-auto pt-2 pb-10">
+            <p className="text-center text-slate-600 dark:text-slate-600 sm:text-lg font-normal mx-auto pt-2 pb-10">
               Share your product query and discover alternatives. Your input
               helps build a diverse knowledge base for informed decisions.
             </p>
           </div>
           <div>
             <form
-              className="flex flex-col gap-5 w-full"
+              className="flex flex-col gap-5 w-full dark:text-white"
               onSubmit={handleAddQuery}
             >
               <TextField
+                sx={{
+                  color: '#fff',
+                }}
+                style={{
+                  color: '#fff',
+                }}
                 id="outlined-textarea"
                 label="Product Name"
                 placeholder="Product Name"
-                multiline
                 required
                 name="productName"
-                className="text-3xl"
+                className="text-3xl dark:placeholder-gray-100"
               />
               <TextField
                 id="outlined-textarea"
                 label="Product Brand"
                 placeholder="Brand Name"
-                multiline
                 required
                 name="productBrand"
                 className="text-3xl"
@@ -316,7 +344,6 @@ const AddQueries = () => {
                 id="outlined-textarea"
                 label="Product Image URL"
                 placeholder="Product Photo"
-                multiline
                 required
                 name="productImage"
                 className="text-3xl"
@@ -325,18 +352,17 @@ const AddQueries = () => {
                 id="outlined-textarea"
                 label="Query Title"
                 placeholder="Better Product Name"
-                multiline
                 required
-                name="queryName"
+                name="queryTitle"
                 className="text-3xl"
               />
               <TextField
                 id="outlined-textarea"
                 label="Boycoing Reason Details"
                 placeholder="Explain in detail why you are boycotting this product..."
-                multiline
                 required
                 name="detail"
+                multiline
                 rows={3}
                 className="text-3xl"
               />
@@ -344,7 +370,7 @@ const AddQueries = () => {
               <input
                 className="w-full py-1.5 bg-mClr rounded border-2 border-mClr text-white text-lg font-bold sm:text-xl mb-5 hover:-skew-x-12 duration-300 active:scale-95 hover:bg-transparent hover:text-mClr"
                 type="submit"
-                value=" Add Query"
+                value="Add Query"
               />
             </form>
           </div>
