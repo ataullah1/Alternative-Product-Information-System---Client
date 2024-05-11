@@ -33,10 +33,19 @@ const AddQueries = () => {
       userImg,
       recommendationCount,
     };
-    // console.log(formData);
+    console.log(formData);
 
     axios
-      .post('/http://localhost:9000/queries', { formData })
+      .post(`${import.meta.env.VITE_API_URL}/queries`, {
+        productBrand: productBrand,
+        productName: productName,
+        productImage: productImage,
+        queryName: queryName,
+        detail: detail,
+        userName: userName,
+        userImg: userImg,
+        recommendationCount: recommendationCount,
+      })
       .then(function (response) {
         console.log(response);
         Swal.fire({
