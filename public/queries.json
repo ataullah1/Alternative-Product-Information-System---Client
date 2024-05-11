@@ -1,0 +1,58 @@
+[
+  {
+    "Product Name": "XYZ Bluetooth Earbuds",
+    "Product Brand": "SonicTunes",
+    "Product Image-URL": "https://example.com/xyz-earbuds.jpg",
+    "Query Title": "Looking for alternatives with longer battery life",
+    "Boycotting Reason Details": "Unreliable connectivity after recent firmware update"
+  },
+  {
+    "Product Name": "Eco-Friendly Laundry Detergent",
+    "Product Brand": "GreenClean",
+    "Product Image-URL": "https://example.com/eco-laundry-detergent.jpg",
+    "Query Title": "Seeking detergent options with less packaging waste",
+    "Boycotting Reason Details": "Excessive plastic packaging; looking for more sustainable options"
+  },
+  {
+    "Product Name": "Organic Protein Powder",
+    "Product Brand": "NatureFuel",
+    "Product Image-URL": "https://example.com/organic-protein-powder.jpg",
+    "Query Title": "Need recommendations for plant-based alternatives",
+    "Boycotting Reason Details": "Allergic reaction to certain ingredients; seeking vegan options"
+  },
+  {
+    "Product Name": "Smart Thermostat",
+    "Product Brand": "EcoTemp",
+    "Product Image-URL": "https://example.com/smart-thermostat.jpg",
+    "Query Title": "Searching for smart thermostats compatible with Apple HomeKit",
+    "Boycotting Reason Details": "Poor customer service experience; exploring other brands"
+  },
+  {
+    "Product Name": "Portable Espresso Maker",
+    "Product Brand": "BeanBrew",
+    "Product Image-URL": "https://example.com/portable-espresso-maker.jpg",
+    "Query Title": "Looking for espresso makers with faster brewing time",
+    "Boycotting Reason Details": "Leakage issues after repeated use; in need of a reliable replacement"
+  },
+  {
+    "Product Name": "Travel Backpack",
+    "Product Brand": "AdventureGear",
+    "Product Image-URL": "https://example.com/travel-backpack.jpg",
+    "Query Title": "Recommendations for backpacks with better weight distribution",
+    "Boycotting Reason Details": "Uncomfortable shoulder straps causing strain; seeking ergonomic designs"
+  },
+  {
+    "Product Name": "Noise-Canceling Headphones",
+    "Product Brand": "QuietBliss",
+    "Product Image-URL": "https://example.com/noise-canceling-headphones.jpg",
+    "Query Title": "Seeking alternatives with improved sound quality",
+    "Boycotting Reason Details": "Disappointing sound performance at high volumes; exploring other options"
+  },
+  {
+    "Product Name": "Reusable Water Bottle",
+    "Product Brand": "EcoHydrate",
+    "Product Image-URL": "https://example.com/reusable-water-bottle.jpg",
+    "Query Title": "Need suggestions for insulated bottles to keep drinks cold longer",
+    "Boycotting Reason Details": "Plastic taste from current bottle; looking for better quality materials"
+  }
+]
