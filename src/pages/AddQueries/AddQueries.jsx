@@ -5,31 +5,27 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // import required modules
 import { Autoplay } from 'swiper/modules';
 import Swal from 'sweetalert2';
+import TextField from '@mui/material/TextField';
 
 const AddQueries = () => {
-  const handleAddCoffee = (e) => {
+  const handleAddQuery = (e) => {
     e.preventDefault();
     const dta = e.target;
-    const name = dta.name.value;
-    const chef = dta.chef.value;
-    const supplier = dta.supplier.value;
-    const taste = dta.taste.value;
-    const category = dta.category.value;
-    const details = dta.details.value;
-    const photo = dta.photo.value;
-    const price = dta.price.value;
+    const productName = dta.productName.value;
+    const productBrand = dta.productBrand.value;
+    const productImage = dta.productImage.value;
+    const queryName = dta.queryName.value;
+    const detail = dta.detail.value;
     const formData = {
-      name,
-      chef,
-      supplier,
-      taste,
-      category,
-      photo,
-      price,
-      details,
+      productBrand,
+      productName,
+      productImage,
+      queryName,
+      detail,
     };
-    // console.log(formData);
-    fetch('https://coffee-store-serve-side.vercel.app/coffees', {
+    console.log(formData);
+
+    fetch('https://coffee-store-serve-side.vercel.app/cffees', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -51,6 +47,7 @@ const AddQueries = () => {
       });
     dta.reset();
   };
+
   return (
     <div className="">
       <div className="h-64 sm:h-72 w-full bg-red-200 relative">
@@ -274,13 +271,13 @@ const AddQueries = () => {
           </div>
         </div>
       </div>
-      <div className="w-11/12 lg:w-1/2 mx-auto my-10">
+      <div className="w-11/12 lg:w-[700px] mx-auto my-10">
         <div className="w-full rounded-[5px] py-4 md:py-6 px-4 md:px-8 lg:px-20 mb-28 border-2 border-mClr">
           <div>
             <h1 className="text-[40px] text-slate-800 dark:text-slate-100 text-center">
               Add New Queries
             </h1>
-            <p className="max-w-[650px] text-center text-slate-700 dark:text-slate-200 text-opacity-70 sm:text-lg font-normal sm:leading-[30px] mx-auto pt-2 pb-10">
+            <p className="max-w-[650px] text-center text-slate-700 dark:text-slate-200 text-opacity-70 sm:text-lg font-normal mx-auto pt-2 pb-10">
               Share your product query and discover alternatives. Your input
               helps build a diverse knowledge base for informed decisions.
             </p>
@@ -288,27 +285,59 @@ const AddQueries = () => {
           <div>
             <form
               className="flex flex-col gap-5 w-full"
-              onSubmit={handleAddCoffee}
+              onSubmit={handleAddQuery}
             >
-              <div className="relative w-full rounded-lg">
-                <input
-                  className="peer rounded-lg border border-[#1B8EF8] bg-transparent px-4 py-2 text-[#1B8EF8] focus:outline-none w-full"
-                  type="text"
-                  placeholder=""
-                  name="name"
-                  id="navigate_ui_input_33"
-                />
-                <label
-                  className="absolute -top-2 left-[10px] rounded-md px-2 text-xs text-slate-400 duration-300 peer-placeholder-shown:left-[14px] peer-placeholder-shown:top-3  peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:left-[10px] peer-focus:bg-sky-300 peer-focus:text-xs peer-focus:text-sky-800 dark:peer-focus:text-sky-400 dark:peer-focus:bg-[#0F172A]"
-                  htmlFor="navigate_ui_input_33"
-                >
-                  Product Name
-                </label>
-              </div>
+              <TextField
+                id="outlined-textarea"
+                label="Product Name"
+                placeholder="Product Name"
+                multiline
+                required
+                name="productName"
+                className="text-3xl"
+              />
+              <TextField
+                id="outlined-textarea"
+                label="Product Brand"
+                placeholder="Brand Name"
+                multiline
+                required
+                name="productBrand"
+                className="text-3xl"
+              />
+              <TextField
+                id="outlined-textarea"
+                label="Product Image URL"
+                placeholder="Product Photo"
+                multiline
+                required
+                name="productImage"
+                className="text-3xl"
+              />
+              <TextField
+                id="outlined-textarea"
+                label="Query Title"
+                placeholder="Better Product Name"
+                multiline
+                required
+                name="queryName"
+                className="text-3xl"
+              />
+              <TextField
+                id="outlined-textarea"
+                label="Boycoing Reason Details"
+                placeholder="Explain in detail why you are boycotting this product..."
+                multiline
+                required
+                name="detail"
+                className="text-3xl"
+              />
 
-              <button className="w-full py-1 bg-[#D2B48C] rounded-[5px] border-2 border-primaryColor text-primaryColor text-lg font-bold sm:text-2xl mb-5 md:mb-0 active:-skew-x-[30deg] duration-200">
-                Add Coffee
-              </button>
+              <input
+                className="w-full py-1.5 bg-mClr rounded border-2 border-mClr text-white text-lg font-bold sm:text-xl mb-5 hover:-skew-x-12 duration-300 active:scale-95 hover:bg-transparent hover:text-mClr"
+                type="submit"
+                value=" Add Query"
+              />
             </form>
           </div>
         </div>
