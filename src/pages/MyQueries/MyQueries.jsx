@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 const MyQueries = () => {
   const [currentSlider, setCurrentSlider] = useState(0);
   const carouselImages = [
-    'https://source.unsplash.com/1200x540/?nature',
-    'https://source.unsplash.com/1200x540/?hill',
-    'https://source.unsplash.com/1200x540/?mountain',
-    'https://source.unsplash.com/1200x540/?river',
-    'https://source.unsplash.com/1200x540/?sea',
+    'https://source.unsplash.com/1200x540/?product',
+    'https://source.unsplash.com/1200x540/?oil',
+    'https://source.unsplash.com/1200x540/?fation',
+    'https://source.unsplash.com/1200x540/?business',
+    'https://source.unsplash.com/1200x540/?shop',
   ];
   const prevSlider = () =>
     setCurrentSlider((currentSlider) =>
@@ -28,9 +29,9 @@ const MyQueries = () => {
     return () => clearInterval(intervalId);
   }, [nextSlider]);
   return (
-    <div>
+    <div className="relative">
       {/*Banner part  */}
-      <div className="w-full h-72 md:h-[500px] lg:h-screen relative overflow-hidden">
+      <div className="w-full h-72 sm:h-96 relative overflow-hidden">
         {/* dots */}
         <div className="z-20 absolute bottom-3 left-1/2 -translate-x-1/2">
           <div className="flex justify-center items-center rounded-full w-full gap-1">
@@ -108,13 +109,21 @@ const MyQueries = () => {
               <img
                 key={slide}
                 src={slide}
-                className="min-w-full h-72 bg-black/20 sm:h-96 md:h-screen object-cover"
+                className="min-w-full h-72 sm:h-96 bg-black/20 object-cover"
                 alt={`Slider - ${inx + 1}`}
               />
             ))}
-            <div className="fixed bg-[#2b2929cf] w-full h-72 md:h-[500px] lg:h-screen z-[5000]"></div>
           </div>
-          <h1 className="text-8xl">hello</h1>
+        </div>
+      </div>
+      <div className="absolute top-0 left-0 bg-[#00000073] w-full h-72 sm:h-96 ">
+        <div className="h-full w-10/12 mx-auto flex items-center justify-center flex-col gap-8 pt-20">
+          <h1 className="text-5xl text-white ">My Queries Page</h1>
+          <Link to={'/add-queries'}>
+            <button className="py-1.5 px-8 rounded hover:-skew-x-12 bg-mClr hover:bg-transparent border-2 border-mClr duration-200 text-white font-semibold tracking-wider">
+              Add Queries
+            </button>
+          </Link>
         </div>
       </div>
     </div>
