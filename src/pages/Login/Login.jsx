@@ -1,14 +1,14 @@
 import img from '../../assets/banner/5.jpg';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { Link, useLocation } from 'react-router-dom';
 import { FaGithub } from 'react-icons/fa';
-import { ContextAuth } from '../../provider/Provider';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAuth from '../../Hooks/useAuth';
 
 const Login = () => {
   // Naviget, login done then go to Home
@@ -20,21 +20,15 @@ const Login = () => {
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
 
-  const {
-    gitHubLogin,
-    googleLogin,
-    emlPassLogin,
-    userDta,
-    setIsLoading,
-    registerDta,
-  } = useContext(ContextAuth);
+  const { gitHubLogin, googleLogin, emlPassLogin, userDta, setLoading } =
+    useAuth();
 
   useEffect(() => {
-    if (userDta && !location.state && registerDta) {
+    if (userDta && !location.state) {
       naviget('/');
       console.log('login to home');
     }
-  }, [naviget, userDta, location.state, registerDta]);
+  }, [naviget, userDta, location.state]);
   const handleLoginSubmit = (e) => {
     setEmailErr(null);
     e.preventDefault();
@@ -74,10 +68,10 @@ const Login = () => {
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage);
-        setIsLoading(false);
+        setLoading(false);
         Swal.fire({
           title: 'Oops...!',
-          text: 'Sorry, your account could not be logged in!',
+          text: 'Please Enter Valid Email And Password !',
           icon: 'error',
         });
       });

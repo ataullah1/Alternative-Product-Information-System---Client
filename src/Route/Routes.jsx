@@ -7,6 +7,7 @@ import Root from '../root/Root';
 import Error from '../pages/Error/Error';
 import Blog from '../pages/Blog/Blog';
 import PrivetRoutes from './PrivetRoutes';
+import MyQueries from '../pages/MyQueries/MyQueries';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/my-queries',
-        element: <About />,
+        element: (
+          <PrivetRoutes>
+            <MyQueries />
+          </PrivetRoutes>
+        ),
       },
       {
         path: '/my-recommendations',

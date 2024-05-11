@@ -33,7 +33,6 @@ const Register = () => {
     userDta,
     profileUpdate,
     setLoading,
-    setRegisterDta,
   } = useContext(ContextAuth);
 
   // Naviget, login done then go to Login
@@ -85,10 +84,15 @@ const Register = () => {
           })
           .catch((err) => {
             console.log(err);
+            setLoading(false);
+            Swal.fire({
+              title: 'Oops...!',
+              text: 'Sorry, your account could not be Created !',
+              icon: 'error',
+            });
           });
         logOutAcc();
         naviget('/login');
-        setRegisterDta(false);
       })
       .catch((error) => {
         const errorMessage = error.message;

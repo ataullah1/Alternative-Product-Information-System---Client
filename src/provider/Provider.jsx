@@ -87,6 +87,7 @@ const Provider = ({ children }) => {
     logOutAcc,
     userDta,
     isLoading,
+    setLoading,
     profileUpdate,
     handleUpdateEmail,
   };
