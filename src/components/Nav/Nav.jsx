@@ -128,23 +128,33 @@ const Nav = () => {
             </div>
 
             <div className="invisible absolute z-50 flex w-60 flex-col bg-gray-100 shadow-4xl group-hover:visible text-center dropdownMenu">
+              {userDta && (
+                <>
+                  <Link
+                    to={'/recommendations-for-me'}
+                    className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                  >
+                    Recommendations For Me
+                  </Link>
+                  <Link
+                    to={'/my-queries'}
+                    className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                  >
+                    My Queries
+                  </Link>
+                  <Link
+                    to={'/my-recommendations'}
+                    className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                  >
+                    My Recommendations
+                  </Link>
+                </>
+              )}
               <Link
-                to={'/recommendations-for-me'}
+                to={'/blog'}
                 className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
               >
-                Recommendations For Me
-              </Link>
-              <Link
-                to={'/my-queries'}
-                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-              >
-                My Queries
-              </Link>
-              <Link
-                to={'/my-recommendations'}
-                className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-              >
-                My Recommendations
+                Blog
               </Link>
               <Link
                 to={'/about'}
@@ -283,24 +293,28 @@ const Nav = () => {
                 >
                   Queries
                 </NavLink>
-                <NavLink
-                  to={'/recommendations-for-me'}
-                  className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-                >
-                  Recommendations For Me
-                </NavLink>
-                <NavLink
-                  to={'/my-queries'}
-                  className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-                >
-                  My Queries
-                </NavLink>
-                <NavLink
-                  to={'/my-recommendations'}
-                  className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-                >
-                  My recommendations
-                </NavLink>
+                {userDta && (
+                  <>
+                    <NavLink
+                      to={'/recommendations-for-me'}
+                      className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                    >
+                      Recommendations For Me
+                    </NavLink>
+                    <NavLink
+                      to={'/my-queries'}
+                      className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                    >
+                      My Queries
+                    </NavLink>
+                    <NavLink
+                      to={'/my-recommendations'}
+                      className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                    >
+                      My recommendations
+                    </NavLink>
+                  </>
+                )}
                 <NavLink
                   to={'/about'}
                   className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"

@@ -5,6 +5,8 @@ import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import Root from '../root/Root';
 import Error from '../pages/Error/Error';
+import Blog from '../pages/Blog/Blog';
+import PrivetRoutes from './PrivetRoutes';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: '/my-recommendations',
         element: <About />,
+      },
+      {
+        path: '/blog',
+        element: (
+          <PrivetRoutes>
+            <Blog />
+          </PrivetRoutes>
+        ),
       },
       {
         path: '/about',
