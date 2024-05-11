@@ -8,6 +8,7 @@ import Error from '../pages/Error/Error';
 import Blog from '../pages/Blog/Blog';
 import PrivetRoutes from './PrivetRoutes';
 import MyQueries from '../pages/MyQueries/MyQueries';
+import AddQueries from '../pages/AddQueries/AddQueries';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
         path: '/add-queries',
         element: (
           <PrivetRoutes>
-            <MyQueries />
+            <AddQueries />
           </PrivetRoutes>
         ),
       },

@@ -27,6 +27,7 @@
 ul a.active {
   border: 2px solid #38b6ff;
 }
+.dropdownMenu > a.active,
 .smallScreenMenu > a.active {
   background-color: #38b6ff;
   color: #ffffff;

@@ -117,10 +117,12 @@ const MyQueries = () => {
         </div>
       </div>
       <div className="absolute top-0 left-0 bg-[#00000073] w-full h-72 sm:h-96 ">
-        <div className="h-full w-10/12 mx-auto flex items-center justify-center flex-col gap-8 pt-20">
-          <h1 className="text-5xl text-white ">My Queries Page</h1>
+        <div className="h-full w-10/12 mx-auto flex items-center justify-center flex-col gap-8 pt-10 sm:pt-20 text-center">
+          <h1 className="text-3xl sm:text-5xl text-white ">
+            Explore and Add Queries
+          </h1>
           <Link to={'/add-queries'}>
-            <button className="py-1.5 px-8 rounded hover:-skew-x-12 bg-mClr hover:bg-transparent border-2 border-mClr duration-200 text-white font-semibold tracking-wider">
+            <button className="py-1.5 px-8 rounded hover:-skew-x-12 bg-mClr hover:bg-transparent border-2 border-mClr duration-200 text-white font-semibold tracking-wider hover:shadow-2xl shadow-mClr hover:scale-110">
               Add Queries
             </button>
           </Link>

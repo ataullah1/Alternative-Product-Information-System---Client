@@ -130,44 +130,44 @@ const Nav = () => {
             <div className="invisible absolute z-50 flex w-60 flex-col bg-gray-100 shadow-4xl group-hover:visible text-center dropdownMenu">
               {userDta && (
                 <>
-                  <Link
+                  <NavLink
                     to={'/recommendations-for-me'}
                     className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
                   >
                     Recommendations For Me
-                  </Link>
-                  <Link
+                  </NavLink>
+                  <NavLink
                     to={'/my-queries'}
                     className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
                   >
                     My Queries
-                  </Link>
-                  <Link
+                  </NavLink>
+                  <NavLink
                     to={'/my-recommendations'}
                     className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
                   >
                     My Recommendations
-                  </Link>
+                  </NavLink>
                 </>
               )}
-              <Link
+              <NavLink
                 to={'/blog'}
                 className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
               >
                 Blog
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to={'/about'}
                 className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
               >
                 About Us
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to={'/contact'}
                 className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
               >
                 Contact Us
-              </Link>
+              </NavLink>
             </div>
           </div>
           <NavLink

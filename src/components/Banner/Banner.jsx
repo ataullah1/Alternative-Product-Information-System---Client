@@ -58,7 +58,7 @@ const Banner = () => {
                   <h1
                     data-aos="zoom-in-down"
                     data-aos-duration="1000"
-                    className="text-3xl md:text-5xl lg:text-6xl font-bold"
+                    className="text-3xl md:text-5xl lg:text-6xl"
                   >
                     Unraveling the Essence of Exceptional Products
                   </h1>
@@ -100,7 +100,7 @@ const Banner = () => {
                   <h1
                     data-aos="zoom-in-down"
                     data-aos-duration="3000"
-                    className="text-3xl md:text-5xl lg:text-6xl font-bold"
+                    className="text-3xl md:text-5xl lg:text-6xl"
                   >
                     Elevate Your Shopping Experience with Insights
                   </h1>
@@ -138,7 +138,7 @@ const Banner = () => {
             >
               <div className="flex h-full items-center justify-center relative">
                 <div className="text-white px-4 max-w-[900px] space-y-0 sm:space-y-5">
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl">
                     Curating Excellence, Unveiling Hidden Treasures
                   </h1>
                   <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
@@ -172,7 +172,7 @@ const Banner = () => {
             >
               <div className="flex h-full items-center justify-center relative">
                 <div className="text-white px-4 max-w-[900px] space-y-0 sm:space-y-5">
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl">
                     Forge Meaningful Connections, Share Experiences
                   </h1>
                   <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
@@ -206,7 +206,7 @@ const Banner = () => {
             >
               <div className="flex h-full items-center justify-center relative">
                 <div className="text-white px-4 max-w-[900px] space-y-0 sm:space-y-5">
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl">
                     Discover Unique Finds for Every Niche
                   </h1>
                   <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
@@ -240,7 +240,7 @@ const Banner = () => {
             >
               <div className="flex h-full items-center justify-center relative">
                 <div className="text-white px-4 max-w-[900px] space-y-0 sm:space-y-5">
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl">
                     Empowering Consumer Voices, Shaping Quality
                   </h1>
                   <p className="max-w-[700px] mx-auto p-4 text-base md:text-lg">
