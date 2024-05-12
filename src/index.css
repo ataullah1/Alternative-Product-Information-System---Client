@@ -144,3 +144,11 @@ button {
     opacity: 0;
   }
 }
+
+/* Custom Responsive code  */
+@media (max-height: 650px) {
+  .updateModalHeightControl {
+    height: 95%;
+    overflow-y: scroll;
+  }
+}

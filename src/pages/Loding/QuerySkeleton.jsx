@@ -6,10 +6,10 @@ import Skeleton from '@mui/material/Skeleton';
 
 export default function QuerySkeleton() {
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6 w-11/12 mx-auto text-center">
-        <div className="mx-auto w-full max-w-[400px] min-h-[580px]">
-          <Card sx={{ maxWidth: 400, minHeight: 580, m: 2 }}>
+    <div className="">
+      <div className="md:min-w-full justify-center max-w-[500px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6 mx-auto text-center">
+        <div className="mx-auto min-w-full min-h-[580px]">
+          <Card sx={{ minHeight: 580, m: 2 }}>
             <CardHeader
               avatar={
                 <Skeleton
@@ -50,8 +50,8 @@ export default function QuerySkeleton() {
             </CardContent>
           </Card>
         </div>
-        <div className="mx-auto w-full max-w-[400px] min-h-[580px]">
-          <Card sx={{ maxWidth: 400, minHeight: 580, m: 2 }}>
+        <div className="mx-auto min-w-full min-h-[580px]">
+          <Card sx={{ minHeight: 580, m: 2 }}>
             <CardHeader
               avatar={
                 <Skeleton
@@ -92,8 +92,8 @@ export default function QuerySkeleton() {
             </CardContent>
           </Card>
         </div>
-        <div className="mx-auto w-full max-w-[400px] min-h-[580px]">
-          <Card sx={{ maxWidth: 400, minHeight: 580, m: 2 }}>
+        <div className="mx-auto min-w-full min-h-[580px]">
+          <Card sx={{ minHeight: 580, m: 2 }}>
             <CardHeader
               avatar={
                 <Skeleton
@@ -134,8 +134,8 @@ export default function QuerySkeleton() {
             </CardContent>
           </Card>
         </div>
-        <div className="mx-auto w-full max-w-[400px] min-h-[580px]">
-          <Card sx={{ maxWidth: 400, minHeight: 580, m: 2 }}>
+        <div className="mx-auto min-w-full min-h-[580px]">
+          <Card sx={{ minHeight: 580, m: 2 }}>
             <CardHeader
               avatar={
                 <Skeleton
@@ -176,8 +176,8 @@ export default function QuerySkeleton() {
             </CardContent>
           </Card>
         </div>
-        <div className="mx-auto w-full max-w-[400px] min-h-[580px]">
-          <Card sx={{ maxWidth: 400, minHeight: 580, m: 2 }}>
+        <div className="mx-auto min-w-full min-h-[580px]">
+          <Card sx={{ minHeight: 580, m: 2 }}>
             <CardHeader
               avatar={
                 <Skeleton
@@ -218,8 +218,8 @@ export default function QuerySkeleton() {
             </CardContent>
           </Card>
         </div>
-        <div className="mx-auto w-full max-w-[400px] min-h-[580px]">
-          <Card sx={{ maxWidth: 400, minHeight: 580, m: 2 }}>
+        <div className="mx-auto min-w-full min-h-[580px]">
+          <Card sx={{ minHeight: 580, m: 2 }}>
             <CardHeader
               avatar={
                 <Skeleton
