@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import Loding from '../Loding/Loding';
 
 const QueryDetails = () => {
-  const id = useParams();
+  const { id } = useParams();
   const axiosSecure = useAxiosSec();
   const {
     data = [],

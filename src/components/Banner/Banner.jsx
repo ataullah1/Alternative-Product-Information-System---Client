@@ -8,8 +8,8 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation, Keyboard } from 'swiper/modules';
 
 // image input
-import slide1 from '../../assets/banner/1.jpg';
-import slide2 from '../../assets/banner/5.jpg';
+import slide1 from '../../assets/banner/5.jpg';
+import slide2 from '../../assets/banner/1.jpg';
 import slide3 from '../../assets/banner/3.jpg';
 import slide4 from '../../assets/banner/4.jpg';
 import slide5 from '../../assets/banner/2.jpg';
