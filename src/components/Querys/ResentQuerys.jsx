@@ -5,10 +5,12 @@ import { PiShareFatBold } from 'react-icons/pi';
 import { RiHandHeartLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import QuerySkeleton from '../../pages/Loding/QuerySkeleton';
 
 const ResentQuerys = () => {
   const [view, setView] = useState(6);
   const [data, setData] = useState([]);
+  const [skeleton, setSkeleton] = useState(true);
   useEffect(() => {
     const queryData = async () => {
       try {
@@ -16,7 +18,9 @@ const ResentQuerys = () => {
           `${import.meta.env.VITE_API_URL}/latest-queries`
         );
         setData(response.data);
+        setSkeleton(false);
       } catch (error) {
+        setSkeleton(true);
         console.error('Error fetching data:', error);
         Swal.fire({
           title: 'Oppps ....!',
@@ -29,11 +33,11 @@ const ResentQuerys = () => {
   }, []);
   console.log(data);
 
+  if (skeleton) {
+    <QuerySkeleton />;
+  }
   return (
     <div className="">
-      <h1>Recent Queries</h1>
-      {/* Render your data here */}
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
         {data.slice(0, view).map((dta) => (
           <div
@@ -42,7 +46,7 @@ const ResentQuerys = () => {
           >
             <div className="sm:min-h-[580px] flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between gap-10 px-4 py-4">
+                <div className="flex items-center justify-between gap-0 px-4 py-4">
                   {/* Avatar image  */}
                   <div className="flex items-center gap-3">
                     <img
