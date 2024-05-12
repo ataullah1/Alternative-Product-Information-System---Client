@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
 import useAuth from '../../Hooks/useAuth';
-import axios from 'axios';
 import img1 from '../../assets/banner/6.jpg';
 import MultyImgBanner from '../../components/MultyImgBanner/MultyImgBanner';
+import useAxiosSec from '../../Hooks/useAxiosSec';
 
 const AddQueries = () => {
+  const axiosSecure = useAxiosSec();
   const dateTime = new Date().toLocaleString('en-BD', {
     timeZone: 'Asia/Dhaka',
     year: 'numeric',
@@ -46,10 +47,7 @@ const AddQueries = () => {
     console.log(formData);
 
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/queries`,
-        formData
-      );
+      const { data } = await axiosSecure.post(`/queries`, formData);
       console.log(data);
       Swal.fire({
         icon: 'success',

@@ -20,7 +20,7 @@ const MyQueries = () => {
     error,
   } = useQuery({
     queryFn: () => queryData(),
-    queryKey: 'resent-query',
+    queryKey: 'my-query',
   });
 
   const queryData = async () => {
