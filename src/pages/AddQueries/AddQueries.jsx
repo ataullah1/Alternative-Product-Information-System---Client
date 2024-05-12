@@ -5,6 +5,7 @@ import useAuth from '../../Hooks/useAuth';
 import img1 from '../../assets/banner/6.jpg';
 import MultyImgBanner from '../../components/MultyImgBanner/MultyImgBanner';
 import useAxiosSec from '../../Hooks/useAxiosSec';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const AddQueries = () => {
   const axiosSecure = useAxiosSec();
@@ -19,6 +20,32 @@ const AddQueries = () => {
   });
   // console.log(dateTime); // Output: 11/05/2024 11:42 PM (assuming current Bangladesh time)
   const { userDta } = useAuth();
+  const queryClient = useQueryClient();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ formData }) => {
+      const { data } = await axiosSecure.post(`/queries`, formData);
+      console.log(data);
+    },
+    onError: () => {
+      Swal.fire({
+        title: 'Oppps ....!',
+        text: 'Can not post query. Check your network !',
+        icon: 'error',
+      });
+    },
+    onSuccess: () => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Good Job',
+        text: 'Your Query has been successfully posted.',
+        timer: 2200,
+      });
+      queryClient.invalidateQueries({ queryKey: ['my-query'] });
+      console.log('Updated Query');
+    },
+  });
+
   const handleAddQuery = async (e) => {
     e.preventDefault();
     const dta = e.target;
@@ -44,33 +71,8 @@ const AddQueries = () => {
       dateTime,
       recommendationCount,
     };
-    console.log(formData);
-
-    try {
-      const { data } = await axiosSecure.post(`/queries`, formData);
-      console.log(data);
-      Swal.fire({
-        icon: 'success',
-        title: 'Good Job',
-        text: 'Your Query has been successfully posted.',
-        timer: 2200,
-      });
-    } catch (err) {
-      console.log(err);
-      if (err.code === 'ERR_NETWORK') {
-        Swal.fire({
-          title: 'NETWORK PROBLEM',
-          text: 'The data could not be added due to your network problem.',
-          icon: 'error',
-        });
-      }
-      Swal.fire({
-        title: 'Oppps ....!',
-        text: 'Check your network!',
-        icon: 'error',
-      });
-    }
-
+    // console.log(formData);
+    await mutateAsync({ formData });
     dta.reset();
   };
 

@@ -5,10 +5,11 @@ import MultyImgBanner from '../../components/MultyImgBanner/MultyImgBanner';
 import useAuth from '../../Hooks/useAuth';
 import useAxiosSec from '../../Hooks/useAxiosSec';
 import QuerySkeleton from '../Loding/QuerySkeleton';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import MyQuery from './MyQuery';
 const MyQueries = () => {
   const axiosSecure = useAxiosSec();
+  const queryClient = useQueryClient();
   const { userDta } = useAuth();
 
   const {
@@ -16,10 +17,9 @@ const MyQueries = () => {
     isLoading,
     isError,
     error,
-    refetch,
   } = useQuery({
     queryFn: () => queryData(),
-    queryKey: 'my-query',
+    queryKey: ['my-query'],
   });
 
   const queryData = async () => {
@@ -34,7 +34,7 @@ const MyQueries = () => {
       console.log(data);
     },
     onSuccess: () => {
-      refetch();
+      queryClient.invalidateQueries({ queryKey: ['my-query'] });
       console.log('Deleted Query');
     },
   });

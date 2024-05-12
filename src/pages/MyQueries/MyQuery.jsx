@@ -10,11 +10,37 @@ import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import useAxiosSec from '../../Hooks/useAxiosSec';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const MyQuery = ({ dta, handleDelete }) => {
   const [openModal, setOpenModal] = useState(false);
   const [update, setUpdate] = useState(null);
   const axiosSecure = useAxiosSec();
+  const queryClient = useQueryClient();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ formData }) => {
+      const { data } = await axiosSecure.patch(`/my-query-update`, formData);
+      console.log(data);
+    },
+    onError: () => {
+      Swal.fire({
+        title: 'Oppps ....!',
+        text: 'Can not update query. Check your network !',
+        icon: 'error',
+      });
+    },
+    onSuccess: () => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated',
+        text: 'Your query data has been successfully updated.',
+        timer: 2200,
+      });
+      queryClient.invalidateQueries({ queryKey: ['my-query'] });
+      console.log('Updated Query');
+    },
+  });
 
   const handleUpdateQuery = async (e) => {
     e.preventDefault();
@@ -32,33 +58,7 @@ const MyQuery = ({ dta, handleDelete }) => {
       details,
     };
     console.log(formData);
-
-    try {
-      const { data } = await axiosSecure.patch(`/my-query-update`, formData);
-      console.log(data);
-      Swal.fire({
-        icon: 'success',
-        title: 'Good Job',
-        text: 'Your Query has been successfully posted.',
-        timer: 2200,
-      });
-    } catch (err) {
-      console.log(err);
-      if (err.code === 'ERR_NETWORK') {
-        Swal.fire({
-          title: 'NETWORK PROBLEM',
-          text: 'The data could not be added due to your network problem.',
-          icon: 'error',
-        });
-      }
-      Swal.fire({
-        title: 'Oppps ....!',
-        text: 'Check your network!',
-        icon: 'error',
-      });
-    }
-
-    dta.reset();
+    await mutateAsync({ formData });
   };
 
   return (
@@ -90,7 +90,7 @@ const MyQuery = ({ dta, handleDelete }) => {
                   <PiDotsThreeOutlineVerticalFill />
                 </div>
                 {/* icon container  */}
-                <div className="absolute z-20 top-6 right-0 text-white duration-500 h-0 group-hover:h-[133px] hidden group-hover:block bg-slate-800 rounded-md">
+                <div className="absolute z-20 top-10 right-0 text-white duration-500 h-0 group-hover:h-[133px] hidden group-hover:block bg-slate-800 rounded-md">
                   <button className="shadow-[0px_2px_8px_0px_rgba(99,99,99,0.4)] py-2 pl-6 pr-10 hover:bg-mClr hover:text-white flex items-center gap-2 w-full rounded-t-md">
                     <span className="text-2xl">
                       <AiOutlineInfoCircle />
@@ -180,7 +180,7 @@ const MyQuery = ({ dta, handleDelete }) => {
                 <FaExternalLinkAlt />
               </div>
               {/* icon container  */}
-              <div className="absolute bottom-6 right-0 text-white duration-500 h-0 group-hover:h-[133px] hidden group-hover:block bg-slate-800 rounded-md">
+              <div className="absolute bottom-10 right-0 text-white duration-500 h-0 group-hover:h-[133px] hidden group-hover:block bg-slate-800 rounded-md">
                 <button className="shadow-[0px_2px_8px_0px_rgba(99,99,99,0.4)] py-2 pl-6 pr-10 hover:bg-mClr hover:text-white flex items-center gap-2 w-full rounded-t-md">
                   <span className="text-2xl">
                     <AiOutlineInfoCircle />
