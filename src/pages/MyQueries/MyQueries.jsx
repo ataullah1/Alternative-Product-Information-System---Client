@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -8,15 +7,15 @@ import { PiShareFatBold } from 'react-icons/pi';
 import { FaRegCommentDots } from 'react-icons/fa';
 import { RiHandHeartLine } from 'react-icons/ri';
 import useAuth from '../../Hooks/useAuth';
+import useAxiosSec from '../../Hooks/useAxiosSec';
 const MyQueries = () => {
+  const axiosSecure = useAxiosSec();
   const { userDta } = useAuth();
   const [data, setData] = useState([]);
   useEffect(() => {
     const queryData = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/my-queries/${userDta.email}`
-        );
+        const response = await axiosSecure.get(`/my-queries/${userDta.email}`);
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -28,7 +27,7 @@ const MyQueries = () => {
       }
     };
     queryData();
-  }, [userDta.email]);
+  }, [userDta.email, axiosSecure]);
   console.log(data);
 
   return (

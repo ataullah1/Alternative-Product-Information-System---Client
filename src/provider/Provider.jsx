@@ -46,13 +46,12 @@ const Provider = ({ children }) => {
 
   // Logout account
   const logOutAcc = () => {
+    axios(`${import.meta.env.VITE_API_URL}/logout`, {
+      withCredentials: true,
+    });
+    // console.log('JWT logout Token,', data);
     return signOut(auth)
       .then(() => {
-        const jwtRequet = async () => {
-          await axios(`${import.meta.env.VITE_API_URL}/logout`);
-        };
-        jwtRequet();
-
         // Sign-out successful.
         Swal.fire({
           title: 'Logged Out',
