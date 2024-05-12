@@ -7,7 +7,9 @@ import useAxiosSec from '../../Hooks/useAxiosSec';
 import QuerySkeleton from '../Loding/QuerySkeleton';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import MyQuery from './MyQuery';
+import { useState } from 'react';
 const MyQueries = () => {
+  const [viewAll, setViewAll] = useState(9);
   const axiosSecure = useAxiosSec();
   const queryClient = useQueryClient();
   const { userDta } = useAuth();
@@ -23,8 +25,8 @@ const MyQueries = () => {
   });
 
   const queryData = async () => {
-    const response = await axiosSecure.get(`/my-queries/${userDta.email}`);
-    return response.data;
+    const { data } = await axiosSecure.get(`/my-queries/${userDta.email}`);
+    return data;
   };
   // console.log(myData);
 
@@ -97,9 +99,19 @@ const MyQueries = () => {
         ) : (
           <div className="">
             <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
-              {myData.map((dta) => (
+              {myData.slice(0, viewAll).map((dta) => (
                 <MyQuery key={dta._id} dta={dta} handleDelete={handleDelete} />
               ))}
+            </div>
+            <div className="text-center">
+              {myData.length > 9 && myData.length !== viewAll && (
+                <button
+                  onClick={() => setViewAll(viewAll + 6)}
+                  className="mt-8 border-b border-mClr px-2 text-black text-lg dark:text-white font-light"
+                >
+                  See more query ...
+                </button>
+              )}
             </div>
           </div>
         )}

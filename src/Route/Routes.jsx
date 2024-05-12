@@ -9,6 +9,7 @@ import Blog from '../pages/Blog/Blog';
 import PrivetRoutes from './PrivetRoutes';
 import MyQueries from '../pages/MyQueries/MyQueries';
 import AddQueries from '../pages/AddQueries/AddQueries';
+import QueryDetails from '../pages/QueryDetails/QueryDetails';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
         element: (
           <PrivetRoutes>
             <MyQueries />
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: '/query-details/:id',
+        element: (
+          <PrivetRoutes>
+            <QueryDetails />
           </PrivetRoutes>
         ),
       },

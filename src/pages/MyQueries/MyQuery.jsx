@@ -96,12 +96,14 @@ const MyQuery = ({ dta, handleDelete }) => {
                 </div>
                 {/* icon container  */}
                 <div className="absolute z-20 top-10 right-0 text-white duration-500 h-0 group-hover:h-[133px] hidden group-hover:block bg-slate-800 rounded-md">
-                  <button className="shadow-[0px_2px_8px_0px_rgba(99,99,99,0.4)] py-2 pl-6 pr-10 hover:bg-mClr hover:text-white flex items-center gap-2 w-full rounded-t-md">
-                    <span className="text-2xl">
-                      <AiOutlineInfoCircle />
-                    </span>
-                    Details
-                  </button>
+                  <Link to={`/query-details/${dta._id}`}>
+                    <button className="shadow-[0px_2px_8px_0px_rgba(99,99,99,0.4)] py-2 pl-6 pr-10 hover:bg-mClr hover:text-white flex items-center gap-2 w-full rounded-t-md">
+                      <span className="text-2xl">
+                        <AiOutlineInfoCircle />
+                      </span>
+                      Details
+                    </button>
+                  </Link>
                   <span onClick={() => setUpdate(dta)}>
                     <button
                       onClick={() => setOpenModal(true)}
@@ -147,12 +149,12 @@ const MyQuery = ({ dta, handleDelete }) => {
               {dta.productName}
             </h2>
             <p className="text-base text-gray-500 dark:text-white/50">
-              {dta.details.slice(0, 130)}...{' '}
+              {dta.details.slice(0, 130)}
               <Link
                 className="cursor-pointer text-[#3e96d4]"
                 to={'/query-details'}
               >
-                See more
+                {dta.details.length > 129 && '... See more'}
               </Link>
             </p>
           </div>
@@ -186,12 +188,14 @@ const MyQuery = ({ dta, handleDelete }) => {
               </div>
               {/* icon container  */}
               <div className="absolute bottom-10 right-0 text-white duration-500 h-0 group-hover:h-[133px] hidden group-hover:block bg-slate-800 rounded-md">
-                <button className="shadow-[0px_2px_8px_0px_rgba(99,99,99,0.4)] py-2 pl-6 pr-10 hover:bg-mClr hover:text-white flex items-center gap-2 w-full rounded-t-md">
-                  <span className="text-2xl">
-                    <AiOutlineInfoCircle />
-                  </span>
-                  Details
-                </button>
+                <Link to={`/query-details/${dta._id}`}>
+                  <button className="shadow-[0px_2px_8px_0px_rgba(99,99,99,0.4)] py-2 pl-6 pr-10 hover:bg-mClr hover:text-white flex items-center gap-2 w-full rounded-t-md">
+                    <span className="text-2xl">
+                      <AiOutlineInfoCircle />
+                    </span>
+                    Details
+                  </button>
+                </Link>
                 <span onClick={() => setUpdate(dta)}>
                   <button
                     onClick={() => setOpenModal(true)}
