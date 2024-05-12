@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
 import Loding from '../Loding/Loding';
+import axios from 'axios';
 
 const Login = () => {
   // Naviget, login done then go to Home
@@ -64,6 +65,17 @@ const Login = () => {
     emlPassLogin(email, pass)
       .then((userCredential) => {
         const user = userCredential.user;
+        const jwtRequet = async () => {
+          const { data } = await axios.post(
+            `${import.meta.env.VITE_API_URL}/jwt`,
+            {
+              email: user?.email,
+            },
+            { withCredentials: true }
+          );
+          console.log('JWT Token,', data);
+        };
+        jwtRequet();
         console.log(user);
         Swal.fire({
           title: 'Good job!',
@@ -98,6 +110,17 @@ const Login = () => {
     socialLogin()
       .then((result) => {
         const user = result.user;
+        const jwtRequet = async () => {
+          const { data } = await axios.post(
+            `${import.meta.env.VITE_API_URL}/jwt`,
+            {
+              email: user?.email,
+            },
+            { withCredentials: true }
+          );
+          console.log('JWT Token,', data);
+        };
+        jwtRequet();
         console.log(user);
         Swal.fire({
           title: 'Good job!',

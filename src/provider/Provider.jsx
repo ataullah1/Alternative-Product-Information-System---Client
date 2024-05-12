@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
 import auth from '../firebase/firebase.config';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 export const ContextAuth = createContext();
 const Provider = ({ children }) => {
@@ -47,6 +48,11 @@ const Provider = ({ children }) => {
   const logOutAcc = () => {
     return signOut(auth)
       .then(() => {
+        const jwtRequet = async () => {
+          await axios(`${import.meta.env.VITE_API_URL}/logout`);
+        };
+        jwtRequet();
+
         // Sign-out successful.
         Swal.fire({
           title: 'Logged Out',

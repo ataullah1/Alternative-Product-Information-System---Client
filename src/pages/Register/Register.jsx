@@ -16,6 +16,7 @@ import { ContextAuth } from '../../provider/Provider';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Loding from '../Loding/Loding';
+import axios from 'axios';
 
 const Register = () => {
   const [eye, setEye] = useState(false);
@@ -122,6 +123,17 @@ const Register = () => {
     socialLogin()
       .then((result) => {
         const user = result.user;
+        const jwtRequet = async () => {
+          const { data } = await axios.post(
+            `${import.meta.env.VITE_API_URL}/jwt`,
+            {
+              email: user?.email,
+            },
+            { withCredentials: true }
+          );
+          console.log('JWT Token,', data);
+        };
+        jwtRequet();
         console.log(user);
         Swal.fire({
           title: 'Good job!',
