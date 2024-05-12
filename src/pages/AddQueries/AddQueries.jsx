@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
-import img1 from '../../assets/banner/6.jpg';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-// import required modules
-import { Autoplay } from 'swiper/modules';
 import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
 import useAuth from '../../Hooks/useAuth';
 import axios from 'axios';
+import img1 from '../../assets/banner/6.jpg';
+import MultyImgBanner from '../../components/MultyImgBanner/MultyImgBanner';
 
 const AddQueries = () => {
   const dateTime = new Date().toLocaleString('en-BD', {
@@ -19,7 +16,7 @@ const AddQueries = () => {
     minute: '2-digit',
     hour12: true, // Include AM/PM indicator
   });
-  console.log(dateTime); // Output: 11/05/2024 11:42 PM (assuming current Bangladesh time)
+  // console.log(dateTime); // Output: 11/05/2024 11:42 PM (assuming current Bangladesh time)
   const { userDta } = useAuth();
   const handleAddQuery = async (e) => {
     e.preventDefault();
@@ -81,209 +78,9 @@ const AddQueries = () => {
 
   return (
     <div className="">
+      {/* Banner Part */}
       <div className="h-64 sm:h-72 w-full bg-red-200 relative">
-        <div className="h-full w-full grid grid-cols-4 grid-rows-2">
-          <div className="w-full bg-red-400 row-span-2 col-span-2">
-            <Swiper
-              className="mySwiper h-full"
-              spaceBetween={30}
-              centeredSlides={true}
-              autoplay={{
-                delay: 2000,
-                disableOnInteraction: false,
-              }}
-              modules={[Autoplay]}
-            >
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-            </Swiper>
-          </div>
-          <div className="w-full bg-yellow-400">
-            <Swiper
-              className="mySwiper h-full"
-              spaceBetween={30}
-              centeredSlides={true}
-              autoplay={{
-                delay: 2000,
-                disableOnInteraction: false,
-              }}
-              modules={[Autoplay]}
-            >
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-            </Swiper>
-          </div>
-          <div className="w-full bg-green-400">
-            <Swiper
-              className="mySwiper h-full"
-              spaceBetween={30}
-              centeredSlides={true}
-              autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-              }}
-              modules={[Autoplay]}
-            >
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-            </Swiper>
-          </div>
-          <div className="w-full bg-emerald-800">
-            <Swiper
-              className="mySwiper h-full"
-              spaceBetween={30}
-              centeredSlides={true}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
-              modules={[Autoplay]}
-            >
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-            </Swiper>
-          </div>
-          <div className="w-full bg-purple-500">
-            <Swiper
-              className="mySwiper h-full"
-              spaceBetween={30}
-              centeredSlides={true}
-              autoplay={{
-                delay: 3500,
-                disableOnInteraction: false,
-              }}
-              modules={[Autoplay]}
-            >
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-              <SwiperSlide
-                className="h-full w-full"
-                style={{
-                  backgroundImage: `url(${img1})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></SwiperSlide>
-            </Swiper>
-          </div>
-        </div>
+        <MultyImgBanner img1={img1} />
         <div className="absolute z-10 top-0 left-0 bg-[#00000073] w-full h-full">
           <div className="h-full w-10/12 mx-auto flex items-center justify-center pt-10 sm:pt-20 text-center">
             <div className="flex items-center justify-center gap-1 text-2xl sm:text-3xl font-bold text-white ">
