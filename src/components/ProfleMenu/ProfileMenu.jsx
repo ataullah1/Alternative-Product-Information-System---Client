@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import { GoPlus } from 'react-icons/go';
+import { LuLogOut } from 'react-icons/lu';
 
 const ProfileMenu = () => {
   const { userDta, logOutAcc } = useAuth();
@@ -79,8 +80,11 @@ const ProfileMenu = () => {
         </NavLink>
         <button
           onClick={logOutAcc}
-          className="hover:bg-[#c52323] hover:text-white font-semibold border-b bg-sClr  text-white py-3"
+          className="hover:bg-[#c52323] hover:text-white font-semibold border-b bg-sClr  text-white py-3 tracking-widest flex items-center justify-center gap-3"
         >
+          <span className='text-2xl'>
+            <LuLogOut />
+          </span>
           Log Out
         </button>
       </div>

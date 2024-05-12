@@ -146,7 +146,7 @@ const AddQueries = () => {
               <TextField
                 id="outlined-textarea"
                 label="Query Title"
-                placeholder="Better Product Name"
+                placeholder="Enter your query title."
                 required
                 name="queryTitle"
                 className="text-3xl"
