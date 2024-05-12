@@ -9,7 +9,6 @@ import Blog from '../pages/Blog/Blog';
 import PrivetRoutes from './PrivetRoutes';
 import MyQueries from '../pages/MyQueries/MyQueries';
 import AddQueries from '../pages/AddQueries/AddQueries';
-import QuerySkeleton from '../pages/Loding/QuerySkeleton';
 
 const router = createBrowserRouter([
   {
@@ -20,10 +19,6 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
-      },
-      {
-        path: '/ss',
-        element: <QuerySkeleton />,
       },
       {
         path: '/queries',

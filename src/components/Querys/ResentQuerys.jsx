@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaRegCommentDots } from 'react-icons/fa';
 import { PiShareFatBold } from 'react-icons/pi';
 import { RiHandHeartLine } from 'react-icons/ri';
@@ -6,39 +6,43 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import QuerySkeleton from '../../pages/Loding/QuerySkeleton';
 import useAxios from '../../Hooks/useAxios';
+import { useQuery } from '@tanstack/react-query';
 
 const ResentQuerys = () => {
   const axiosFetch = useAxios();
   const [view, setView] = useState(6);
-  const [data, setData] = useState([]);
-  const [skeleton, setSkeleton] = useState(true);
-  useEffect(() => {
-    const queryData = async () => {
-      try {
-        const response = await axiosFetch.get(`/latest-queries`);
-        setData(response.data);
-        setSkeleton(false);
-      } catch (error) {
-        setSkeleton(true);
-        console.error('Error fetching data:', error);
-        Swal.fire({
-          title: 'Oppps ....!',
-          text: 'Querys data is not coming. Check your network!',
-          icon: 'error',
-        });
-      }
-    };
-    queryData();
-  }, [axiosFetch]);
-  console.log(data);
 
-  if (skeleton) {
-    <QuerySkeleton />;
+  const {
+    data: datas = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryFn: () => queryData(),
+    queryKey: 'resent-query',
+  });
+
+  const queryData = async () => {
+    const response = await axiosFetch(`/latest-queries`);
+    return response.data;
+  };
+
+  // console.log(datas);
+
+  if ((error, isError)) {
+    Swal.fire({
+      title: 'Oppps ....!',
+      text: 'Querys data is not coming. Check your network!',
+      icon: 'error',
+    });
+  }
+  if (isLoading) {
+    return <QuerySkeleton />;
   }
   return (
     <div className="">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
-        {data.slice(0, view).map((dta) => (
+        {datas.slice(0, view).map((dta) => (
           <div
             key={dta._id}
             className="mx-auto max-w-[400px] rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]"
@@ -143,7 +147,7 @@ const ResentQuerys = () => {
           </Link>
         ) : (
           <button
-            onClick={() => setView(data.length)}
+            onClick={() => setView(datas.length)}
             className="mt-8 border-b border-mClr px-2 text-black text-lg dark:text-white font-light"
           >
             See more query ...

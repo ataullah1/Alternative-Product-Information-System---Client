@@ -11,7 +11,7 @@ const useAxios = () => {
   const naviget = useNavigate();
   axiosSecure.interceptors.response.use(
     (res) => {
-      console.log('Interceptor result: ', res);
+      //   console.log('Interceptor result: ', res);
       return res;
     },
     async (error) => {
