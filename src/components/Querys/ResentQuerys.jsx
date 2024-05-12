@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import QuerySkeleton from '../../pages/Loding/QuerySkeleton';
 import useAxios from '../../Hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
+import { FiExternalLink } from 'react-icons/fi';
 
 const ResentQuerys = () => {
   const axiosFetch = useAxios();
@@ -41,11 +42,11 @@ const ResentQuerys = () => {
   }
   return (
     <div className="">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
+      <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
         {datas.slice(0, view).map((dta) => (
           <div
             key={dta._id}
-            className="mx-auto max-w-[400px] rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]"
+            className="min-w-full max-w-[500px] rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]"
           >
             <div className="sm:min-h-[580px] flex flex-col justify-between">
               <div>
@@ -67,10 +68,8 @@ const ResentQuerys = () => {
                     </div>
                   </div>
                   {/* Setting button */}
-                  <div className="flex cursor-pointer flex-col gap-2 rounded-full px-4 py-3">
-                    <span className="size-[3px] rounded-full bg-gray-600 dark:bg-white"></span>
-                    <span className="size-[3px] rounded-full bg-gray-600 dark:bg-white"></span>
-                    <span className="size-[3px] rounded-full bg-gray-600 dark:bg-white"></span>
+                  <div className="flex cursor-pointer flex-col gap-2 rounded-full text-slate-900 text-2xl">
+                    <FiExternalLink />
                   </div>
                 </div>
                 {/* Post Image */}

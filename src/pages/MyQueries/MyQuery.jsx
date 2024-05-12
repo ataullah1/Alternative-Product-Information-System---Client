@@ -5,16 +5,22 @@ import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { HiDotsVertical } from 'react-icons/hi';
 import { useState } from 'react';
+import { MdDeleteForever } from 'react-icons/md';
+import { TbEdit } from 'react-icons/tb';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { IoCloseSharp } from 'react-icons/io5';
 
-const MyQuery = ({ dta }) => {
-const [menu,setMenu]=useState(false)
-
+const MyQuery = ({ dta, handleDelete }) => {
+  const [menu, setMenu] = useState(false);
 
   return (
-    <div className="mx-auto max-w-[400px] rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]">
+    <div
+      className="mx-auto min-w-full max-w-[500px] rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]"
+      // onClick={() => setMenu(false)}
+    >
       <div className="sm:min-h-[580px] flex flex-col justify-between">
         <div>
-          <div className="flex items-center justify-between gap-0 px-4 py-4">
+          <div className="flex items-center justify-between gap-0 px-4 py-4 relative">
             {/* Avatar image  */}
             <div className="flex items-center gap-3">
               <img
@@ -32,9 +38,53 @@ const [menu,setMenu]=useState(false)
               </div>
             </div>
             {/* Setting button */}
-            <div className="flex cursor-pointer flex-col gap-2 rounded-full text-stone-900 text-2xl py-5 px-2" onClick={()=>setMenu(true)}>
-              <HiDotsVertical />
+            <div
+              className="flex cursor-pointer flex-col gap-2 rounded-full text-stone-900 dark:text-white text-2xl py-5 px-2"
+              onClick={() => setMenu(!menu)}
+            >
+              {menu ? (
+                <span>
+                  <IoCloseSharp />
+                </span>
+              ) : (
+                <span>
+                  <HiDotsVertical />
+                </span>
+              )}
             </div>
+            {menu && (
+              <div className="absolute top-16 right-8 bg-slate-800 dark:bg-slate-700 rounded-md flex flex-col z-30 text-lg text-white">
+                <button
+                  className="py-2 pl-6 pr-10 hover:bg-mClr hover:text-white flex items-center gap-2 rounded-t-md"
+                  onClick={() => setMenu(!menu)}
+                >
+                  <span className="text-2xl">
+                    <AiOutlineInfoCircle />
+                  </span>
+                  Details
+                </button>
+                <button
+                  className="py-2 pl-6 pr-10 hover:bg-mClr hover:text-white flex items-center gap-2"
+                  onClick={() => setMenu(!menu)}
+                >
+                  <span className="text-2xl">
+                    <TbEdit />
+                  </span>
+                  Update
+                </button>
+                <div onClick={() => setMenu(!menu)} className="">
+                  <button
+                    className="py-2 pl-6 pr-10 hover:bg-sClr hover:text-white flex items-center gap-2 w-full rounded-b-md"
+                    onClick={() => handleDelete(dta._id)}
+                  >
+                    <span className="text-2xl">
+                      <MdDeleteForever />
+                    </span>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
           {/* Post Image */}
           <div className="flex flex-col gap-1">
@@ -105,4 +155,5 @@ const [menu,setMenu]=useState(false)
 export default MyQuery;
 MyQuery.propTypes = {
   dta: PropTypes.object,
+  handleDelete: PropTypes.func,
 };

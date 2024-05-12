@@ -5,7 +5,7 @@ import MultyImgBanner from '../../components/MultyImgBanner/MultyImgBanner';
 import useAuth from '../../Hooks/useAuth';
 import useAxiosSec from '../../Hooks/useAxiosSec';
 import QuerySkeleton from '../Loding/QuerySkeleton';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import MyQuery from './MyQuery';
 const MyQueries = () => {
   const axiosSecure = useAxiosSec();
@@ -16,6 +16,7 @@ const MyQueries = () => {
     isLoading,
     isError,
     error,
+    refetch,
   } = useQuery({
     queryFn: () => queryData(),
     queryKey: 'my-query',
@@ -25,8 +26,39 @@ const MyQueries = () => {
     const response = await axiosSecure.get(`/my-queries/${userDta.email}`);
     return response.data;
   };
-
   // console.log(myData);
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ id }) => {
+      const { data } = await axiosSecure.delete(`/my-queries-delete/${id}`);
+      console.log(data);
+    },
+    onSuccess: () => {
+      refetch();
+      console.log('Deleted Query');
+    },
+  });
+  const handleDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await mutateAsync({ id });
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your file has been deleted.',
+          icon: 'success',
+        });
+      }
+    });
+  };
 
   if ((error, isError)) {
     Swal.fire({
@@ -64,9 +96,9 @@ const MyQueries = () => {
           <QuerySkeleton />
         ) : (
           <div className="">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
+            <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
               {myData.map((dta) => (
-                <MyQuery key={dta._id} dta={dta} />
+                <MyQuery key={dta._id} dta={dta} handleDelete={handleDelete} />
               ))}
             </div>
           </div>
