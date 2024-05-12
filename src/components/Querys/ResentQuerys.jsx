@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FaRegCommentDots } from 'react-icons/fa';
 import { PiShareFatBold } from 'react-icons/pi';
@@ -6,17 +5,17 @@ import { RiHandHeartLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import QuerySkeleton from '../../pages/Loding/QuerySkeleton';
+import useAxios from '../../Hooks/useAxios';
 
 const ResentQuerys = () => {
+  const axiosFetch = useAxios();
   const [view, setView] = useState(6);
   const [data, setData] = useState([]);
   const [skeleton, setSkeleton] = useState(true);
   useEffect(() => {
     const queryData = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/latest-queries`
-        );
+        const response = await axiosFetch.get(`/latest-queries`);
         setData(response.data);
         setSkeleton(false);
       } catch (error) {
@@ -30,7 +29,7 @@ const ResentQuerys = () => {
       }
     };
     queryData();
-  }, []);
+  }, [axiosFetch]);
   console.log(data);
 
   if (skeleton) {
