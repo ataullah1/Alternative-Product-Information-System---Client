@@ -19,8 +19,11 @@ const MyQuery = ({ dta, handleDelete }) => {
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
-    mutationFn: async ({ formData }) => {
-      const { data } = await axiosSecure.patch(`/my-query-update`, formData);
+    mutationFn: async ({ formData, id }) => {
+      const { data } = await axiosSecure.put(
+        `/my-query-update/${id}`,
+        formData
+      );
       console.log(data);
     },
     onError: () => {
@@ -35,7 +38,7 @@ const MyQuery = ({ dta, handleDelete }) => {
         icon: 'success',
         title: 'Updated',
         text: 'Your query data has been successfully updated.',
-        timer: 2200,
+        timer: 2500,
       });
       queryClient.invalidateQueries({ queryKey: ['my-query'] });
       console.log('Updated Query');
@@ -50,6 +53,7 @@ const MyQuery = ({ dta, handleDelete }) => {
     const productImage = dta.productImage.value;
     const queryTitle = dta.queryTitle.value;
     const details = dta.detail.value;
+    const id = update._id;
     const formData = {
       productName,
       productBrand,
@@ -57,8 +61,9 @@ const MyQuery = ({ dta, handleDelete }) => {
       queryTitle,
       details,
     };
+
     console.log(formData);
-    await mutateAsync({ formData });
+    await mutateAsync({ formData, id });
   };
 
   return (
