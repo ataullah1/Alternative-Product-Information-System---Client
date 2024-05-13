@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxiosSec from '../../Hooks/useAxiosSec';
 import useAuth from '../../Hooks/useAuth';
 import Swal from 'sweetalert2';
+import { AiFillCaretRight } from 'react-icons/ai';
 
 const MyRecommendations = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -29,11 +30,13 @@ const MyRecommendations = () => {
 
   const { mutateAsync } = useMutation({
     mutationFn: async ({ id }) => {
-      const { data } = await axiosSecure.delete(`/my-queries-delete/${id}`);
+      const { data } = await axiosSecure.delete(
+        `/my-recommendations-delete/${id}`
+      );
       console.log(data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['my-query'] });
+      queryClient.invalidateQueries({ queryKey: ['my-recommendation'] });
       console.log('Deleted Query');
     },
   });
@@ -150,7 +153,10 @@ const MyRecommendations = () => {
                     </p>
                   </td>
                   <td className=" px-5 border-b text-end">
-                    <button className="bg-error hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-8 rounded-md" onClick={()=>handleDelete(dta._id)}>
+                    <button
+                      className="bg-error hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-8 rounded-md"
+                      onClick={() => handleDelete(dta._id)}
+                    >
                       Delete
                     </button>
                   </td>
@@ -168,7 +174,7 @@ const MyRecommendations = () => {
         } inset-0 bg-black/20 backdrop-blur-sm duration-100`}
       >
         <div
-          className={`absolute recommendModalStyle overflow-y-scroll max-h-screen sm:max-h-max w-11/12 sm:w-10/12 md:w-9/12 lg:w-4/6 rounded-lg bg-white p-3 pb-5 text-center drop-shadow-2xl dark:bg-gray-800 dark:text-white ${
+          className={`absolute recommendModalStyle overflow-y-scroll h-[90%] sm:max-h-max w-11/12 sm:w-10/12 md:w-9/12 lg:w-4/6 rounded-lg bg-white p-3 pb-5 text-center drop-shadow-2xl dark:bg-gray-800 dark:text-white ${
             openModal
               ? 'scale-1 opacity-1 duration-300'
               : 'scale-0 opacity-0 duration-150'
@@ -193,7 +199,7 @@ const MyRecommendations = () => {
                     </p>
                   </div>
                 </div>
-                {/* Setting button */}
+                {/* Date Time */}
                 <div className="lg:pr-6 text-left">
                   <p className="text-slate-800 dark:text-slate-300">
                     <span className="font-semibold"> Date:</span>{' '}
@@ -205,6 +211,12 @@ const MyRecommendations = () => {
                   </p>
                 </div>
               </div>
+              <h1 className="text-2xl pb-3 text-slate-800 dark:text-slate-100 flex items-center">
+                <span className="text-mClr dark:text-sClr">
+                  <AiFillCaretRight />
+                </span>
+                You Recommendations.
+              </h1>
               <div className="w-full">
                 {/* <div className="w-12"></div> */}
                 <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-2 w-full">
@@ -248,10 +260,70 @@ const MyRecommendations = () => {
               </div>
             </div>
           </div>
+          <hr />
+          <hr />
+          <div className="text-left p-3">
+            <h1 className="text-2xl pb-3 text-slate-800 dark:text-slate-100 flex items-center">
+              <span className="text-mClr dark:text-sClr">
+                <AiFillCaretRight />
+              </span>
+              You recommend this for that query.
+            </h1>
+            <div className="w-full">
+              {/* <div className="w-12"></div> */}
+              <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-2 w-full">
+                {modalDta?.queryImg ? (
+                  <div
+                    className="h-64 w-full max-w-[550px] lg:w-3/5 bg-red-200 rounded-md"
+                    style={{
+                      backgroundImage: `url(${modalDta?.queryImg})`,
+                      backgroundPosition: 'center',
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+                  ></div>
+                ) : (
+                  <div className="w-full max-w-[550px] lg:w-3/5 text-center">
+                    <img
+                      className="h-64 w-auto mx-auto"
+                      src="https://shorturl.at/erBM5"
+                    />
+                  </div>
+                )}
+                {/* <div className="w-[1px] h-60 bg-gray-300 hidden lg:block"></div> */}
+                <div className="pt-3 w-full lg:w-2/5 flex flex-col md:flex-row lg:flex-col md:gap-10">
+                  <div className="text-left sm:text-center md:text-left lg:text-center">
+                    <p className="text-mClr font-bold text-lg">Product Name:</p>
+                    <p className="text-xl xl:text-2xl font-medium text-slate-800 dark:text-slate-100 pb-0 sm:pb-5 md:pb-0 lg:pb-5">
+                      {modalDta?.queryNames}
+                    </p>
+                  </div>
+                  <div className="text-left sm:text-center md:text-left lg:text-center">
+                    <p className="text-mClr font-bold text-lg">
+                      Product Brand:
+                    </p>
+                    <p className="text-xl xl:text-2xl font-medium text-slate-800 dark:text-slate-100">
+                      {modalDta?.queryBrands
+                        ? modalDta.queryBrands
+                        : 'Not Included'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="text-left">
+                <h1 className="text-2xl font-medium sm:text-3xl pt-4 pb-2 text-slate-800 dark:text-slate-100 font-serif">
+                  {modalDta?.queryTitles}
+                </h1>
+                <p className="text-slate-700 dark:text-slate-300 max-w-[800px]">
+                  {modalDta?.recReson}
+                </p>
+              </div>
+            </div>
+          </div>
           <div className="text-right pr-5">
             <button
               onClick={() => setOpenModal(false)}
-              className="rounded-md bg-mClr hover:bg-[#1f81ba] px-6 py-1.5 text-white"
+              className="rounded-md bg-mClr hover:bg-[#1f81ba] px-14 py-2 text-xl mt-3 text-white"
             >
               Close
             </button>

@@ -134,6 +134,7 @@ const QueryDetails = () => {
     const recReson = dta.recReson.value;
     const queryId = data._id;
     const queryTitles = data.queryTitle;
+    const queryImg = data.productImage;
     const queryNames = data.productName;
     const userEmails = data.userEmail;
     const userNames = data.userName;
@@ -148,6 +149,7 @@ const QueryDetails = () => {
       recReson,
       queryId,
       queryTitles,
+      queryImg,
       queryNames,
       userEmails,
       userNames,
