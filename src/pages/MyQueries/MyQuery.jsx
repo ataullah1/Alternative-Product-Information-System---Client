@@ -152,7 +152,7 @@ const MyQuery = ({ dta, handleDelete }) => {
               {dta.details.slice(0, 130)}
               <Link
                 className="cursor-pointer text-[#3e96d4]"
-                to={'/query-details'}
+                to={`/query-details/${dta._id}`}
               >
                 {dta.details.length > 129 && '... See more'}
               </Link>
@@ -171,7 +171,7 @@ const MyQuery = ({ dta, handleDelete }) => {
           </Tooltip>
           <Tooltip title="Recommendation">
             <Link
-              to={'/query-details'}
+              to={`/query-details/${dta._id}`}
               className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90"
             >
               <span className="text-2xl">

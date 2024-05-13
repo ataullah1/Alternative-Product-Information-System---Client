@@ -4,6 +4,7 @@ import { PiShareFatBold } from 'react-icons/pi';
 import { RiHandHeartLine } from 'react-icons/ri';
 import { FiExternalLink } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { Tooltip } from '@mui/material';
 const QueryCard = ({ dta }) => {
   return (
     <div className="min-w-full max-w-[500px] rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]">
@@ -29,7 +30,7 @@ const QueryCard = ({ dta }) => {
             {/* Setting button */}
             <Link
               to={`/query-details/${dta._id}`}
-              className="flex cursor-pointer flex-col gap-2 rounded-full text-slate-900 text-2xl"
+              className="flex cursor-pointer flex-col gap-2 rounded-full text-slate-900 dark:text-slate-100 text-2xl"
             >
               <FiExternalLink />
             </Link>
@@ -59,33 +60,37 @@ const QueryCard = ({ dta }) => {
               {dta.productBrand}
             </p>
             <p className="text-base text-gray-500 dark:text-white/50">
-              {dta.details.slice(0, 130)}...{' '}
+              {dta.details.slice(0, 130)}
               <Link
                 className="cursor-pointer text-[#3e96d4]"
                 to={`/query-details/${dta._id}`}
               >
-                See more
+                {dta.details.length > 129 && '... See more'}
               </Link>
             </p>
           </div>
         </div>
         {/* icons */}
         <div className="mt-4 flex justify-between px-8 pb-4">
-          <button className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90">
-            <span className="text-2xl">
-              <RiHandHeartLine />
-            </span>
-            <h2 className="">40K</h2>
-          </button>
-          <Link
-            to={`/query-details/${dta._id}`}
-            className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90"
-          >
-            <span className="text-2xl">
-              <FaRegCommentDots />
-            </span>
-            <h2 className="">40</h2>
-          </Link>
+          <Tooltip title="Support">
+            <button className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90">
+              <span className="text-2xl">
+                <RiHandHeartLine />
+              </span>
+              <h2 className="">40K</h2>
+            </button>
+          </Tooltip>
+          <Tooltip title="Recommendation">
+            <Link
+              to={`/query-details/${dta._id}`}
+              className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90"
+            >
+              <span className="text-2xl">
+                <FaRegCommentDots />
+              </span>
+              <h2 className="">40</h2>
+            </Link>
+          </Tooltip>
           <button className="flex items-center gap-1 text-lg font-semibold text-slate-800 dark:text-white/90">
             <span className="text-2xl">
               <PiShareFatBold />

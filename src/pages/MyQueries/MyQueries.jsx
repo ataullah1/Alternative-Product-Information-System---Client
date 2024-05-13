@@ -75,14 +75,14 @@ const MyQueries = () => {
       {/*Banner part  */}
       <div className="h-72 sm:h-96 relative">
         <MultyImgBanner img1={img1} />
-        <div className="absolute z-10 top-0 left-0 bg-[#00000073] w-full h-72 sm:h-96 ">
+        <div className="absolute z-10 top-0 left-0 bg-[#000000a8] w-full h-72 sm:h-96 ">
           <div className="h-full w-10/12 mx-auto flex items-center justify-center flex-col gap-8 pt-10 sm:pt-20 text-center">
-            <h1 className="text-3xl sm:text-5xl text-white ">
+            <h1 className="text-3xl sm:text-5xl text-white">
               Explore and Add Queries
             </h1>
             <Link to={'/add-queries'}>
-              <button className="py-1.5 px-8 rounded hover:-skew-x-12 bg-mClr hover:bg-transparent border-2 border-mClr duration-200 text-white font-semibold tracking-wider hover:shadow-2xl shadow-mClr hover:scale-110">
-                Add Queries
+              <button className="py-2 px-8 rounded hover:-skew-x-12 bg-mClr hover:bg-transparent border-2 border-mClr duration-200 text-white font-semibold tracking-widest hover:shadow-2xl shadow-mClr hover:scale-110">
+                Add New Queries
               </button>
             </Link>
           </div>
