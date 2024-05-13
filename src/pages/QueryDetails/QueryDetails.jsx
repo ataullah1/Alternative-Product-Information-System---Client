@@ -11,6 +11,7 @@ import { TextField, Tooltip } from '@mui/material';
 import { RiHandHeartLine } from 'react-icons/ri';
 import { useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
+import { FiExternalLink } from 'react-icons/fi';
 
 const QueryDetails = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -84,7 +85,7 @@ const QueryDetails = () => {
     minute: '2-digit',
     hour12: true, // Include AM/PM indicator
   });
-  const handleAddQuery = async (e) => {
+  const handleRecommendation = async (e) => {
     e.preventDefault();
     const dta = e.target;
     const recTitle = dta.recTitle.value;
@@ -274,7 +275,7 @@ const QueryDetails = () => {
               <div>
                 <form
                   className="flex flex-col gap-5 w-full dark:text-white"
-                  onSubmit={handleAddQuery}
+                  onSubmit={handleRecommendation}
                 >
                   <TextField
                     id="outlined-textarea"
@@ -329,9 +330,42 @@ const QueryDetails = () => {
         </div>
 
         {/* Recommended Section  */}
-        <div className="flex flex-col md:flex-row items-start gap-5">
-          <div className="w-full md:w-3/5">
-            
+        <div className="flex flex-col md:flex-row items-start gap-5 mt-8">
+          <div className="w-full md:w-3/5 border dark:border-gray-500 p-4 rounded-md">
+            <h1 className="text-2xl sm:text-3xl text-slate-800 dark:text-slate-100">
+              Recommended alternative products
+            </h1>
+            <div>
+              {recommended.map((dta) => (
+                <div
+                  key={dta.queryId}
+                  className="p-3 border dark:border-gray-500 rounded-md"
+                >
+                  <div className="flex items-center justify-between gap-0">
+                    {/* Avatar image  */}
+                    <div className="flex items-center gap-1">
+                      <img
+                        className="h-12 w-12 rounded-full bg-black/40 border-2 border-mClr"
+                        src={recommended?.recUserImg}
+                        alt="card navigate ui"
+                      />
+                      <div className="flex flex-col">
+                        <h2 className="text-xl font-semibold text-slate-800 dark:text-white/90 capitalize">
+                          {'Md Ataullah'}
+                        </h2>
+                        <p className="text-gray-400">
+                          {'05/12/2024, 12:11 AM'}
+                        </p>
+                      </div>
+                    </div>
+                    {/* Setting button */}
+                    <Link className="flex cursor-pointer flex-col gap-2 rounded-full text-slate-900 dark:text-slate-100 text-2xl">
+                      <FiExternalLink />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="w-full md:w-2/5"></div>
         </div>
