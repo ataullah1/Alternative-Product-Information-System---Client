@@ -11,6 +11,7 @@ import MyQueries from '../pages/MyQueries/MyQueries';
 import AddQueries from '../pages/AddQueries/AddQueries';
 import QueryDetails from '../pages/QueryDetails/QueryDetails';
 import AllQuerys from '../components/Querys/AllQuerys';
+import MyRecommendations from '../pages/MyRecommendations/MyRecommendations';
 
 const router = createBrowserRouter([
   {
@@ -56,7 +57,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/my-recommendations',
-        element: <About />,
+        element: (
+          <PrivetRoutes>
+            <MyRecommendations />
+          </PrivetRoutes>
+        ),
       },
       {
         path: '/blog',

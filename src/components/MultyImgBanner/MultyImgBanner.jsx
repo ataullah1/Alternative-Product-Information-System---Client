@@ -53,7 +53,7 @@ const MultyImgBanner = ({ img1 }) => {
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
-            delay: 2000,
+            delay: 1700,
             disableOnInteraction: false,
           }}
           modules={[Autoplay]}

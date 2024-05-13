@@ -112,7 +112,7 @@ const Nav = () => {
             className="border-2 w-24 py-1.5 text-center text-white hover:border-mainColor duration-200"
             to={'/queries'}
           >
-            Queries
+            All Queries
           </NavLink>
           <div className="group relative cursor-pointer py-1.5 w-34">
             <div className="flex items-center justify-between pl-2 lg:pl-0 pr-2 border-2 w-full py-1.5 text-center text-white hover:border-mainColor duration-200">
@@ -131,22 +131,22 @@ const Nav = () => {
               {userDta && (
                 <>
                   <NavLink
-                    to={'/recommendations-for-me'}
-                    className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-                  >
-                    Recommendations For Me
-                  </NavLink>
-                  <NavLink
                     to={'/my-queries'}
                     className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
                   >
-                    My Queries
+                    My Added Queries
                   </NavLink>
                   <NavLink
                     to={'/my-recommendations'}
                     className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
                   >
                     My Recommendations
+                  </NavLink>
+                  <NavLink
+                    to={'/recommendations-for-me'}
+                    className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                  >
+                    Recommendations For Me
                   </NavLink>
                 </>
               )}
@@ -291,27 +291,27 @@ const Nav = () => {
                   to={'/queries'}
                   className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
                 >
-                  Queries
+                  All Queries
                 </NavLink>
                 {userDta && (
                   <>
                     <NavLink
-                      to={'/recommendations-for-me'}
-                      className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-                    >
-                      Recommendations For Me
-                    </NavLink>
-                    <NavLink
                       to={'/my-queries'}
                       className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
                     >
-                      My Queries
+                      My Added Queries
                     </NavLink>
                     <NavLink
                       to={'/my-recommendations'}
                       className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
                     >
                       My recommendations
+                    </NavLink>
+                    <NavLink
+                      to={'/recommendations-for-me'}
+                      className="text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+                    >
+                      Recommendations For Me
                     </NavLink>
                   </>
                 )}

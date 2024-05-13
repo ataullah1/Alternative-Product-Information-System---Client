@@ -40,25 +40,25 @@ const ProfileMenu = () => {
           to={'/queries'}
           className="block md:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
         >
-          Queries
-        </NavLink>
-        <NavLink
-          to={'/recommendations-for-me'}
-          className="block md:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
-        >
-          Recommendations For Me
+          All Queries
         </NavLink>
         <NavLink
           to={'/my-queries'}
           className="block md:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
         >
-          My Queries
+          My Added Queries
         </NavLink>
         <NavLink
           to={'/my-recommendations'}
           className="block md:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
         >
           My recommendations
+        </NavLink>
+        <NavLink
+          to={'/recommendations-for-me'}
+          className="block md:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
+        >
+          Recommendations For Me
         </NavLink>
         <NavLink
           to={'/about'}
@@ -82,7 +82,7 @@ const ProfileMenu = () => {
           onClick={logOutAcc}
           className="hover:bg-[#c52323] hover:text-white font-semibold border-b bg-sClr  text-white py-3 tracking-widest flex items-center justify-center gap-3"
         >
-          <span className='text-2xl'>
+          <span className="text-2xl">
             <LuLogOut />
           </span>
           Log Out

@@ -97,11 +97,11 @@ const QueryDetails = () => {
       });
     },
     onSuccess: () => {
-      Swal.fire({
-        title: 'Oppps ....!',
-        text: 'Recommendation data incrage hoise',
-        icon: 'success',
-      });
+      // Swal.fire({
+      //   title: 'Oppps ....!',
+      //   text: 'Recommendation data incrage hoise',
+      //   icon: 'success',
+      // });
       console.log('RecommendationCount incraged');
       queryClient.invalidateQueries({
         queryKey: [`querydetail`],
@@ -379,13 +379,13 @@ const QueryDetails = () => {
         {/* Recommended Section  */}
         <div className="flex flex-col md:flex-row items-start gap-5 mt-16">
           <div className="w-full md:w-[70%] rounded-md">
-            <h1 className="text-2xl lg:text-3xl text-slate-800 dark:text-slate-100  font-serif mb-8">
+            <h1 className="text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-100  font-mono mb-8">
               <span className="flex items-center">
                 <span className="text-mClr dark:text-sClr">
                   <AiFillCaretRight />
                 </span>
                 <span className="border-b-2 border-mClr inline-block">
-                  Recommended alternative products
+                  All Recommendations
                 </span>
                 <span className="text-mClr dark:text-sClr">
                   <AiFillCaretLeft />
