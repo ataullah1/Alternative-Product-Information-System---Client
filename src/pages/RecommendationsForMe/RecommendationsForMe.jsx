@@ -2,18 +2,16 @@ import img1 from '../../assets/banner/9.jpg';
 import { Link } from 'react-router-dom';
 import MultyImgBanner from '../../components/MultyImgBanner/MultyImgBanner';
 import { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import useAxiosSec from '../../Hooks/useAxiosSec';
 import useAuth from '../../Hooks/useAuth';
-import Swal from 'sweetalert2';
 import { AiFillCaretRight } from 'react-icons/ai';
 
-const MyRecommendations = () => {
+const RecommendationsForMe = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalDta, setModalDta] = useState(null);
   const axiosSecure = useAxiosSec();
   const { userDta } = useAuth();
-  const queryClient = useQueryClient();
   // My Recommendations data get
   const { data, isLoading, isError, error } = useQuery({
     queryFn: () => dataGeting(),
@@ -27,65 +25,6 @@ const MyRecommendations = () => {
   };
   console.log(error, isError, isLoading);
 
-  //  Delete Recommendation======
-  const { mutateAsync } = useMutation({
-    mutationFn: async ({ id }) => {
-      const { data } = await axiosSecure.delete(
-        `/my-recommendations-delete/${id}`
-      );
-      console.log(data);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries([
-        'my-recommendation',
-        'recommend',
-        'all-query',
-      ]);
-      console.log('Deleted Recommendation');
-    },
-  });
-  const handleDelete = (id) => {
-    console.log(id);
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        await mutateAsync({ id });
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
-        });
-      }
-    });
-  };
-
-  const { mutateAsync: decreasesCounts } = useMutation({
-    mutationFn: async ({ id }) => {
-      const { data } = await axiosSecure.patch(
-        `/recomendaton-countdecreases-update/${id}`
-      );
-      console.log(data);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries([
-        'my-recommendation',
-        'recommend',
-        'all-query',
-      ]);
-      console.log('Decrase Recommendations');
-    },
-  });
-  const decreasesCount = async (ids) => {
-    const id = await ids;
-    decreasesCounts({ id });
-  };
   return (
     <div>
       {/* Banner Part */}
@@ -177,14 +116,9 @@ const MyRecommendations = () => {
                     </p>
                   </td>
                   <td className=" px-5 border-b text-end">
-                    <span onClick={() => handleDelete(dta._id)}>
-                      <button
-                        onClick={() => decreasesCount(dta?.queryId)}
-                        className="bg-error hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-8 rounded-md"
-                      >
-                        Delete
-                      </button>
-                    </span>
+                    <button className="bg-error hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-8 rounded-md">
+                      Details
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -368,4 +302,4 @@ const MyRecommendations = () => {
   );
 };
 
-export default MyRecommendations;
+export default RecommendationsForMe;

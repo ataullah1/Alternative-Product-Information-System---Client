@@ -12,6 +12,7 @@ import AddQueries from '../pages/AddQueries/AddQueries';
 import QueryDetails from '../pages/QueryDetails/QueryDetails';
 import AllQuerys from '../components/Querys/AllQuerys';
 import MyRecommendations from '../pages/MyRecommendations/MyRecommendations';
+import RecommendationsForMe from '../pages/RecommendationsForMe/RecommendationsForMe';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/recommendations-for-me',
-        element: <About />,
+        element: (
+          <PrivetRoutes>
+            <RecommendationsForMe />
+          </PrivetRoutes>
+        ),
       },
       {
         path: '/my-queries',
