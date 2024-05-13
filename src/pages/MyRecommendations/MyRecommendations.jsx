@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSec from '../../Hooks/useAxiosSec';
 import useAuth from '../../Hooks/useAuth';
-import { HiDotsVertical } from 'react-icons/hi';
 
 const MyRecommendations = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -134,28 +133,15 @@ const MyRecommendations = () => {
         } inset-0 bg-black/20 backdrop-blur-sm duration-100`}
       >
         <div
-          className={`absolute w-11/12 sm:w-10/12 md:w-9/12 lg:w-4/6 rounded-lg bg-white p-3 pb-5 text-center drop-shadow-2xl dark:bg-gray-800 dark:text-white ${
+          className={`absolute recommendModalStyle overflow-y-scroll max-h-screen sm:max-h-max w-11/12 sm:w-10/12 md:w-9/12 lg:w-4/6 rounded-lg bg-white p-3 pb-5 text-center drop-shadow-2xl dark:bg-gray-800 dark:text-white ${
             openModal
               ? 'scale-1 opacity-1 duration-300'
               : 'scale-0 opacity-0 duration-150'
           } `}
         >
-          <svg
-            onClick={() => setOpenModal(false)}
-            className="mx-auto mr-0 w-8 cursor-pointer fill-black dark:fill-white"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g strokeWidth="0"></g>
-            <g strokeLinecap="round" strokeLinejoin="round"></g>
-            <g>
-              <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"></path>
-            </g>
-          </svg>
           <div>
             <div className="p-3 rounded-md">
-              <div className="bg-gray-300 dark:bg-slate-900 rounded-md flex flex-col lg:flex-row lg:items-center justify-between gap-2 p-3 lg:p-0">
+              <div className="bg-gray-300 dark:bg-slate-900 rounded-md flex flex-col lg:flex-row lg:items-center justify-between gap-2 p-3 lg:p-0 mb-6">
                 {/* Avatar image  */}
                 <div className="h-20 flex items-center gap-3">
                   <img
@@ -165,10 +151,10 @@ const MyRecommendations = () => {
                   />
                   <div className="flex flex-col justify-start h-full py-2 text-left">
                     <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 capitalize">
-                      {modalDta?.userName}
+                      {modalDta?.recUserName}
                     </h2>
                     <p className="text-slate-800 dark:text-slate-300">
-                      {modalDta?.userEmail}
+                      {modalDta?.recUserEmail}
                     </p>
                   </div>
                 </div>
@@ -188,7 +174,7 @@ const MyRecommendations = () => {
                 {/* <div className="w-12"></div> */}
                 <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-2 w-full">
                   <div
-                    className="h-60 w-full max-w-[450px] lg:w-3/5 bg-red-200 rounded-md"
+                    className="h-64 w-full max-w-[550px] lg:w-3/5 bg-red-200 rounded-md"
                     style={{
                       backgroundImage: `url(${modalDta?.recImage})`,
                       backgroundPosition: 'center',
@@ -196,21 +182,27 @@ const MyRecommendations = () => {
                       backgroundRepeat: 'no-repeat',
                     }}
                   ></div>
-                  <div className="w-[1px] h-60 bg-gray-300 hidden lg:block"></div>
-                  <div className="pt-3 w-full lg:w-2/5">
-                    <p className="text-mClr font-bold text-lg">Product Name:</p>
-                    <p className="text-xl xl:text-2xl font-medium text-slate-800 dark:text-slate-100 pb-0 sm:pb-5 md:pb-0 lg:pb-5">
-                      {modalDta?.recName}
-                    </p>
-                    <p className="text-mClr font-bold text-lg">
-                      Product Brand:
-                    </p>
-                    <p className="text-xl xl:text-2xl font-medium text-slate-800 dark:text-slate-100">
-                      {modalDta?.recBrand}
-                    </p>
+                  {/* <div className="w-[1px] h-60 bg-gray-300 hidden lg:block"></div> */}
+                  <div className="pt-3 w-full lg:w-2/5 flex flex-col md:flex-row lg:flex-col md:gap-10">
+                    <div className="text-left sm:text-center md:text-left lg:text-center">
+                      <p className="text-mClr font-bold text-lg">
+                        Product Name:
+                      </p>
+                      <p className="text-xl xl:text-2xl font-medium text-slate-800 dark:text-slate-100 pb-0 sm:pb-5 md:pb-0 lg:pb-5">
+                        {modalDta?.recName}
+                      </p>
+                    </div>
+                    <div className="text-left sm:text-center md:text-left lg:text-center">
+                      <p className="text-mClr font-bold text-lg">
+                        Product Brand:
+                      </p>
+                      <p className="text-xl xl:text-2xl font-medium text-slate-800 dark:text-slate-100">
+                        {modalDta?.recBrand}
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div>
+                <div className="text-left">
                   <h1 className="text-2xl font-medium sm:text-3xl pt-4 pb-2 text-slate-800 dark:text-slate-100 font-serif">
                     {modalDta?.recTitle}
                   </h1>
@@ -221,12 +213,14 @@ const MyRecommendations = () => {
               </div>
             </div>
           </div>
-          <button
-            onClick={() => setOpenModal(false)}
-            className="rounded-md bg-indigo-600 hover:bg-indigo-700 px-1 py-1.5 text-white"
-          >
-            Ok
-          </button>
+          <div className="text-right pr-5">
+            <button
+              onClick={() => setOpenModal(false)}
+              className="rounded-md bg-mClr hover:bg-[#1f81ba] px-6 py-1.5 text-white"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>
