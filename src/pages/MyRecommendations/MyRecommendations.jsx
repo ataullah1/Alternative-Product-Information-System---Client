@@ -2,15 +2,17 @@ import img1 from '../../assets/banner/9.jpg';
 import { Link } from 'react-router-dom';
 import MultyImgBanner from '../../components/MultyImgBanner/MultyImgBanner';
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxiosSec from '../../Hooks/useAxiosSec';
 import useAuth from '../../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const MyRecommendations = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalDta, setModalDta] = useState(null);
   const axiosSecure = useAxiosSec();
   const { userDta } = useAuth();
+  const queryClient = useQueryClient();
   // My Recommendations data get
   const { data, isLoading, isError, error } = useQuery({
     queryFn: () => dataGeting(),
@@ -22,8 +24,41 @@ const MyRecommendations = () => {
     );
     return data;
   };
-  console.log(error, isError, isLoading);
   //   console.log(modalDta);
+  console.log(error, isError, isLoading);
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ id }) => {
+      const { data } = await axiosSecure.delete(`/my-queries-delete/${id}`);
+      console.log(data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['my-query'] });
+      console.log('Deleted Query');
+    },
+  });
+  const handleDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await mutateAsync({ id });
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your file has been deleted.',
+          icon: 'success',
+        });
+      }
+    });
+  };
+
   return (
     <div>
       {/* Banner Part */}
@@ -115,7 +150,7 @@ const MyRecommendations = () => {
                     </p>
                   </td>
                   <td className=" px-5 border-b text-end">
-                    <button className="bg-error hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-8 rounded-md">
+                    <button className="bg-error hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-8 rounded-md" onClick={()=>handleDelete(dta._id)}>
                       Delete
                     </button>
                   </td>
@@ -146,7 +181,7 @@ const MyRecommendations = () => {
                 <div className="h-20 flex items-center gap-3">
                   <img
                     className="h-full w-20 rounded-sm border-2 border-mClr"
-                    src={modalDta?.userImg}
+                    src={modalDta?.recUserImg}
                     alt="card navigate ui"
                   />
                   <div className="flex flex-col justify-start h-full py-2 text-left">

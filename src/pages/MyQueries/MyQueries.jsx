@@ -30,6 +30,7 @@ const MyQueries = () => {
   };
   // console.log(myData);
 
+  // My Adding query deleting
   const { mutateAsync } = useMutation({
     mutationFn: async ({ id }) => {
       const { data } = await axiosSecure.delete(`/my-queries-delete/${id}`);
