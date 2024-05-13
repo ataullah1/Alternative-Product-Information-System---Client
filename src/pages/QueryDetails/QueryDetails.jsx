@@ -11,10 +11,12 @@ import { TextField, Tooltip } from '@mui/material';
 import { RiHandHeartLine } from 'react-icons/ri';
 import { useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
-import { FiExternalLink } from 'react-icons/fi';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
+import { HiDotsVertical } from 'react-icons/hi';
 
 const QueryDetails = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [recResonlen, setRecResonlen] = useState(250);
   const queryClient = useQueryClient();
   const { userDta } = useAuth();
   const axiosSecure = useAxiosSec();
@@ -71,7 +73,9 @@ const QueryDetails = () => {
         text: 'Your recommendation has been successfully posted.',
         timer: 2500,
       });
-      queryClient.invalidateQueries({ queryKey: [`query-${id}`] });
+      queryClient.invalidateQueries({
+        queryKey: [`recommend-${id}`],
+      });
       console.log('Recommended Product');
     },
   });
@@ -165,7 +169,7 @@ const QueryDetails = () => {
       </div>
 
       {/* Main Content */}
-      <div className="w-11/12 mx-auto mt-10">
+      <div className="w-11/12 max-w-[1700px] mx-auto mt-10">
         <div className="flex flex-col md:flex-row items-start gap-5">
           <div className="w-full md:w-3/5 p-4 border dark:border-gray-500 rounded-md">
             {/* Card Details */}
@@ -238,6 +242,10 @@ const QueryDetails = () => {
           </div>
           <div className="w-full md:w-2/5 rounded-md flex flex-col gap-10">
             <div className="border dark:border-gray-500 rounded-md p-5">
+              <button className="py-3 px-4 text-2xl mb-4 bg-[#b0da4eaf] dark:bg-[#407a6b] rounded-md text-[#6c1896] dark:text-green-500 w-full">
+                Total Recommendation: {data.recommendationCount < 2 && '0'}
+                {recommended.length}
+              </button>
               <h1 className="pb-3 text-2xl lg:text-3xl text-slate-800 dark:text-slate-100">
                 {data.queryTitle}
               </h1>
@@ -256,7 +264,10 @@ const QueryDetails = () => {
                     <span className="text-2xl">
                       <FaRegCommentDots />
                     </span>
-                    <h2 className="">40</h2>
+                    <h2 className="">
+                      {data.recommendationCount < 2 && '0'}
+                      {recommended.length}
+                    </h2>
                   </button>
                 </Tooltip>
                 <button className="flex items-center gap-1 text-lg font-semibold text-slate-800 dark:text-white/90">
@@ -330,44 +341,101 @@ const QueryDetails = () => {
         </div>
 
         {/* Recommended Section  */}
-        <div className="flex flex-col md:flex-row items-start gap-5 mt-8">
-          <div className="w-full md:w-3/5 border dark:border-gray-500 p-4 rounded-md">
-            <h1 className="text-2xl sm:text-3xl text-slate-800 dark:text-slate-100">
-              Recommended alternative products
+        <div className="flex flex-col md:flex-row items-start gap-5 mt-16">
+          <div className="w-full md:w-[70%] rounded-md">
+            <h1 className="text-2xl lg:text-3xl text-slate-800 dark:text-slate-100  font-serif mb-8">
+              <span className="flex items-center">
+                <span className="text-mClr dark:text-sClr">
+                  <AiFillCaretRight />
+                </span>
+                <span className="border-b-2 border-mClr inline-block">
+                  Recommended alternative products
+                </span>
+                <span className="text-mClr dark:text-sClr">
+                  <AiFillCaretLeft />
+                </span>
+              </span>
             </h1>
-            <div>
+            <div className="flex flex-col gap-5">
               {recommended.map((dta) => (
                 <div
                   key={dta.queryId}
                   className="p-3 border dark:border-gray-500 rounded-md"
                 >
-                  <div className="flex items-center justify-between gap-0">
+                  <div className="flex items-center justify-between gap-0 mb-5">
                     {/* Avatar image  */}
                     <div className="flex items-center gap-1">
                       <img
                         className="h-12 w-12 rounded-full bg-black/40 border-2 border-mClr"
-                        src={recommended?.recUserImg}
+                        src={dta?.recUserImg}
                         alt="card navigate ui"
                       />
                       <div className="flex flex-col">
                         <h2 className="text-xl font-semibold text-slate-800 dark:text-white/90 capitalize">
                           {'Md Ataullah'}
                         </h2>
-                        <p className="text-gray-400">
-                          {'05/12/2024, 12:11 AM'}
-                        </p>
+                        <p className="text-gray-400">{dta.dateTime}</p>
                       </div>
                     </div>
                     {/* Setting button */}
                     <Link className="flex cursor-pointer flex-col gap-2 rounded-full text-slate-900 dark:text-slate-100 text-2xl">
-                      <FiExternalLink />
+                      <HiDotsVertical />
                     </Link>
+                  </div>
+                  <div className="w-full">
+                    {/* <div className="w-12"></div> */}
+                    <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-2 w-full">
+                      <div
+                        className="h-60 w-full max-w-[450px] lg:w-3/5 bg-red-200 rounded-md"
+                        style={{
+                          backgroundImage: `url(${dta.recImage})`,
+                          backgroundPosition: 'center',
+                          backgroundSize: 'cover',
+                          backgroundRepeat: 'no-repeat',
+                        }}
+                      ></div>
+                      <div className="w-[1px] h-60 bg-gray-300 hidden lg:block"></div>
+                      <div className="pt-3 w-full lg:w-2/5">
+                        <p className="text-mClr font-bold text-lg">
+                          Product Name:
+                        </p>
+                        <p className="text-xl xl:text-2xl font-medium text-slate-800 dark:text-slate-100 pb-0 sm:pb-5 md:pb-0 lg:pb-5">
+                          {dta.recName}
+                        </p>
+                        <p className="text-mClr font-bold text-lg">
+                          Product Brand:
+                        </p>
+                        <p className="text-xl xl:text-2xl font-medium text-slate-800 dark:text-slate-100">
+                          {dta.recBrand}
+                        </p>
+                      </div>
+                    </div>
+                    <div>
+                      <h1 className="text-2xl font-medium sm:text-3xl pt-4 pb-2 text-slate-800 dark:text-slate-100 font-serif">
+                        {dta.recTitle}
+                      </h1>
+                      <p className="text-slate-700 dark:text-slate-300 max-w-[800px]">
+                        {dta.recReson.slice(0, recResonlen)}
+
+                        {dta.recReson.length !== recResonlen &&
+                          dta.recReson.length > 250 && (
+                            <span
+                              className="cursor-pointer text-mClr"
+                              onClick={() =>
+                                setRecResonlen(dta.recReson.length)
+                              }
+                            >
+                              ...see more
+                            </span>
+                          )}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="w-full md:w-2/5"></div>
+          <div className="w-full md:w-[30%]"></div>
         </div>
       </div>
 
@@ -380,7 +448,7 @@ const QueryDetails = () => {
       >
         <div
           onClick={(e_) => e_.stopPropagation()}
-          className={`absolute drop-shadow-2xl rounded-lg ${
+          className={`absolute detailspageimage drop-shadow-2xl rounded-lg ${
             openModal
               ? 'opacity-1 duration-300 translate-y-0'
               : '-translate-y-20 opacity-0 duration-150'

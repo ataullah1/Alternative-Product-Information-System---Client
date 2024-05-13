@@ -147,7 +147,8 @@ button {
 
 /* Custom Responsive code  */
 @media (max-height: 650px) {
-  .updateModalHeightControl {
+  .updateModalHeightControl,
+  .detailspageimage {
     height: 95%;
     overflow-y: scroll;
   }
