@@ -116,18 +116,11 @@ const AddQueries = () => {
               onSubmit={handleAddQuery}
             >
               <TextField
-                sx={{
-                  color: '#fff',
-                }}
-                style={{
-                  color: '#fff',
-                }}
                 id="outlined-textarea"
                 label="Product Name"
                 placeholder="Product Name"
                 required
                 name="productName"
-                className="text-3xl dark:placeholder-gray-100"
               />
               <TextField
                 id="outlined-textarea"
