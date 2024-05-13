@@ -49,8 +49,8 @@ const QueryDetails = () => {
       Swal.fire({
         icon: 'success',
         title: 'Good Job',
-        text: 'Your Query has been successfully posted.',
-        timer: 2200,
+        text: 'Your recommendation has been successfully posted.',
+        timer: 2500,
       });
       queryClient.invalidateQueries({ queryKey: [`query-${id}`] });
       console.log('Recommended Product');
@@ -71,6 +71,7 @@ const QueryDetails = () => {
     const dta = e.target;
     const recTitle = dta.recTitle.value;
     const recName = dta.recName.value;
+    const recBrand = dta.recBrand.value;
     const recImage = dta.recImage.value;
     const recReson = dta.recReson.value;
     const queryId = data._id;
@@ -80,9 +81,11 @@ const QueryDetails = () => {
     const userNames = data.userName;
     const recUserEmail = userDta.email;
     const recUserName = userDta.displayName;
+    const recUserImg = userDta.photoURL;
     const formData = {
       recTitle,
       recName,
+      recBrand,
       recImage,
       recReson,
       queryId,
@@ -92,6 +95,7 @@ const QueryDetails = () => {
       userNames,
       recUserEmail,
       recUserName,
+      recUserImg,
       dateTime,
     };
     // console.log(formData);
@@ -135,158 +139,172 @@ const QueryDetails = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex items-start w-11/12 mx-auto gap-5 mt-10">
-        <div className="w-full md:w-3/5 p-4 border rounded-md">
-          {/* Card Details */}
-          <div>
-            <div
-              onClick={() => setOpenModal(true)}
-              className="w-full h-96 rounded-md"
-              style={{
-                backgroundImage: `url(${data.productImage})`,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-              }}
-            ></div>
-            <div className="">
-              <h1 className="text-[45px] pt-5 text-mClr">{data.queryTitle}</h1>
-              <h1 className="underline text-4xl text-slate-800 pt-3 dark:text-white">
-                {data.productName}
-              </h1>
-              <h1 className="text-2xl text-teal-600 py-3">
-                <span className="font-bold text-slate-800 dark:text-slate-200">
-                  Brand :{' '}
-                </span>
-                {data.productBrand}
-              </h1>
-              <p className="pt-3 pb-2 text-slate-800 text-xl font-semibold dark:text-slate-200">
-                Reasons to seek alternatives:
-              </p>
-              <p className="text-lg leading-7 text-slate-800 dark:text-slate-300">
-                {data.details}
-              </p>
-              <hr className="mb-4 mt-7" />
-              {/* Posted Author */}
-              <h1 className="text-3xl text-slate-800 border-b-2 border-mClr inline-block pr-3 pl-1 mb-5 dark:text-white">
-                Posted By:
-              </h1>
-              <div className="bg-gray-300 dark:bg-slate-900 rounded-md flex items-center justify-between gap-2">
-                {/* Avatar image  */}
-                <div className="h-20 flex items-center gap-3">
-                  <img
-                    className="h-full w-20 rounded-sm border-2 border-mClr"
-                    src={data.userImg}
-                    alt="card navigate ui"
-                  />
-                  <div className="flex flex-col justify-start h-full py-2">
-                    <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 capitalize">
-                      {data.userName}
-                    </h2>
+      <div className="w-11/12 mx-auto mt-10">
+        <div className="flex flex-col md:flex-row items-start gap-5">
+          <div className="w-full md:w-3/5 p-4 border dark:border-gray-500 rounded-md">
+            {/* Card Details */}
+            <div>
+              <div
+                onClick={() => setOpenModal(true)}
+                className="w-full h-64 sm:h-80 md:h-64 lg:h-96 rounded-md"
+                style={{
+                  backgroundImage: `url(${data.productImage})`,
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                }}
+              ></div>
+              <div className="">
+                <h1 className="text-3xl sm:text-4xl md:text-3xl lg:text-[45px] pt-5 text-mClr">
+                  {data.queryTitle}
+                </h1>
+                <h1 className="underline text-2xl sm:text-3xl lg:text-4xl text-slate-800 pt-3 dark:text-white">
+                  {data.productName}
+                </h1>
+                <h1 className="text-lg sm:text-2xl text-teal-600 py-3">
+                  <span className="font-bold text-slate-800 dark:text-slate-200">
+                    Brand :{' '}
+                  </span>
+                  {data.productBrand}
+                </h1>
+                <p className="sm:pt-3 pb-2 text-slate-800 text-xl font-semibold dark:text-slate-200">
+                  Reasons to seek alternatives:
+                </p>
+                <p className="sm:text-lg leading-7 text-slate-800 dark:text-slate-300">
+                  {data.details}
+                </p>
+                <hr className="mb-4 mt-7" />
+                {/* Posted Author */}
+                <h1 className="text-2xl lg:text-3xl text-slate-800 border-b-2 border-mClr inline-block pr-3 pl-1 mb-5 dark:text-white">
+                  Posted By:
+                </h1>
+                <div className="bg-gray-300 dark:bg-slate-900 rounded-md flex flex-col lg:flex-row lg:items-center justify-between gap-2 p-3 lg:p-0">
+                  {/* Avatar image  */}
+                  <div className="h-20 flex items-center gap-3">
+                    <img
+                      className="h-full w-20 rounded-sm border-2 border-mClr"
+                      src={data.userImg}
+                      alt="card navigate ui"
+                    />
+                    <div className="flex flex-col justify-start h-full py-2">
+                      <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 capitalize">
+                        {data.userName}
+                      </h2>
+                      <p className="text-slate-800 dark:text-slate-300">
+                        {data.userEmail}
+                      </p>
+                    </div>
+                  </div>
+                  {/* Setting button */}
+                  <div className="lg:pr-6">
                     <p className="text-slate-800 dark:text-slate-300">
-                      {data.userEmail}
+                      <span className="font-semibold"> Date:</span>{' '}
+                      {data.dateTime.slice(0, 10)}
+                    </p>
+                    <p className="text-slate-800 dark:text-slate-300">
+                      <span className="font-semibold">Time:</span>{' '}
+                      {data.dateTime.slice(11, 20)}
                     </p>
                   </div>
-                </div>
-                {/* Setting button */}
-                <div className="pr-6">
-                  <p className="text-slate-800 dark:text-slate-300">
-                    <span className="font-semibold"> Date:</span>{' '}
-                    {data.dateTime.slice(0, 10)}
-                  </p>
-                  <p className="text-slate-800 dark:text-slate-300">
-                    <span className="font-semibold">Time:</span>{' '}
-                    {data.dateTime.slice(11, 20)}
-                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="w-full md:w-2/5 p-4 border rounded-md flex flex-col gap-10">
-          <div className="border rounded-md">
-            <h1 className="pt-5 pb-3 pl-4 text-2xl text-slate-800">
-              {data.queryTitle}
-            </h1>
-            {/* icons */}
-            <div className="rounded-md flex justify-between px-4 py-4">
-              <Tooltip title="Support">
-                <button className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90">
+          <div className="w-full md:w-2/5 rounded-md flex flex-col gap-10">
+            <div className="border dark:border-gray-500 rounded-md p-5">
+              <h1 className="pb-3 text-2xl lg:text-3xl text-slate-800 dark:text-slate-100">
+                {data.queryTitle}
+              </h1>
+              {/* icons */}
+              <div className="rounded-md flex justify-between py-4">
+                <Tooltip title="Support">
+                  <button className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90">
+                    <span className="text-2xl">
+                      <RiHandHeartLine />
+                    </span>
+                    <h2 className="">40K</h2>
+                  </button>
+                </Tooltip>
+                <Tooltip title="Recommendation">
+                  <button className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90">
+                    <span className="text-2xl">
+                      <FaRegCommentDots />
+                    </span>
+                    <h2 className="">40</h2>
+                  </button>
+                </Tooltip>
+                <button className="flex items-center gap-1 text-lg font-semibold text-slate-800 dark:text-white/90">
                   <span className="text-2xl">
-                    <RiHandHeartLine />
-                  </span>
-                  <h2 className="">40K</h2>
-                </button>
-              </Tooltip>
-              <Tooltip title="Recommendation">
-                <button className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90">
-                  <span className="text-2xl">
-                    <FaRegCommentDots />
+                    <PiShareFatBold />
                   </span>
                   <h2 className="">40</h2>
                 </button>
-              </Tooltip>
-              <button className="flex items-center gap-1 text-lg font-semibold text-slate-800 dark:text-white/90">
-                <span className="text-2xl">
-                  <PiShareFatBold />
-                </span>
-                <h2 className="">40</h2>
-              </button>
+              </div>
             </div>
-          </div>
-          <div className="rounded-md text-center">
-            <h1 className="py-4 text-2xl text-slate-800 dark:text-slate-100 bg-gray-300 px-6 mb-5 rounded-t-md w-full">
-              Add Recommendation
-            </h1>
+            <div className="rounded-md text-center dark:bg-slate-400 dark:p-4">
+              <h1 className="py-4 text-2xl md:text-xl lg:text-2xl text-slate-800 dark:text-slate-100 bg-gray-300 dark:bg-gray-800 px-6 mb-5 rounded-t-md w-full">
+                Add Recommendation
+              </h1>
 
-            <div>
-              <form
-                className="flex flex-col gap-5 w-full dark:text-white"
-                onSubmit={handleAddQuery}
-              >
-                <TextField
-                  id="outlined-textarea"
-                  label="Recommendation Title"
-                  placeholder="Recommendation Title"
-                  required
-                  name="recTitle"
-                />
-                <TextField
-                  id="outlined-textarea"
-                  label="Recommended Product Name"
-                  placeholder="Recommended Product Name"
-                  required
-                  name="recName"
-                />
-                <TextField
-                  id="outlined-textarea"
-                  label="Recommended Product Image URL"
-                  placeholder="Recommended Product Photo"
-                  required
-                  name="recImage"
-                  className="text-3xl"
-                />
+              <div>
+                <form
+                  className="flex flex-col gap-5 w-full dark:text-white"
+                  onSubmit={handleAddQuery}
+                >
+                  <TextField
+                    id="outlined-textarea"
+                    label="Recommendation Title"
+                    placeholder="Recommendation Title"
+                    required
+                    name="recTitle"
+                  />
+                  <TextField
+                    id="outlined-textarea"
+                    label="Recommended Product Name"
+                    placeholder="Recommended Product Name"
+                    required
+                    name="recName"
+                  />
+                  <TextField
+                    id="outlined-textarea"
+                    label="Recommended Product Brand"
+                    placeholder="Recommended Product Brand"
+                    required
+                    name="recBrand"
+                  />
+                  <TextField
+                    id="outlined-textarea"
+                    label="Recommended Product Image URL"
+                    placeholder="Recommended Product Photo"
+                    required
+                    name="recImage"
+                    className="text-3xl"
+                  />
 
-                <TextField
-                  id="outlined-textarea"
-                  label="Recommendation Reason"
-                  placeholder="Explain in detail why you are recommending this product..."
-                  required
-                  name="recReson"
-                  multiline
-                  rows={4}
-                  className="text-3xl"
-                />
+                  <TextField
+                    id="outlined-textarea"
+                    label="Recommendation Reason"
+                    placeholder="Explain in detail why you are recommending this product..."
+                    required
+                    name="recReson"
+                    multiline
+                    rows={4}
+                    className="text-3xl"
+                  />
 
-                <input
-                  className="w-full py-1.5 bg-mClr rounded border-2 border-mClr text-white text-lg font-bold sm:text-xl mb-5 hover:-skew-x-12 duration-300 active:scale-95 hover:bg-transparent hover:text-mClr"
-                  type="submit"
-                  value="Add Recommendation"
-                />
-              </form>
+                  <input
+                    className="w-full py-1.5 bg-mClr rounded border-2 border-mClr text-white text-lg font-bold sm:text-xl mb-5 hover:-skew-x-[9deg] duration-300 active:scale-95 hover:bg-transparent hover:text-mClr dark:hover:text-white dark:hover:border-white"
+                    type="submit"
+                    value="Add Recommendation"
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Recommended Section  */}
+        <div></div>
       </div>
 
       {/* Image Full Screen Modal */}
