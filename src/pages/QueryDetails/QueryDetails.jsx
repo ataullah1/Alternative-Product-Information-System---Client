@@ -18,6 +18,8 @@ const QueryDetails = () => {
   const { userDta } = useAuth();
   const axiosSecure = useAxiosSec();
   const { id } = useParams();
+
+  // Query details data get
   const {
     data = [],
     isLoading,
@@ -31,6 +33,22 @@ const QueryDetails = () => {
     const { data } = await axiosSecure.get(`/query-details/${id}`);
     return data;
   };
+
+  // Query details data get
+  const {
+    data: recommended = [],
+    isLoading: recLoding,
+    isError: recIsErr,
+    error: recErr,
+  } = useQuery({
+    queryFn: () => recommendRec(),
+    queryKey: [`recommend-${id}`],
+  });
+  const recommendRec = async () => {
+    const { data } = await axiosSecure.get(`/recommended-query/${id}`);
+    return data;
+  };
+  console.log(recLoding, recommended);
 
   // Recommendation Data Saving Database
   const { mutateAsync } = useMutation({
@@ -107,6 +125,13 @@ const QueryDetails = () => {
     Swal.fire({
       title: 'Oppps ....!',
       text: 'Querys details data is not coming. Check your network!',
+      icon: 'error',
+    });
+  }
+  if ((recErr, recIsErr)) {
+    Swal.fire({
+      title: 'Oppps ....!',
+      text: 'Recommendation data is not coming. Check your network!',
       icon: 'error',
     });
   }
@@ -304,7 +329,12 @@ const QueryDetails = () => {
         </div>
 
         {/* Recommended Section  */}
-        <div></div>
+        <div className="flex flex-col md:flex-row items-start gap-5">
+          <div className="w-full md:w-3/5">
+            
+          </div>
+          <div className="w-full md:w-2/5"></div>
+        </div>
       </div>
 
       {/* Image Full Screen Modal */}
