@@ -30,7 +30,7 @@ const QueryDetails = () => {
     error,
   } = useQuery({
     queryFn: () => queryData(),
-    queryKey: [`query-${id}`],
+    queryKey: [`querydetail`],
   });
   const queryData = async () => {
     const { data } = await axiosSecure.get(`/query-details/${id}`);
@@ -45,7 +45,7 @@ const QueryDetails = () => {
     error: recErr,
   } = useQuery({
     queryFn: () => recommendRec(),
-    queryKey: [`recommend-${id}`],
+    queryKey: [`recommend`],
   });
   const recommendRec = async () => {
     const { data } = await axiosSecure.get(`/recommended-query/${id}`);
@@ -74,11 +74,46 @@ const QueryDetails = () => {
         timer: 2500,
       });
       queryClient.invalidateQueries({
-        queryKey: [`recommend-${id}`],
+        queryKey: [`recommend`],
       });
       console.log('Recommended Product');
+      recCounting();
     },
   });
+  // Recommendation Count Data Saving Database
+  const { mutateAsync: countingRecommend } = useMutation({
+    mutationFn: async ({ dtaa }) => {
+      const { data } = await axiosSecure.patch(
+        `/recomendaton-count-update/${id}`,
+        dtaa
+      );
+      console.log(data);
+    },
+    onError: () => {
+      Swal.fire({
+        title: 'Oppps ....!',
+        text: 'Check your network !',
+        icon: 'error',
+      });
+    },
+    onSuccess: () => {
+      Swal.fire({
+        title: 'Oppps ....!',
+        text: 'Recommendation data incrage hoise',
+        icon: 'success',
+      });
+      console.log('RecommendationCount incraged');
+      queryClient.invalidateQueries({
+        queryKey: [`querydetail`],
+      });
+      console.log('recommendationCount done');
+    },
+  });
+  const recCounting = () => {
+    const recommendationCount = recommended.length + 1;
+    const dtaa = { recommendationCount };
+    countingRecommend({ dtaa });
+  };
 
   const dateTime = new Date().toLocaleString('en-BD', {
     timeZone: 'Asia/Dhaka',
@@ -243,7 +278,8 @@ const QueryDetails = () => {
           <div className="w-full md:w-2/5 rounded-md flex flex-col gap-10">
             <div className="border dark:border-gray-500 rounded-md p-5">
               <button className="py-3 px-4 text-2xl mb-4 bg-[#b0da4eaf] dark:bg-[#407a6b] rounded-md text-[#6c1896] dark:text-green-500 w-full">
-                Total Recommendation: {data.recommendationCount < 2 && '0'}
+                Total Recommendation:
+                {data.recommendationCount.length < 2 && '0'}
                 {recommended.length}
               </button>
               <h1 className="pb-3 text-2xl lg:text-3xl text-slate-800 dark:text-slate-100">
@@ -265,7 +301,7 @@ const QueryDetails = () => {
                       <FaRegCommentDots />
                     </span>
                     <h2 className="">
-                      {data.recommendationCount < 2 && '0'}
+                      {data.recommendationCount.length < 2 && '0'}
                       {recommended.length}
                     </h2>
                   </button>
