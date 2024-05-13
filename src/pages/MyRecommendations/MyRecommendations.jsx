@@ -110,7 +110,7 @@ const MyRecommendations = () => {
         </div>
       </div>
       {/* Table Part */}
-      <div className="w-11/12 mx-auto">
+      <div className="w-11/12 mx-auto pt-10">
         <div className="overflow-x-auto">
           <table className="w-full shadow-md border mx-auto border-gray-100 my-6 text-slate-700 dark:text-slate-100">
             <thead>
