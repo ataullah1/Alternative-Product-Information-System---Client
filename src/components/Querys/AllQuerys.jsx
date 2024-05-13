@@ -13,7 +13,7 @@ const AllQuerys = () => {
     error,
   } = useQuery({
     queryFn: () => queryData(),
-    queryKey: 'all-query',
+    queryKey: ['all-query'],
   });
 
   const queryData = async () => {

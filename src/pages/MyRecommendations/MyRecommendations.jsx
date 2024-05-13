@@ -25,9 +25,9 @@ const MyRecommendations = () => {
     );
     return data;
   };
-  //   console.log(modalDta);
   console.log(error, isError, isLoading);
 
+  //  Delete Recommendation======
   const { mutateAsync } = useMutation({
     mutationFn: async ({ id }) => {
       const { data } = await axiosSecure.delete(
@@ -36,8 +36,12 @@ const MyRecommendations = () => {
       console.log(data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['my-recommendation'] });
-      console.log('Deleted Query');
+      queryClient.invalidateQueries([
+        'my-recommendation',
+        'recommend',
+        'all-query',
+      ]);
+      console.log('Deleted Recommendation');
     },
   });
   const handleDelete = (id) => {
@@ -62,6 +66,22 @@ const MyRecommendations = () => {
     });
   };
 
+  const { mutateAsync: decreasesCount } = useMutation({
+    mutationFn: async ({ id }) => {
+      const { data } = await axiosSecure.delete(
+        `/recomendaton-countdecreases-update/${id}`
+      );
+      console.log(data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        'my-recommendation',
+        'recommend',
+        'all-query',
+      ]);
+      console.log('Deleted Query');
+    },
+  });
   return (
     <div>
       {/* Banner Part */}
@@ -312,11 +332,12 @@ const MyRecommendations = () => {
               </div>
               <div className="text-left">
                 <h1 className="text-2xl font-medium sm:text-3xl pt-4 pb-2 text-slate-800 dark:text-slate-100 font-serif">
+                  <span className="font-bold font-sans"> Query Title:</span>{' '}
                   {modalDta?.queryTitles}
                 </h1>
-                <p className="text-slate-700 dark:text-slate-300 max-w-[800px]">
+                {/* <p className="text-slate-700 dark:text-slate-300 max-w-[800px]">
                   {modalDta?.recReson}
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

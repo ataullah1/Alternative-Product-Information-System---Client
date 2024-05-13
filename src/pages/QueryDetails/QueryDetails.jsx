@@ -77,15 +77,15 @@ const QueryDetails = () => {
         queryKey: [`recommend`],
       });
       console.log('Recommended Product');
-      recCounting();
+      countingRecommend();
     },
   });
+
   // Recommendation Count Data Saving Database
   const { mutateAsync: countingRecommend } = useMutation({
-    mutationFn: async ({ dtaa }) => {
+    mutationFn: async () => {
       const { data } = await axiosSecure.patch(
-        `/recomendaton-count-update/${id}`,
-        dtaa
+        `/recomendaton-count-update/${id}`
       );
       console.log(data);
     },
@@ -97,11 +97,6 @@ const QueryDetails = () => {
       });
     },
     onSuccess: () => {
-      // Swal.fire({
-      //   title: 'Oppps ....!',
-      //   text: 'Recommendation data incrage hoise',
-      //   icon: 'success',
-      // });
       console.log('RecommendationCount incraged');
       queryClient.invalidateQueries({
         queryKey: [`querydetail`],
@@ -109,11 +104,6 @@ const QueryDetails = () => {
       console.log('recommendationCount done');
     },
   });
-  const recCounting = () => {
-    const recommendationCount = recommended.length + 1;
-    const dtaa = { recommendationCount };
-    countingRecommend({ dtaa });
-  };
 
   const dateTime = new Date().toLocaleString('en-BD', {
     timeZone: 'Asia/Dhaka',
