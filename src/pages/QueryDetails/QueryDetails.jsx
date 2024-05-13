@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import useAxiosSec from '../../Hooks/useAxiosSec';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import Loding from '../Loding/Loding';
 import img1 from '../../assets/banner/8.jpg';
@@ -14,6 +14,7 @@ import useAuth from '../../Hooks/useAuth';
 
 const QueryDetails = () => {
   const [openModal, setOpenModal] = useState(false);
+  const queryClient = useQueryClient();
   const { userDta } = useAuth();
   const axiosSecure = useAxiosSec();
   const { id } = useParams();
@@ -31,9 +32,29 @@ const QueryDetails = () => {
     return data;
   };
 
-  // Recommended Data Saving Database
+  // Recommendation Data Saving Database
   const { mutateAsync } = useMutation({
-    mutationFn: {},
+    mutationFn: async ({ formData }) => {
+      const { data } = await axiosSecure.post(`/recommendation`, formData);
+      console.log(data);
+    },
+    onError: () => {
+      Swal.fire({
+        title: 'Oppps ....!',
+        text: 'Can not post recommendation. Check your network !',
+        icon: 'error',
+      });
+    },
+    onSuccess: () => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Good Job',
+        text: 'Your Query has been successfully posted.',
+        timer: 2200,
+      });
+      queryClient.invalidateQueries({ queryKey: [`query-${id}`] });
+      console.log('Recommended Product');
+    },
   });
 
   const dateTime = new Date().toLocaleString('en-BD', {
