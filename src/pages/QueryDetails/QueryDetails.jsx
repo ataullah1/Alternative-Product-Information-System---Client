@@ -37,7 +37,7 @@ const QueryDetails = () => {
     return data;
   };
 
-  // Query details data get
+  // Recommendation data get
   const {
     data: recommended = [],
     isLoading: recLoding,
