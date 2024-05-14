@@ -177,7 +177,7 @@ const MyQuery = ({ dta, handleDelete }) => {
               <span className="text-2xl">
                 <FaRegCommentDots />
               </span>
-              <h2 className="">40</h2>
+              <h2 className="">{dta.recommendationCount}</h2>
             </Link>
           </Tooltip>
           <div className="flex items-center gap-1 text-lg font-semibold text-slate-800 dark:text-white/90">

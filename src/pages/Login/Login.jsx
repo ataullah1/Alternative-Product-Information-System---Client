@@ -65,6 +65,7 @@ const Login = () => {
     emlPassLogin(email, pass)
       .then((userCredential) => {
         const user = userCredential.user;
+        naviget(location?.state ? location.state : '/');
         const jwtRequet = async () => {
           const { data } = await axios.post(
             `${import.meta.env.VITE_API_URL}/jwt`,
@@ -82,7 +83,6 @@ const Login = () => {
           text: 'Your account has been successfully logged in.',
           icon: 'success',
         });
-        naviget(location?.state ? location.state : '/');
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -110,6 +110,7 @@ const Login = () => {
     socialLogin()
       .then((result) => {
         const user = result.user;
+        naviget(location?.state ? location.state : '/');
         const jwtRequet = async () => {
           const { data } = await axios.post(
             `${import.meta.env.VITE_API_URL}/jwt`,
@@ -127,7 +128,6 @@ const Login = () => {
           text: 'Your account has been successfully logged in.',
           icon: 'success',
         });
-        naviget(location?.state ? location.state : '/');
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -141,8 +141,7 @@ const Login = () => {
   };
 
   if (userDta || isLoading) {
-    <Loding />;
-    return;
+    return <Loding />;
   }
   return (
     <div className="w-11/12 mx-auto">
@@ -158,44 +157,54 @@ const Login = () => {
         {/* login form */}
         <div className="w-full md:w-1/2 p-5">
           <form className="space-y-6" onSubmit={handleLoginSubmit}>
-            <div>
-              <label
-                className={
-                  emailErr
-                    ? 'input input-bordered text-white dark:bg-transparent border-2 flex items-center gap-2 border-red-500'
-                    : 'input input-bordered text-white dark:bg-transparent border-2 dark:border-mClr flex items-center gap-2'
-                }
-              >
-                <MdEmail />
+            {/* Email Fild */}
+            <div className="">
+              <div className="relative">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none text-gray-600 dark:text-gray-200">
+                  <MdEmail />
+                </div>
                 <input
-                  type="email"
+                  type="text"
+                  id="input-group-1"
+                  className={`bg-gray-50 py-2 text-base border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                    emailErr
+                      ? 'border-red-500 dark:border-red-500'
+                      : 'border-gray-400 dark:border-gray-200'
+                  }`}
+                  placeholder="Your Email"
                   name="email"
-                  className="grow"
-                  placeholder="Email"
                 />
-              </label>
+              </div>
               {emailErr && (
-                <p className="text-sm text-red-500 italic">{emailErr}</p>
+                <p className="text-sm text-red-500 italic pt-1">{emailErr}</p>
               )}
             </div>
-            <div>
-              <label className="relative input input-bordered  text-white dark:bg-transparent border-2 dark:border-mClr flex items-center gap-2">
-                <RiLockPasswordFill />
+            {/* Password Fild */}
+            <div className="">
+              <div className="relative">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none text-gray-600 dark:text-gray-200">
+                  <RiLockPasswordFill />
+                </div>
                 <input
                   type={eye ? 'text' : 'password'}
-                  className="grow"
-                  name="password"
+                  id="input-group-1"
+                  className={`bg-gray-50 py-2 text-base border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                    passErr
+                      ? 'border-red-500 dark:border-red-500'
+                      : 'border-gray-400 dark:border-gray-200'
+                  }`}
                   placeholder="Password"
+                  name="password"
                 />
                 <div
                   onClick={() => setEye(!eye)}
-                  className="cursor-pointer text-xl absolute right-3"
+                  className="cursor-pointer text-xl absolute top-1/2 -translate-y-1/2 right-3"
                 >
                   {eye ? <FaEye /> : <FaEyeSlash />}
                 </div>
-              </label>{' '}
+              </div>
               {passErr && (
-                <p className="text-sm text-red-500 italic">{passErr}</p>
+                <p className="text-sm text-red-500 italic pt-1">{passErr}</p>
               )}
             </div>
 

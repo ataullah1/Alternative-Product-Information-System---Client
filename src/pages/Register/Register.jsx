@@ -33,7 +33,7 @@ const Register = () => {
     emlPassRegister,
     gitHubLogin,
     googleLogin,
-    logOutAcc,
+    // logOutAcc,
     userDta,
     profileUpdate,
     setLoading,
@@ -94,6 +94,7 @@ const Register = () => {
               text: 'Your account has been successfully created. Please login now.',
               icon: 'success',
             });
+            naviget(location?.state ? location.state : '/');
           })
           .catch((err) => {
             console.log(err);
@@ -104,8 +105,8 @@ const Register = () => {
               icon: 'error',
             });
           });
-        logOutAcc();
-        naviget('/login');
+        // logOutAcc();
+        // naviget('/login');
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -133,6 +134,7 @@ const Register = () => {
     socialLogin()
       .then((result) => {
         const user = result.user;
+        naviget(location?.state ? location.state : '/');
         const jwtRequet = async () => {
           const { data } = await axios.post(
             `${import.meta.env.VITE_API_URL}/jwt`,
@@ -150,7 +152,6 @@ const Register = () => {
           text: 'Your account has been successfully logged in.',
           icon: 'success',
         });
-        naviget(location?.state ? location.state : '/');
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -164,8 +165,7 @@ const Register = () => {
   };
 
   if (userDta || isLoading) {
-    <Loding />;
-    return;
+    return <Loding />;
   }
   return (
     <div>
@@ -173,7 +173,7 @@ const Register = () => {
         <div className="h-28 sm:h-36"></div>
         <div className="flex flex-col md:flex-row-reverse items-center md:w-11/12 lg:w-9/12 mx-auto border-mClr border-2 rounded gap-6 shadow-2xl">
           <div
-            className="w-full md:w-1/2 h-72 sm:h-96 md:h-[600px]"
+            className="w-full md:w-1/2 h-72 sm:h-96 md:h-[615px] lg:h-[600px] bg-no-repeat bg-cover"
             style={{
               backgroundImage: 'url(' + img + ')',
               backgroundPosition: 'center',
@@ -191,7 +191,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="input-group-1"
-                    className={`bg-gray-50 py-2 text-lg border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                    className={`bg-gray-50 py-2 text-base border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
                       nameErr
                         ? 'border-red-500 dark:border-red-500'
                         : 'border-gray-400 dark:border-gray-200'
@@ -213,7 +213,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="input-group-1"
-                    className={`bg-gray-50 py-2 text-lg border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                    className={`bg-gray-50 py-2 text-base border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
                       imgErr
                         ? 'border-red-500 dark:border-red-500'
                         : 'border-gray-400 dark:border-gray-200'
@@ -235,7 +235,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="input-group-1"
-                    className={`bg-gray-50 py-2 text-lg border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                    className={`bg-gray-50 py-2 text-base border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
                       emailErr
                         ? 'border-red-500 dark:border-red-500'
                         : 'border-gray-400 dark:border-gray-200'
@@ -257,7 +257,7 @@ const Register = () => {
                   <input
                     type={eye ? 'text' : 'password'}
                     id="input-group-1"
-                    className={`bg-gray-50 py-2 text-lg border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                    className={`bg-gray-50 py-2 text-base border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
                       passErr
                         ? 'border-red-500 dark:border-red-500'
                         : 'border-gray-400 dark:border-gray-200'
@@ -285,7 +285,7 @@ const Register = () => {
                   <input
                     type="password"
                     id="input-group-1"
-                    className={`bg-gray-50 py-2 text-lg border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                    className={`bg-gray-50 py-2 text-base border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
                       confPassErr
                         ? 'border-red-500 dark:border-red-500'
                         : 'border-gray-400 dark:border-gray-200'

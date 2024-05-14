@@ -10,6 +10,8 @@ import { Search } from '@mui/icons-material';
 import { Dropdown } from 'flowbite-react';
 import { useState } from 'react';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { TfiLayoutColumn2Alt, TfiLayoutColumn3Alt } from 'react-icons/tfi';
+import { RiLayoutBottom2Fill } from 'react-icons/ri';
 const AllQuerys = () => {
   // Get all query data
   const axiosFetch = useAxios();
@@ -149,8 +151,16 @@ const AllQuerys = () => {
           {/* End Sorting dropdown  */}
 
           {/* Start Layout Button  action */}
-          <div>
-            <button></button>
+          <div className=''>
+            <button>
+              <TfiLayoutColumn3Alt />
+            </button>
+            <button>
+              <TfiLayoutColumn2Alt />
+            </button>
+            <button>
+              <RiLayoutBottom2Fill />
+            </button>
           </div>
           {/* end Layout Button  action */}
 
