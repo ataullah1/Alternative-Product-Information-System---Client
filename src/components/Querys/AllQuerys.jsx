@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import img1 from '../../assets/banner/1.jpg';
 import { Search } from '@mui/icons-material';
 import { Dropdown } from 'flowbite-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { TfiLayoutColumn2Alt, TfiLayoutColumn3Alt } from 'react-icons/tfi';
 import { RiLayoutBottom2Fill } from 'react-icons/ri';
@@ -17,6 +17,9 @@ import QueryCardLarge from './QueryCardLarge';
 const AllQuerys = () => {
   const [serr, setSerr] = useState(null);
   const [layouts, setHandleLayout] = useState('threeColum');
+  const [perPage, setPerPage] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postCount, setPostCount] = useState(0);
   // Get all query data
   const axiosFetch = useAxios();
   let {
@@ -26,10 +29,12 @@ const AllQuerys = () => {
     error,
   } = useQuery({
     queryFn: () => queryData(),
-    queryKey: ['all-query'],
+    queryKey: ['all-query', currentPage],
   });
   const queryData = async () => {
-    const { data } = await axiosFetch(`/all-queries`);
+    const { data } = await axiosFetch(
+      `/all-queries?page=${currentPage}&size=${perPage}`
+    );
     return data;
   };
   if ((error, isError)) {
@@ -94,8 +99,25 @@ const AllQuerys = () => {
     console.log(search);
   };
   // End Search functionality========
+  // console.log(layouts);
 
-  console.log(layouts);
+  // Pagination Functionality =============
+  useEffect(() => {
+    const getCount = async () => {
+      const { data } = await axiosFetch('/all-queries-len');
+      setPostCount(data.data);
+    };
+    getCount();
+  }, [axiosFetch]);
+
+  const pageNo = Math.ceil(postCount / perPage);
+  const pages = [
+    ...Array(pageNo)
+      .keys()
+      .map((dta) => dta + 1),
+  ];
+
+  // End Pagination Functionality =============
   return (
     <div className="">
       <div className="mb-10">
@@ -253,34 +275,110 @@ const AllQuerys = () => {
 
         {/* Start main Card Layout  */}
         <div>
-          {isLoading ? (
-            <AllQuerySkeleton
-              crt={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-              h={60}
-              w={'40%'}
-            />
-          ) : layouts === 'oneColum' ? (
-            //  Layou 1 Colum ===============
-            <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 gap-6 sm:gap-4 xl:gap-6">
-              {datas.map((dta) => (
-                <QueryCardLarge dta={dta} key={dta._id} />
+          <div>
+            {isLoading ? (
+              <AllQuerySkeleton
+                crt={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
+                h={60}
+                w={'40%'}
+              />
+            ) : layouts === 'oneColum' ? (
+              //  Layou 1 Colum ===============
+              <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 gap-6 sm:gap-4 xl:gap-6">
+                {datas.map((dta) => (
+                  <QueryCardLarge dta={dta} key={dta._id} />
+                ))}
+              </div>
+            ) : layouts === 'twoColum' ? (
+              // Layout 3 Colum ============
+              <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-4 xl:gap-6">
+                {datas.map((dta) => (
+                  <QueryCardMeadium dta={dta} key={dta._id} />
+                ))}
+              </div>
+            ) : (
+              // Layout 3 colum ============
+              <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
+                {datas.map((dta) => (
+                  <QueryCard dta={dta} key={dta._id} />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Pageination section=============== */}
+          <nav
+            aria-label="Page navigation example"
+            className="mx-auto flex justify-center pt-9"
+          >
+            <ul className="flex items-center -space-x-px h-10 text-xl">
+              {/* Previous nutton */}
+              <li>
+                <button
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                  className="flex items-center justify-center px-4 h-10 leading-tight border-1 border-gray-300 rounded-l-md bg-slate-800 text-white hover:bg-gray-700 hover:text-white dark:bg-gray-400 dark:border-gray-300 dark:text-gray-700 dark:hover:bg-gray-200 dark:hover:text-gray-700 disabled:bg-slate-500"
+                >
+                  <span className="sr-only">Previous</span>
+                  <svg
+                    className="w-3 h-3 rtl:rotate-180"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 6 10"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 1 1 5l4 4"
+                    />
+                  </svg>
+                </button>
+              </li>
+              {pages.map((dta) => (
+                <li key={dta}>
+                  <button
+                    onClick={() => setCurrentPage(dta)}
+                    className={`flex items-center justify-center px-4 h-10 leading-tight ${
+                      currentPage === dta
+                        ? 'bg-mClr text-white'
+                        : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-200 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                    }`}
+                  >
+                    {dta}
+                  </button>
+                </li>
               ))}
-            </div>
-          ) : layouts === 'twoColum' ? (
-            // Layout 3 Colum ============
-            <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-4 xl:gap-6">
-              {datas.map((dta) => (
-                <QueryCardMeadium dta={dta} key={dta._id} />
-              ))}
-            </div>
-          ) : (
-            // Layout 3 colum ============
-            <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
-              {datas.map((dta) => (
-                <QueryCard dta={dta} key={dta._id} />
-              ))}
-            </div>
-          )}
+
+              {/* Next button */}
+              <li>
+                <button
+                  disabled={currentPage === pageNo}
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  className="flex items-center justify-center px-4 h-10 leading-tight border-1 border-gray-300 rounded-r-md bg-slate-800 text-white hover:bg-gray-700 hover:text-white dark:bg-gray-400 dark:border-gray-300 dark:text-gray-700 dark:hover:bg-gray-200 dark:hover:text-gray-700 disabled:bg-slate-500"
+                >
+                  <span className="sr-only">Next</span>
+                  <svg
+                    className="w-3 h-3 rtl:rotate-180"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 6 10"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m1 9 4-4-4-4"
+                    />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </nav>
         </div>
         {/* End main Card Layout  */}
       </div>
