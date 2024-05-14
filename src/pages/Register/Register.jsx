@@ -22,6 +22,8 @@ const Register = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const isValidPass = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+  const [nameErr, setNameErr] = useState(null);
+  const [imgErr, setImgErr] = useState(null);
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
   const [confPassErr, setConfPassErr] = useState(null);
@@ -50,6 +52,8 @@ const Register = () => {
 
   // const [imgNam, setImgNam] = useState({});
   const handleSignUpSubmit = (e) => {
+    setNameErr(null);
+    setImgErr(null);
     setEmailErr(null);
     setPassErr(null);
     setConfPassErr(null);
@@ -63,7 +67,13 @@ const Register = () => {
     const confPass = formDta.get('confirmPass');
     // console.log(name, photo, imgNam, email, pass, confPass);
 
-    if (!isValidEmail.test(email)) {
+    if (name.length < 2) {
+      setNameErr('Please enter your valid name.');
+      return;
+    } else if (photo.length < 10) {
+      setImgErr('Please enter your valid photo.');
+      return;
+    } else if (!isValidEmail.test(email)) {
       setEmailErr('Please enter a valid email address.');
       return;
     } else if (!isValidPass.test(pass)) {
@@ -172,89 +182,118 @@ const Register = () => {
           {/* login form */}
           <div className="w-full md:w-1/2 p-5">
             <form className="space-y-4" onSubmit={handleSignUpSubmit}>
-              <label className="input input-bordered flex items-center gap-2">
-                <FaUserAlt />
-                <input
-                  type="text"
-                  name="name"
-                  className="grow"
-                  required
-                  placeholder="Your Name"
-                />
-              </label>
-              <label className="input input-bordered flex items-center gap-2">
-                <FaImage />
-                <input
-                  type="text"
-                  className="grow"
-                  name="img"
-                  required
-                  placeholder="Your Image URL"
-                />
-              </label>
-              <div>
-                <label
-                  className={
-                    emailErr
-                      ? 'input input-bordered flex items-center gap-2 border-red-500'
-                      : 'input input-bordered flex items-center gap-2'
-                  }
-                >
-                  <MdEmail />
+              {/* Name Fild */}
+              <div className="">
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none text-gray-600 dark:text-gray-200">
+                    <FaUserAlt />
+                  </div>
                   <input
-                    type="email"
-                    name="email"
-                    className="grow"
-                    placeholder="Email"
+                    type="text"
+                    id="input-group-1"
+                    className={`bg-gray-50 py-2 text-lg border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                      nameErr
+                        ? 'border-red-500 dark:border-red-500'
+                        : 'border-gray-400 dark:border-gray-200'
+                    }`}
+                    placeholder="Your Name"
+                    name="name"
                   />
-                </label>
+                </div>
+                {nameErr && (
+                  <p className="text-sm text-red-500 italic pt-1">{nameErr}</p>
+                )}
+              </div>
+              {/* Image Fild */}
+              <div className="">
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none text-gray-600 dark:text-gray-200">
+                    <FaImage />
+                  </div>
+                  <input
+                    type="text"
+                    id="input-group-1"
+                    className={`bg-gray-50 py-2 text-lg border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                      imgErr
+                        ? 'border-red-500 dark:border-red-500'
+                        : 'border-gray-400 dark:border-gray-200'
+                    }`}
+                    placeholder="Your Image URL"
+                    name="img"
+                  />
+                </div>
+                {imgErr && (
+                  <p className="text-sm text-red-500 italic pt-1">{imgErr}</p>
+                )}
+              </div>
+              {/* Email Fild */}
+              <div className="">
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none text-gray-600 dark:text-gray-200">
+                    <MdEmail />
+                  </div>
+                  <input
+                    type="text"
+                    id="input-group-1"
+                    className={`bg-gray-50 py-2 text-lg border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                      emailErr
+                        ? 'border-red-500 dark:border-red-500'
+                        : 'border-gray-400 dark:border-gray-200'
+                    }`}
+                    placeholder="Your Email"
+                    name="email"
+                  />
+                </div>
                 {emailErr && (
                   <p className="text-sm text-red-500 italic pt-1">{emailErr}</p>
                 )}
               </div>
-              <div>
-                <label
-                  className={
-                    passErr
-                      ? 'relative input input-bordered flex items-center gap-2 border-red-500'
-                      : 'relative input input-bordered flex items-center gap-2'
-                  }
-                >
-                  <RiLockPasswordFill />
+              {/* Password Fild */}
+              <div className="">
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none text-gray-600 dark:text-gray-200">
+                    <RiLockPasswordFill />
+                  </div>
                   <input
                     type={eye ? 'text' : 'password'}
-                    name="password"
-                    className="grow"
-                    required
+                    id="input-group-1"
+                    className={`bg-gray-50 py-2 text-lg border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                      passErr
+                        ? 'border-red-500 dark:border-red-500'
+                        : 'border-gray-400 dark:border-gray-200'
+                    }`}
                     placeholder="Password"
+                    name="password"
                   />
                   <div
                     onClick={() => setEye(!eye)}
-                    className="cursor-pointer text-xl absolute right-3"
+                    className="cursor-pointer text-xl absolute top-1/2 -translate-y-1/2 right-3"
                   >
                     {eye ? <FaEye /> : <FaEyeSlash />}
                   </div>
-                </label>
+                </div>
                 {passErr && (
                   <p className="text-sm text-red-500 italic pt-1">{passErr}</p>
                 )}
               </div>
-              <div>
-                <label
-                  className={
-                    confPassErr
-                      ? 'input input-bordered flex items-center gap-2 border-red-500'
-                      : 'input input-bordered flex items-center gap-2'
-                  }
-                >
-                  <TbPasswordFingerprint />
+              {/* Confirm Password Fild */}
+              <div className="">
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none text-gray-600 dark:text-gray-200">
+                    <TbPasswordFingerprint />
+                  </div>
                   <input
                     type="password"
-                    className="grow"
-                    name="confirmPass"
+                    id="input-group-1"
+                    className={`bg-gray-50 py-2 text-lg border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                      confPassErr
+                        ? 'border-red-500 dark:border-red-500'
+                        : 'border-gray-400 dark:border-gray-200'
+                    }`}
                     placeholder="Confirm Password"
+                    name="confirmPass"
                   />
-                </label>
+                </div>
                 {confPassErr && (
                   <p className="text-sm text-red-500 italic pt-1">
                     {confPassErr}

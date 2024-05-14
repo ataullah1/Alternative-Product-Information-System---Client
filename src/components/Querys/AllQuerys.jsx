@@ -148,6 +148,12 @@ const AllQuerys = () => {
           </div>
           {/* End Sorting dropdown  */}
 
+          {/* Start Layout Button  action */}
+          <div>
+            <button></button>
+          </div>
+          {/* end Layout Button  action */}
+
           {/* Start Searching  */}
           <div className="relative">
             <input
