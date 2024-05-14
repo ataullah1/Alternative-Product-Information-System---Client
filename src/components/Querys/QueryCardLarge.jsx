@@ -8,9 +8,22 @@ import { Tooltip } from '@mui/material';
 const QueryCardLarge = ({ dta }) => {
   return (
     <div className="min-w-full max-w-full rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]">
-      <div className="sm:min-h-[600px] flex flex-col justify-between">
-        <div>
-          <div className="flex items-center justify-between gap-0 px-4 py-4">
+      <div className="flex flex-col md:flex-row items-center gap-4 p-5">
+        {/* Post Image */}
+        <div className="overflow-hidden w-full md:w-1/2 rounded-md">
+          <div
+            className="w-full h-72 sm:h-[450px] lg:h-96 hover:scale-110 duration-[2.5s]"
+            style={{
+              backgroundImage: `url(${dta.productImage})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+            }}
+          ></div>
+        </div>
+        {/* Post content */}
+        <div className="mt-3 space-y-2 px-4 w-full md:w-1/2">
+          <div className="flex items-center justify-between gap-0">
             {/* Avatar image  */}
             <div className="flex items-center gap-3">
               <img
@@ -35,22 +48,8 @@ const QueryCardLarge = ({ dta }) => {
               <FiExternalLink />
             </Link>
           </div>
-          {/* Post Image */}
-          <div className="flex flex-col gap-1">
-            <div className="overflow-hidden">
-              <div
-                className="w-full h-72 lg:h-96 hover:scale-110 duration-[2.5s]"
-                style={{
-                  backgroundImage: `url(${dta.productImage})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              ></div>
-            </div>
-          </div>
-          {/* Post content */}
-          <div className="mt-3 space-y-2 px-4">
+          {/* -============ */}
+          <div className="space-y-3">
             <h1 className="text-xl sm:text-2xl lg:text-3xl text-mClr">
               {dta.queryTitle}
             </h1>
@@ -71,34 +70,34 @@ const QueryCardLarge = ({ dta }) => {
               </Link>
             </p>
           </div>
-        </div>
-        {/* icons */}
-        <div className="mt-4 flex justify-between px-8 pb-4">
-          <Tooltip title="Support">
-            <button className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90">
+          {/* icons */}
+          <div className="pt-4 flex justify-between px-2 sm:px-8 pb-4">
+            <Tooltip title="Support">
+              <button className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90">
+                <span className="text-2xl">
+                  <RiHandHeartLine />
+                </span>
+                <h2 className="">40K</h2>
+              </button>
+            </Tooltip>
+            <Tooltip title="Recommendation">
+              <Link
+                to={`/query-details/${dta._id}`}
+                className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90"
+              >
+                <span className="text-2xl">
+                  <FaRegCommentDots />
+                </span>
+                <h2 className="">{dta.recommendationCount}</h2>
+              </Link>
+            </Tooltip>
+            <button className="flex items-center gap-1 text-lg font-semibold text-slate-800 dark:text-white/90">
               <span className="text-2xl">
-                <RiHandHeartLine />
+                <PiShareFatBold />
               </span>
-              <h2 className="">40K</h2>
+              <h2 className="">40</h2>
             </button>
-          </Tooltip>
-          <Tooltip title="Recommendation">
-            <Link
-              to={`/query-details/${dta._id}`}
-              className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90"
-            >
-              <span className="text-2xl">
-                <FaRegCommentDots />
-              </span>
-              <h2 className="">{dta.recommendationCount}</h2>
-            </Link>
-          </Tooltip>
-          <button className="flex items-center gap-1 text-lg font-semibold text-slate-800 dark:text-white/90">
-            <span className="text-2xl">
-              <PiShareFatBold />
-            </span>
-            <h2 className="">40</h2>
-          </button>
+          </div>
         </div>
       </div>
     </div>
