@@ -45,19 +45,13 @@ const QueryDetails = () => {
     error: recErr,
   } = useQuery({
     queryFn: () => recommendRec(),
-    queryKey: [`recommend`], // ############################################
+    queryKey: [`recommend`, id],
   });
   const recommendRec = async () => {
     const { data } = await axiosSecure.get(`/recommended-query/${id}`);
     return data;
   };
   console.log(recLoding, recommended);
-
-  // useEffect(() => {
-  //   queryClient.invalidateQueries({
-  //     queryKey: [`recommend`],
-  //   });
-  // }, [id, queryClient]);
 
   // Recommendation Data Saving Database
   const { mutateAsync } = useMutation({
@@ -275,11 +269,11 @@ const QueryDetails = () => {
           </div>
           <div className="w-full md:w-2/5 rounded-md flex flex-col gap-10">
             <div className="border dark:border-gray-500 rounded-md p-5">
-              <button className="py-3 px-4 text-2xl mb-4 bg-[#b0da4eaf] dark:bg-[#449d85] rounded-md text-[#6c1896] dark:text-[#00ffaa] w-full">
-                Total Recommendation:
-                {data.recommendationCount.length < 2 && '0'}
+              <h1 className="py-3 px-4 text-center text-2xl mb-4 bg-[#b0da4eaf] dark:bg-[#449d85] rounded-md text-[#6c1896] dark:text-[#00ffaa] w-full">
+                Total Recommendation:{' '}
+                {data.recommendationCount.toString().length < 2 && '0'}
                 {recommended.length}
-              </button>
+              </h1>
               <h1 className="pb-3 text-2xl lg:text-3xl text-slate-800 dark:text-slate-100">
                 {data.queryTitle}
               </h1>
@@ -298,8 +292,8 @@ const QueryDetails = () => {
                     <span className="text-2xl">
                       <FaRegCommentDots />
                     </span>
-                    <h2 className="">
-                      {data.recommendationCount.length < 2 && '0'}
+                    <h2 className="tracking-widest">
+                      {data.recommendationCount.toString().length < 2 && '0'}
                       {recommended.length}
                     </h2>
                   </button>

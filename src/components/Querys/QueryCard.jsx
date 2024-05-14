@@ -88,7 +88,11 @@ const QueryCard = ({ dta }) => {
               <span className="text-2xl">
                 <FaRegCommentDots />
               </span>
-              <h2 className="">{dta.recommendationCount}</h2>
+              <h2 className="tracking-widest">
+                {dta.recommendationCount.toString().length < 2
+                  ? '0' + dta.recommendationCount
+                  : dta.recommendationCount}
+              </h2>
             </Link>
           </Tooltip>
           <button className="flex items-center gap-1 text-lg font-semibold text-slate-800 dark:text-white/90">

@@ -82,13 +82,6 @@ const AllQuerys = () => {
   }
   // End Sorting order============
 
-  // Handle layout Function
-  // const setHandleLayout = (e) => {
-  //   console.log(e);
-  // };
-
-  // end Handle layout Function
-
   // Search functionality========
   const handleSearch = (e) => {
     setSerr(null);
@@ -210,14 +203,14 @@ const AllQuerys = () => {
             {/* Start Searching  */}
             <div className="hidden lg:flex items-center">
               <form onSubmit={handleSearch} className="relative lg:w-80">
-                <div className="absolute top-1/2 -translate-y-1/2 left-1">
+                <div className="absolute top-1/2 -translate-y-1/2 left-2">
                   <Search className={serr ? 'text-red-500' : ''} />
                 </div>
                 <input
                   type="text"
                   name="search"
                   id="default-search"
-                  className={`block w-full pl-8 pr-[88px] py-[12px] text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`block w-full pl-9 pr-[88px] py-[12px] text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 ${
                     serr ? 'placeholder-red-500' : 'placeholder-gray-700'
                   }`}
                   placeholder="Search keyword"
