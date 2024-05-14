@@ -16,10 +16,11 @@ import QueryCardMeadium from './QueryCardMeadium';
 import QueryCardLarge from './QueryCardLarge';
 const AllQuerys = () => {
   const [serr, setSerr] = useState(null);
+  const [searchs, setSearch] = useState('');
   const [layouts, setHandleLayout] = useState('threeColum');
-  const [perPage, setPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
   const [postCount, setPostCount] = useState(0);
+  const perPage = 9;
   // Get all query data
   const axiosFetch = useAxios();
   let {
@@ -29,11 +30,11 @@ const AllQuerys = () => {
     error,
   } = useQuery({
     queryFn: () => queryData(),
-    queryKey: ['all-query', currentPage],
+    queryKey: ['all-query', currentPage, searchs],
   });
   const queryData = async () => {
     const { data } = await axiosFetch(
-      `/all-queries?page=${currentPage}&size=${perPage}`
+      `/all-queries?page=${currentPage}&size=${perPage}&searchs=${searchs}`
     );
     return data;
   };
@@ -96,7 +97,8 @@ const AllQuerys = () => {
       setSerr(true);
       return;
     }
-    console.log(search);
+    setSearch(search);
+    // console.log(search);
   };
   // End Search functionality========
   // console.log(layouts);
@@ -104,11 +106,11 @@ const AllQuerys = () => {
   // Pagination Functionality =============
   useEffect(() => {
     const getCount = async () => {
-      const { data } = await axiosFetch('/all-queries-len');
+      const { data } = await axiosFetch(`/all-queries-len?searchs=${searchs}`);
       setPostCount(data.data);
     };
     getCount();
-  }, [axiosFetch]);
+  }, [axiosFetch, searchs]);
 
   const pageNo = Math.ceil(postCount / perPage);
   const pages = [
@@ -277,11 +279,7 @@ const AllQuerys = () => {
         <div>
           <div>
             {isLoading ? (
-              <AllQuerySkeleton
-                crt={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-                h={60}
-                w={'40%'}
-              />
+              <AllQuerySkeleton crt={[1, 2, 3, 4, 5, 6]} h={60} w={'40%'} />
             ) : layouts === 'oneColum' ? (
               //  Layou 1 Colum ===============
               <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 gap-6 sm:gap-4 xl:gap-6">
@@ -309,7 +307,7 @@ const AllQuerys = () => {
           {/* Pageination section=============== */}
           <nav
             aria-label="Page navigation example"
-            className="mx-auto flex justify-center pt-9"
+            className="mx-auto flex justify-end pt-9"
           >
             <ul className="flex items-center -space-x-px h-10 text-xl">
               {/* Previous nutton */}
