@@ -269,7 +269,7 @@ const QueryDetails = () => {
           </div>
           <div className="w-full md:w-2/5 rounded-md flex flex-col gap-10">
             <div className="border dark:border-gray-500 rounded-md p-5">
-              <button className="py-3 px-4 text-2xl mb-4 bg-[#b0da4eaf] dark:bg-[#407a6b] rounded-md text-[#6c1896] dark:text-green-500 w-full">
+              <button className="py-3 px-4 text-2xl mb-4 bg-[#b0da4eaf] dark:bg-[#449d85] rounded-md text-[#6c1896] dark:text-[#00ffaa] w-full">
                 Total Recommendation:
                 {data.recommendationCount.length < 2 && '0'}
                 {recommended.length}

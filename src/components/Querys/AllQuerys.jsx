@@ -9,7 +9,9 @@ import img1 from '../../assets/banner/1.jpg';
 import { Search } from '@mui/icons-material';
 import { Dropdown } from 'flowbite-react';
 import { useState } from 'react';
+import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 const AllQuerys = () => {
+  // Get all query data
   const axiosFetch = useAxios();
   let {
     data: datas = [],
@@ -31,7 +33,9 @@ const AllQuerys = () => {
       icon: 'error',
     });
   }
-  // const [querys, setQuerys] = useState(datas);
+  // end all query data geting ==========
+
+  // Sorting order =============
   const [sortDta, setSortDta] = useState(null);
   if (sortDta === 'default') {
     console.log('default');
@@ -41,7 +45,7 @@ const AllQuerys = () => {
       return datB - datA;
     });
     datas = sorting;
-  } else if (sortDta === 'dateTime') {
+  } else if (sortDta === 'dateTimeDown') {
     console.log('dateTime');
     const sorting = datas.sort((a, b) => {
       const datA = new Date(a.dateTime);
@@ -49,13 +53,28 @@ const AllQuerys = () => {
       return datB - datA;
     });
     datas = sorting;
-  } else if (sortDta === 'recommendation') {
+  } else if (sortDta === 'dateTimeUp') {
+    console.log('dateTime');
+    const sorting = datas.sort((a, b) => {
+      const datA = new Date(a.dateTime);
+      const datB = new Date(b.dateTime);
+      return datA - datB;
+    });
+    datas = sorting;
+  } else if (sortDta === 'recommendationDown') {
     console.log('recommendation');
     const sorting = datas.sort(
       (a, b) => b.recommendationCount - a.recommendationCount
     );
     datas = sorting;
+  } else if (sortDta === 'recommendationUp') {
+    console.log('recommendationUp');
+    const sorting = datas.sort(
+      (a, b) => a.recommendationCount - b.recommendationCount
+    );
+    datas = sorting;
   }
+  // End Sorting order============
 
   return (
     <div className="">
@@ -83,50 +102,83 @@ const AllQuerys = () => {
         </div>
       </div>
       <div className="w-11/12 mx-auto">
+        {/* Order Action layout  */}
         <div className="flex items-center justify-between">
+          {/* Sorting Dropdown Button  */}
           <div>
             <Dropdown label="Sort By Query" className="">
               <Dropdown.Item onClick={() => setSortDta('default')}>
                 Default
               </Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item onClick={() => setSortDta('dateTime')}>
-                Date & Time
+              <Dropdown.Item onClick={() => setSortDta('dateTimeDown')}>
+                <span className="flex items-center gap-2">
+                  Date & Time
+                  <span>
+                    <FaArrowDown />
+                  </span>
+                </span>
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setSortDta('dateTimeUp')}>
+                <span className="flex items-center gap-2">
+                  Date & Time
+                  <span>
+                    <FaArrowUp />
+                  </span>
+                </span>
               </Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item onClick={() => setSortDta('recommendation')}>
-                Recommendation
+              <Dropdown.Item onClick={() => setSortDta('recommendationDown')}>
+                <span className="flex items-center gap-2">
+                  Recommendation
+                  <span>
+                    <FaArrowDown />
+                  </span>
+                </span>
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setSortDta('recommendationUp')}>
+                <span className="flex items-center gap-2">
+                  Recommendation
+                  <span>
+                    <FaArrowUp />
+                  </span>
+                </span>
               </Dropdown.Item>
             </Dropdown>
           </div>
-          <div>
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search keyword"
-                className="py-1.5 px-4 w-72 outline-none border-2 border-mClr bg-transparent rounded text-slate-700 dark:text-slate-100 pr-10"
-              />
-              <span className="absolute top-1/2 -translate-y-1/2 cursor-pointer text-slate-700 dark:text-slate-100 px-3 py-1 right-0">
-                <Search />
-              </span>
-            </div>
+          {/* End Sorting dropdown  */}
+
+          {/* Start Searching  */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search keyword"
+              className="py-1.5 px-4 w-72 outline-none border-2 border-mClr bg-transparent rounded text-slate-700 dark:text-slate-100 pr-10"
+            />
+            <span className="absolute top-1/2 -translate-y-1/2 cursor-pointer text-slate-700 dark:text-slate-100 px-3 py-1 right-0">
+              <Search />
+            </span>
           </div>
+          {/* End Searching  */}
         </div>
         <div className="w-full h-[1px] bg-gray-400 mt-3 mb-7"></div>
-
-        {isLoading ? (
-          <AllQuerySkeleton
-            crt={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-            h={60}
-            w={'40%'}
-          />
-        ) : (
-          <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
-            {datas.map((dta) => (
-              <QueryCard dta={dta} key={dta._id} />
-            ))}
-          </div>
-        )}
+        {/* Start main Card Layout  */}
+        <div>
+          {isLoading ? (
+            <AllQuerySkeleton
+              crt={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
+              h={60}
+              w={'40%'}
+            />
+          ) : (
+            <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
+              {datas.map((dta) => (
+                <QueryCard dta={dta} key={dta._id} />
+              ))}
+            </div>
+          )}
+        </div>
+        {/* End main Card Layout  */}
       </div>
     </div>
   );
