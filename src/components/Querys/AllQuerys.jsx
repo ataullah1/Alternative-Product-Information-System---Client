@@ -12,8 +12,11 @@ import { useState } from 'react';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { TfiLayoutColumn2Alt, TfiLayoutColumn3Alt } from 'react-icons/tfi';
 import { RiLayoutBottom2Fill } from 'react-icons/ri';
+import QueryCardMeadium from './QueryCardMeadium';
+import QueryCardLarge from './QueryCardLarge';
 const AllQuerys = () => {
   const [serr, setSerr] = useState(null);
+  // const [layouts, setLayouts] = useState(null);
   // Get all query data
   const axiosFetch = useAxios();
   let {
@@ -78,6 +81,14 @@ const AllQuerys = () => {
     datas = sorting;
   }
   // End Sorting order============
+
+  // Handle layout Function
+  const handleLayout = (e) => {
+    console.log(e);
+  };
+
+  // end Handle layout Function
+
   // Search functionality========
   const handleSearch = (e) => {
     setSerr(null);
@@ -89,7 +100,7 @@ const AllQuerys = () => {
     }
     console.log(search);
   };
-
+  // End Search functionality========
   return (
     <div className="">
       <div className="mb-10">
@@ -165,13 +176,22 @@ const AllQuerys = () => {
 
             {/* Start Layout Button  action */}
             <div className="lg:text-2xl px-4 lg:px-5 py-1 lg:py-2 bg-slate-400 rounded-md  flex items-center justify-between gap-3 lg:gap-5 text-white">
-              <button className="px-2 py-2 rounded bg-slate-600">
+              <button
+                onClick={() => handleLayout('threeColum')}
+                className="px-2 py-2 rounded bg-slate-600"
+              >
                 <TfiLayoutColumn3Alt />
               </button>
-              <button className="px-2 py-2 rounded bg-slate-600">
+              <button
+                onClick={() => handleLayout('twoColum')}
+                className="px-2 py-2 rounded bg-slate-600"
+              >
                 <TfiLayoutColumn2Alt />
               </button>
-              <button className="px-2 py-2 rounded bg-slate-600">
+              <button
+                onClick={() => handleLayout('oneColum')}
+                className="px-2 py-2 rounded bg-slate-600"
+              >
                 <RiLayoutBottom2Fill />
               </button>
             </div>
@@ -201,9 +221,7 @@ const AllQuerys = () => {
               </form>
               {/* <button className="py-2 rounded-r-md">Search</button> */}
             </div>
-            {/* End Searching  */}
           </div>
-          {/* Start Searching  */}
           <div className="flex lg:hidden items-center w-full">
             <form onSubmit={handleSearch} className="relative w-full">
               <div className="absolute top-1/2 -translate-y-1/2 left-1">
@@ -229,7 +247,7 @@ const AllQuerys = () => {
           </div>
           {/* End Searching  */}
         </div>
-        {/* <div className="w-full h-[1px] bg-gray-400 mt-3 mb-7"></div> */}
+
         {/* Start main Card Layout  */}
         <div>
           {isLoading ? (
@@ -239,9 +257,24 @@ const AllQuerys = () => {
               w={'40%'}
             />
           ) : (
-            <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
+            // Layout 3 colum ============
+            // <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
+            //   {datas.map((dta) => (
+            //     <QueryCard dta={dta} key={dta._id} />
+            //   ))}
+            // </div>
+
+            //  Layout 3 Colum ============
+            // <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-4 xl:gap-6">
+            //   {datas.map((dta) => (
+            //     <QueryCardMeadium dta={dta} key={dta._id} />
+            //   ))}
+            // </div>
+
+            //  Layou 1 Colum ===============
+            <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 gap-6 sm:gap-4 xl:gap-6">
               {datas.map((dta) => (
-                <QueryCard dta={dta} key={dta._id} />
+                <QueryCardLarge dta={dta} key={dta._id} />
               ))}
             </div>
           )}

@@ -5,9 +5,9 @@ import { RiHandHeartLine } from 'react-icons/ri';
 import { FiExternalLink } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
-const QueryCard = ({ dta }) => {
+const QueryCardMeadium = ({ dta }) => {
   return (
-    <div className="min-w-full max-w-[500px] rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]">
+    <div className="min-w-full max-w-full rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]">
       <div className="sm:min-h-[600px] flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between gap-0 px-4 py-4">
@@ -39,7 +39,7 @@ const QueryCard = ({ dta }) => {
           <div className="flex flex-col gap-1">
             <div className="overflow-hidden">
               <div
-                className="w-full h-56 hover:scale-110 duration-[2.5s]"
+                className="w-full h-72 lg:h-96 hover:scale-110 duration-[2.5s]"
                 style={{
                   backgroundImage: `url(${dta.productImage})`,
                   backgroundPosition: 'center',
@@ -51,7 +51,9 @@ const QueryCard = ({ dta }) => {
           </div>
           {/* Post content */}
           <div className="mt-3 space-y-2 px-4">
-            <h1 className="text-xl text-mClr">{dta.queryTitle}</h1>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl text-mClr">
+              {dta.queryTitle}
+            </h1>
             <h2 className="text-2xl font-semibold text-slate-800 dark:text-white/90">
               {dta.productName}
             </h2>
@@ -59,13 +61,13 @@ const QueryCard = ({ dta }) => {
               <span className="font-bold">Brand: </span>
               {dta.productBrand}
             </p>
-            <p className="text-base text-gray-500 dark:text-white/50">
-              {dta.details.slice(0, 130)}
+            <p className="text-lg text-gray-500 dark:text-white/50">
+              {dta.details.slice(0, 180)}
               <Link
                 className="cursor-pointer text-[#3e96d4]"
                 to={`/query-details/${dta._id}`}
               >
-                {dta.details.length > 129 && '... See more'}
+                {dta.details.length > 188 && '... See more'}
               </Link>
             </p>
           </div>
@@ -103,7 +105,7 @@ const QueryCard = ({ dta }) => {
   );
 };
 
-export default QueryCard;
-QueryCard.propTypes = {
+export default QueryCardMeadium;
+QueryCardMeadium.propTypes = {
   dta: PropTypes.object,
 };
