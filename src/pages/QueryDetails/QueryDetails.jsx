@@ -45,13 +45,19 @@ const QueryDetails = () => {
     error: recErr,
   } = useQuery({
     queryFn: () => recommendRec(),
-    queryKey: [`recommend`], //==############################################
+    queryKey: [`recommend`], // ############################################
   });
   const recommendRec = async () => {
     const { data } = await axiosSecure.get(`/recommended-query/${id}`);
     return data;
   };
   console.log(recLoding, recommended);
+
+  // useEffect(() => {
+  //   queryClient.invalidateQueries({
+  //     queryKey: [`recommend`],
+  //   });
+  // }, [id, queryClient]);
 
   // Recommendation Data Saving Database
   const { mutateAsync } = useMutation({
