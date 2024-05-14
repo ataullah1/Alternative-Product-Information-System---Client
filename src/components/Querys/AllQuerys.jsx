@@ -13,6 +13,7 @@ import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { TfiLayoutColumn2Alt, TfiLayoutColumn3Alt } from 'react-icons/tfi';
 import { RiLayoutBottom2Fill } from 'react-icons/ri';
 const AllQuerys = () => {
+  const [serr, setSerr] = useState(null);
   // Get all query data
   const axiosFetch = useAxios();
   let {
@@ -77,6 +78,17 @@ const AllQuerys = () => {
     datas = sorting;
   }
   // End Sorting order============
+  // Search functionality========
+  const handleSearch = (e) => {
+    setSerr(null);
+    e.preventDefault();
+    const search = e.target.search.value;
+    if (search.length < 3) {
+      setSerr(true);
+      return;
+    }
+    console.log(search);
+  };
 
   return (
     <div className="">
@@ -105,79 +117,119 @@ const AllQuerys = () => {
       </div>
       <div className="w-11/12 mx-auto">
         {/* Order Action layout  */}
-        <div className="flex items-center justify-between">
-          {/* Sorting Dropdown Button  */}
-          <div>
-            <Dropdown label="Sort By Query" className="">
-              <Dropdown.Item onClick={() => setSortDta('default')}>
-                Default
-              </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item onClick={() => setSortDta('dateTimeDown')}>
-                <span className="flex items-center gap-2">
-                  Date & Time
-                  <span>
-                    <FaArrowDown />
+        <div className="flex flex-col items-center gap-4 bg-gray-500 mb-3 p-4 rounded-t-md ">
+          <div className="flex items-center gap-2 justify-between w-full">
+            {/* Sorting Dropdown Button  */}
+            <div className="sortingBtn">
+              <Dropdown label="Sort By Query" className="">
+                <Dropdown.Item onClick={() => setSortDta('default')}>
+                  Default
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item onClick={() => setSortDta('dateTimeDown')}>
+                  <span className="flex items-center gap-2">
+                    Date & Time
+                    <span>
+                      <FaArrowDown />
+                    </span>
                   </span>
-                </span>
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setSortDta('dateTimeUp')}>
-                <span className="flex items-center gap-2">
-                  Date & Time
-                  <span>
-                    <FaArrowUp />
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setSortDta('dateTimeUp')}>
+                  <span className="flex items-center gap-2">
+                    Date & Time
+                    <span>
+                      <FaArrowUp />
+                    </span>
                   </span>
-                </span>
-              </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item onClick={() => setSortDta('recommendationDown')}>
-                <span className="flex items-center gap-2">
-                  Recommendation
-                  <span>
-                    <FaArrowDown />
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item onClick={() => setSortDta('recommendationDown')}>
+                  <span className="flex items-center gap-2">
+                    Recommendation
+                    <span>
+                      <FaArrowDown />
+                    </span>
                   </span>
-                </span>
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setSortDta('recommendationUp')}>
-                <span className="flex items-center gap-2">
-                  Recommendation
-                  <span>
-                    <FaArrowUp />
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setSortDta('recommendationUp')}>
+                  <span className="flex items-center gap-2">
+                    Recommendation
+                    <span>
+                      <FaArrowUp />
+                    </span>
                   </span>
-                </span>
-              </Dropdown.Item>
-            </Dropdown>
-          </div>
-          {/* End Sorting dropdown  */}
+                </Dropdown.Item>
+              </Dropdown>
+            </div>
+            {/* End Sorting dropdown  */}
 
-          {/* Start Layout Button  action */}
-          <div className=''>
-            <button>
-              <TfiLayoutColumn3Alt />
-            </button>
-            <button>
-              <TfiLayoutColumn2Alt />
-            </button>
-            <button>
-              <RiLayoutBottom2Fill />
-            </button>
-          </div>
-          {/* end Layout Button  action */}
+            {/* Start Layout Button  action */}
+            <div className="lg:text-2xl px-4 lg:px-5 py-1 lg:py-2 bg-slate-400 rounded-md  flex items-center justify-between gap-3 lg:gap-5 text-white">
+              <button className="px-2 py-2 rounded bg-slate-600">
+                <TfiLayoutColumn3Alt />
+              </button>
+              <button className="px-2 py-2 rounded bg-slate-600">
+                <TfiLayoutColumn2Alt />
+              </button>
+              <button className="px-2 py-2 rounded bg-slate-600">
+                <RiLayoutBottom2Fill />
+              </button>
+            </div>
+            {/* end Layout Button  action */}
 
+            {/* Start Searching  */}
+            <div className="hidden lg:flex items-center">
+              <form onSubmit={handleSearch} className="relative lg:w-80">
+                <div className="absolute top-1/2 -translate-y-1/2 left-1">
+                  <Search className={serr ? 'text-red-500' : ''} />
+                </div>
+                <input
+                  type="text"
+                  name="search"
+                  id="default-search"
+                  className={`block w-full pl-8 pr-[88px] py-[12px] text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 ${
+                    serr ? 'placeholder-red-500' : 'placeholder-gray-700'
+                  }`}
+                  placeholder="Search keyword"
+                />
+                <button
+                  type="submit"
+                  className="text-white absolute right-2 top-1/2 -translate-y-1/2 bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1"
+                >
+                  Search
+                </button>
+              </form>
+              {/* <button className="py-2 rounded-r-md">Search</button> */}
+            </div>
+            {/* End Searching  */}
+          </div>
           {/* Start Searching  */}
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search keyword"
-              className="py-1.5 px-4 w-72 outline-none border-2 border-mClr bg-transparent rounded text-slate-700 dark:text-slate-100 pr-10"
-            />
-            <span className="absolute top-1/2 -translate-y-1/2 cursor-pointer text-slate-700 dark:text-slate-100 px-3 py-1 right-0">
-              <Search />
-            </span>
+          <div className="flex lg:hidden items-center w-full">
+            <form onSubmit={handleSearch} className="relative w-full">
+              <div className="absolute top-1/2 -translate-y-1/2 left-1">
+                <Search className={serr ? 'text-red-500' : ''} />
+              </div>
+              <input
+                type="text"
+                name="search"
+                id="default-search"
+                className={`block w-full pl-8 pr-[88px] py-[10px] text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 ${
+                  serr ? 'placeholder-red-500' : 'placeholder-gray-700'
+                }`}
+                placeholder="Search keyword"
+              />
+              <button
+                type="submit"
+                className="text-white absolute right-2 top-1/2 -translate-y-1/2 bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1"
+              >
+                Search
+              </button>
+            </form>
+            {/* <button className="py-2 rounded-r-md">Search</button> */}
           </div>
           {/* End Searching  */}
         </div>
-        <div className="w-full h-[1px] bg-gray-400 mt-3 mb-7"></div>
+        {/* <div className="w-full h-[1px] bg-gray-400 mt-3 mb-7"></div> */}
         {/* Start main Card Layout  */}
         <div>
           {isLoading ? (

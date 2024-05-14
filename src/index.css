@@ -145,6 +145,17 @@ button {
   }
 }
 
+.sortingBtn > button {
+  background-color: #38b6ff;
+  border-radius: 5px;
+  
+}
+
+.sortingBtn > button > span {
+  background: #38b6ff;
+  border: 1px solid #38b6ff;
+  font-size: 16px;
+}
 /* Custom Responsive code  */
 @media (max-height: 650px) {
   .updateModalHeightControl,
