@@ -28,6 +28,10 @@ Welcome to the Alternative Product Information System project! This project allo
 - **SweetAlert**: For elegant alert messages.
 - **React Icons**: For using icons.
 - **DaisyUI**: For additional UI components and theming.
+<hr/>
+- **MongoDB**: For the database.
+- **Express.js**: For the backend server.
+- **Node.js**: For server-side JavaScript runtime.
 
 ## Device Responsiveness
 
