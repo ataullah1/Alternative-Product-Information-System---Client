@@ -14,13 +14,16 @@ import { TfiLayoutColumn2Alt, TfiLayoutColumn3Alt } from 'react-icons/tfi';
 import { RiLayoutBottom2Fill } from 'react-icons/ri';
 import QueryCardMeadium from './QueryCardMeadium';
 import QueryCardLarge from './QueryCardLarge';
+import { TbReload } from 'react-icons/tb';
 const AllQuerys = () => {
   const [serr, setSerr] = useState(null);
   const [searchs, setSearch] = useState('');
   const [layouts, setHandleLayout] = useState('threeColum');
   const [currentPage, setCurrentPage] = useState(1);
+  const [reload, setReload] = useState(false);
   const [postCount, setPostCount] = useState(0);
-  const perPage = 9;
+  const [perPage, setPerPage] = useState(6);
+
   // Get all query data
   const axiosFetch = useAxios();
   let {
@@ -30,7 +33,7 @@ const AllQuerys = () => {
     error,
   } = useQuery({
     queryFn: () => queryData(),
-    queryKey: ['all-query', currentPage, searchs],
+    queryKey: ['all-query', currentPage, searchs, reload, perPage],
   });
   const queryData = async () => {
     const { data } = await axiosFetch(
@@ -118,8 +121,22 @@ const AllQuerys = () => {
       .keys()
       .map((dta) => dta + 1),
   ];
-
+  const handlePageSize = (e) => {
+    const nom = e.target.value;
+    // console.log(parseInt(nom));
+    setPerPage(nom);
+  };
   // End Pagination Functionality =============
+
+  // Handle Reload=====
+  const handleReload = () => {
+    setCurrentPage(1);
+    setSearch('');
+    setReload(!reload);
+    setSortDta('default');
+  };
+  // document.getElementById('reloadData').style.rotate = '50px';
+
   return (
     <div className="">
       <div className="mb-10">
@@ -150,7 +167,7 @@ const AllQuerys = () => {
         <div className="flex flex-col items-center gap-4 bg-gray-500 mb-3 p-4 rounded-t-md ">
           <div className="flex items-center gap-2 justify-between w-full">
             {/* Sorting Dropdown Button  */}
-            <div className="sortingBtn">
+            <div className="sortingBtn flex items-center gap-3">
               <Dropdown label="Sort By Query" className="">
                 <Dropdown.Item onClick={() => setSortDta('default')}>
                   Default
@@ -190,11 +207,19 @@ const AllQuerys = () => {
                   </span>
                 </Dropdown.Item>
               </Dropdown>
+
+              <button
+                id="reloadData"
+                onClick={handleReload}
+                className="text-[27px] p-1 border-2 text-white"
+              >
+                <TbReload />
+              </button>
             </div>
             {/* End Sorting dropdown  */}
 
             {/* Start Layout Button  action */}
-            <div className="lg:text-2xl px-4 lg:px-5 py-1 lg:py-2 bg-slate-400 rounded-md  flex items-center justify-between gap-3 lg:gap-5 text-white">
+            <div className="lg:text-xl px-4 lg:px-5 py-2 bg-slate-400 rounded-md  flex items-center justify-between gap-3 lg:gap-5 text-white">
               <button
                 onClick={() => setHandleLayout('threeColum')}
                 className={`px-2 py-2 rounded ${
@@ -310,12 +335,25 @@ const AllQuerys = () => {
             className="mx-auto flex justify-end pt-9"
           >
             <ul className="flex items-center -space-x-px h-10 text-xl">
+              <li>
+                <select
+                  onChange={handlePageSize}
+                  className="flex items-center justify-center px-4 h-[38px] leading-tight outline-none border-2 rounded-l-md bg-transparent text-slate-900  font-bold hover:bg-gray-700 hover:text-white dark:bg-gray-400 dark:border-gray-300 dark:text-gray-700 dark:hover:bg-gray-200 dark:hover:text-gray-700 option"
+                >
+                  <option value="6">06</option>
+                  <option value="9">09</option>
+                  <option value="12">12</option>
+                  <option value="15">15</option>
+                  <option value="18">18</option>
+                </select>
+              </li>
+
               {/* Previous nutton */}
               <li>
                 <button
                   disabled={currentPage === 1}
                   onClick={() => setCurrentPage(currentPage - 1)}
-                  className="flex items-center justify-center px-4 h-10 leading-tight border-1 border-gray-300 rounded-l-md bg-slate-800 text-white hover:bg-gray-700 hover:text-white dark:bg-gray-400 dark:border-gray-300 dark:text-gray-700 dark:hover:bg-gray-200 dark:hover:text-gray-700 disabled:bg-slate-500"
+                  className="flex items-center justify-center px-4 h-10 leading-tight border-1 border-gray-300 bg-slate-800 text-white hover:bg-gray-700 hover:text-white dark:bg-gray-400 dark:border-gray-300 dark:text-gray-700 dark:hover:bg-gray-200 dark:hover:text-gray-700 option"
                 >
                   <span className="sr-only">Previous</span>
                   <svg
@@ -355,7 +393,7 @@ const AllQuerys = () => {
                 <button
                   disabled={currentPage === pageNo}
                   onClick={() => setCurrentPage(currentPage + 1)}
-                  className="flex items-center justify-center px-4 h-10 leading-tight border-1 border-gray-300 rounded-r-md bg-slate-800 text-white hover:bg-gray-700 hover:text-white dark:bg-gray-400 dark:border-gray-300 dark:text-gray-700 dark:hover:bg-gray-200 dark:hover:text-gray-700 disabled:bg-slate-500"
+                  className="flex items-center justify-center px-4 h-10 leading-tight border-1 border-gray-300 rounded-r-md bg-slate-800 text-white hover:bg-gray-700 hover:text-white dark:bg-gray-400 dark:border-gray-300 dark:text-gray-700 dark:hover:bg-gray-200 dark:hover:text-gray-700 option"
                 >
                   <span className="sr-only">Next</span>
                   <svg
