@@ -11,9 +11,9 @@ const LatestBlogs = () => {
       </div>
       <div>
         <Marquee speed={60}>
-          <div className="md:w-[550px] shadow-xl mr-8">
+          <div className="w-[380px] md:w-[550px] shadow-xl mr-8">
             <div
-              className="h-64 w-full bg-cover bg-center rounded-t-md"
+              className="h-52  sm:h-64 w-full bg-cover bg-center rounded-t-md"
               style={{ backgroundImage: `url(${img1})` }}
             ></div>
             <div className="border p-3 rounded-b-md">
@@ -43,9 +43,9 @@ const LatestBlogs = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-[550px] shadow-xl mr-8">
+          <div className="w-[380px] md:w-[550px] shadow-xl mr-8">
             <div
-              className="h-64 w-full bg-cover bg-center rounded-t-md"
+              className="h-52  sm:h-64 w-full bg-cover bg-center rounded-t-md"
               style={{ backgroundImage: `url(${img1})` }}
             ></div>
             <div className="border p-3 rounded-b-md">
@@ -75,9 +75,9 @@ const LatestBlogs = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-[550px] shadow-xl mr-8">
+          <div className="w-[380px] md:w-[550px] shadow-xl mr-8">
             <div
-              className="h-64 w-full bg-cover bg-center rounded-t-md"
+              className="h-52  sm:h-64 w-full bg-cover bg-center rounded-t-md"
               style={{ backgroundImage: `url(${img1})` }}
             ></div>
             <div className="border p-3 rounded-b-md">
