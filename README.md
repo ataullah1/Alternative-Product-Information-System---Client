@@ -29,6 +29,10 @@ Welcome to the Alternative Product Information System project! This project allo
 - **React Icons**: For using icons.
 - **DaisyUI**: For additional UI components and theming.
 
+## Device Responsiveness
+
+The website is designed to be fully responsive, ensuring optimal viewing and interaction experience across all devices, including desktops, tablets, and smartphones. It utilizes responsive design principles and frameworks such as Material UI to adapt to different screen sizes and resolutions seamlessly.
+
 ## Project Structure
 
 The project is structured to ensure clarity and maintainability. Here’s an overview:
