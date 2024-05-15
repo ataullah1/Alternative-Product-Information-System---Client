@@ -34,7 +34,7 @@ const LatestBlogs = () => {
                 <button className="text-balance px-6 py-1.5 bg-[#68701586] rounded text-white">
                   #foods
                 </button>
-                <button className="text-balance px-6 py-1.5 bg-[#392e9d87] rounded text-white">
+                <button className="text-balance px-6 py-1.5 bg-[#6fe88987] rounded text-white">
                   #elactronic
                 </button>
                 <button className="text-balance px-6 py-1.5 bg-[#0c8f8da8] rounded text-white">
@@ -66,7 +66,7 @@ const LatestBlogs = () => {
                 <button className="text-balance px-6 py-1.5 bg-[#68701586] rounded text-white">
                   #foods
                 </button>
-                <button className="text-balance px-6 py-1.5 bg-[#392e9d87] rounded text-white">
+                <button className="text-balance px-6 py-1.5 bg-[#6fe88987] rounded text-white">
                   #elactronic
                 </button>
                 <button className="text-balance px-6 py-1.5 bg-[#0c8f8da8] rounded text-white">
@@ -98,7 +98,7 @@ const LatestBlogs = () => {
                 <button className="text-balance px-6 py-1.5 bg-[#68701586] rounded text-white">
                   #foods
                 </button>
-                <button className="text-balance px-6 py-1.5 bg-[#392e9d87] rounded text-white">
+                <button className="text-balance px-6 py-1.5 bg-[#6fe88987] rounded text-white">
                   #elactronic
                 </button>
                 <button className="text-balance px-6 py-1.5 bg-[#0c8f8da8] rounded text-white">
@@ -107,6 +107,7 @@ const LatestBlogs = () => {
               </div>
             </div>
           </div>
+          
         </Marquee>
       </div>
     </div>

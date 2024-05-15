@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 const QueryCardMeadium = ({ dta }) => {
   return (
-    <div className="min-w-full max-w-full rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]">
+    <div className="min-w-full max-w-full rounded-lg bg-slate-100 font-sans shadow-lg dark:bg-slate-800">
       <div className="sm:min-h-[600px] flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between gap-0 px-4 py-4">

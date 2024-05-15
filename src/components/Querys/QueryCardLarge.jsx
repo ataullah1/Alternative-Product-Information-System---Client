@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 const QueryCardLarge = ({ dta }) => {
   return (
-    <div className="min-w-full max-w-full rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]">
+    <div className="min-w-full max-w-full rounded-lg bg-slate-100 font-sans shadow-lg dark:bg-slate-800">
       <div className="flex flex-col md:flex-row items-center gap-4 p-5">
         {/* Post Image */}
         <div className="overflow-hidden w-full md:w-1/2 rounded-md">

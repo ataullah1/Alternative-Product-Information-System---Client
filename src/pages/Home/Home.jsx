@@ -6,11 +6,11 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <div className="w-11/12 mx-auto">
+      <div className="w-11/12 mx-auto max-w-[1700px]">
         <ResentQuerys />
       </div>
       <MiddleBanner />
-      <div className="w-11/12 mx-auto">
+      <div className="w-11/12 mx-auto max-w-[1700px]">
         <LatestBlogs />
       </div>
     </div>

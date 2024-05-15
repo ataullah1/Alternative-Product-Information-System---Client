@@ -38,7 +38,7 @@ const ResentQuerys = () => {
     return <AllQuerySkeleton crt={[1, 2, 3, 4, 5, 6]} h={40} w={'20%'} />;
   }
   return (
-    <div className="">
+    <div className="mt-10">
       <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
         {datas.slice(0, view).map((dta) => (
           <QueryCard dta={dta} key={dta._id} />

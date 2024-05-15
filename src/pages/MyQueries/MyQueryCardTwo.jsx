@@ -67,7 +67,7 @@ const MyQueryCardTwo = ({ dta, handleDelete }) => {
   };
 
   return (
-    <div className="mx-auto min-w-full max-w-[500px] rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]">
+    <div className="mx-auto min-w-full max-w-[500px] rounded-lg bg-slate-100 font-sans shadow-lg dark:bg-slate-800">
       <div className="sm:min-h-[580px] flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between gap-0 px-4 py-4 relative">
