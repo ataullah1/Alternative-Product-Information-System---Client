@@ -1,5 +1,7 @@
 # Alternative Product Information System
 
+### assignment_category_0009
+
 Welcome to the Alternative Product Information System project! This project allows users to share and find alternatives to products they are dissatisfied with. Users can post pictures, names, and brands of products they dislike, and other users can recommend better alternatives. The website provides a robust system for filtering and viewing posts dynamically, ensuring a user-friendly experience.
 
 ## Live Link
@@ -67,3 +69,21 @@ The project is structured to ensure clarity and maintainability. Here’s an ove
    npm run dev
 
    ```
+
+## Contact me
+
+### Email
+
+[Click here to email](mailto:ataullahm100@gmail.com?subject=Hello%20Ataullah)
+
+### Follow on GitHub
+
+[Link to GitHub Profile](https://github.com/ataullah1)
+
+### Follow on Facebook
+
+[Link to Facebook Profile](https://www.facebook.com/ataullah0)
+
+### Follow on Twitter
+
+[Link to Twitter Profile](https://twitter.com/dev_ataullah)
