@@ -79,7 +79,7 @@ const QueryCardMeadium = ({ dta }) => {
               <span className="text-2xl">
                 <RiHandHeartLine />
               </span>
-              <h2 className="">40K</h2>
+              <h2 className="">{Math.floor((Math.random() + 1) * 10)}K</h2>
             </button>
           </Tooltip>
           <Tooltip title="Recommendation">
@@ -94,14 +94,14 @@ const QueryCardMeadium = ({ dta }) => {
                 {dta.recommendationCount.toString().length < 2
                   ? '0' + dta.recommendationCount
                   : dta.recommendationCount}
-              </h2>https://fb.watch/s3fWd3k2d4/
+              </h2>
             </Link>
           </Tooltip>
           <button className="flex items-center gap-1 text-lg font-semibold text-slate-800 dark:text-white/90">
             <span className="text-2xl">
               <PiShareFatBold />
             </span>
-            <h2 className="">40</h2>
+            <h2 className="">{Math.floor((Math.random() + 1) * 10)}</h2>
           </button>
         </div>
       </div>

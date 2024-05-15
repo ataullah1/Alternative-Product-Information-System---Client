@@ -5,7 +5,15 @@ import { RiHandHeartLine } from 'react-icons/ri';
 import { FiExternalLink } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
+import { useState } from 'react';
 const QueryCard = ({ dta }) => {
+  const [support, setSupport] = useState(false);
+  const handleSupport = () => {
+    setSupport(!support);
+    // console.log(e);
+  };
+
+  console.log(Math.floor(Math.random() * 10));
   return (
     <div className="min-w-full max-w-[500px] rounded-lg bg-white font-sans shadow-lg dark:bg-[#18181B]">
       <div className="sm:min-h-[600px] flex flex-col justify-between">
@@ -73,11 +81,14 @@ const QueryCard = ({ dta }) => {
         {/* icons */}
         <div className="mt-4 flex justify-between px-8 pb-4">
           <Tooltip title="Support">
-            <button className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90">
-              <span className="text-2xl">
+            <button
+              onClick={() => handleSupport()}
+              className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-white/90"
+            >
+              <span className={`text-3xl ${support && 'text-mClr'}`}>
                 <RiHandHeartLine />
               </span>
-              <h2 className="">40K</h2>
+              <span className="">{Math.floor((Math.random() + 1) * 10)}K</span>
             </button>
           </Tooltip>
           <Tooltip title="Recommendation">
@@ -99,7 +110,7 @@ const QueryCard = ({ dta }) => {
             <span className="text-2xl">
               <PiShareFatBold />
             </span>
-            <h2 className="">40</h2>
+            <h2 className="">{Math.floor((Math.random() + 1) * 10)}</h2>
           </button>
         </div>
       </div>

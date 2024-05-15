@@ -166,7 +166,7 @@ const MyQuery = ({ dta, handleDelete }) => {
               <span className="text-2xl">
                 <RiHandHeartLine />
               </span>
-              <h2 className="">40K</h2>
+              <h2 className="">{Math.floor((Math.random() + 1) * 10)}K</h2>
             </button>
           </Tooltip>
           <Tooltip title="Recommendation">
@@ -177,7 +177,10 @@ const MyQuery = ({ dta, handleDelete }) => {
               <span className="text-2xl">
                 <FaRegCommentDots />
               </span>
-              <h2 className="">{dta.recommendationCount}</h2>
+              <h2 className="">
+                {dta.recommendationCount.toString().length < 2 && '0'}
+                {dta.recommendationCount}
+              </h2>
             </Link>
           </Tooltip>
           <div className="flex items-center gap-1 text-lg font-semibold text-slate-800 dark:text-white/90">

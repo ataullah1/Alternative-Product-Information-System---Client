@@ -77,7 +77,7 @@ const QueryCardLarge = ({ dta }) => {
                 <span className="text-2xl">
                   <RiHandHeartLine />
                 </span>
-                <h2 className="">40K</h2>
+                <h2 className="">{Math.floor((Math.random() + 1) * 10)}K</h2>
               </button>
             </Tooltip>
             <Tooltip title="Recommendation">
@@ -99,7 +99,7 @@ const QueryCardLarge = ({ dta }) => {
               <span className="text-2xl">
                 <PiShareFatBold />
               </span>
-              <h2 className="">40</h2>
+              <h2 className="">{Math.floor((Math.random() + 1) * 10)}</h2>
             </button>
           </div>
         </div>
