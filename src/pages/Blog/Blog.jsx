@@ -5,7 +5,7 @@ export default function Blog() {
       <div className="py-28 flex-col items-center justify-center  px-4">
         <h1
           role="heading"
-          className="text-center xl:text-5xl md:text-4xl text-2xl font-bold text-slate-800 dark:text-slate-100"
+          className="text-center xl:text-4xl md:text-4xl text-2xl font-bold text-slate-800 dark:text-slate-100"
         >
           Read Our Latest
         </h1>
