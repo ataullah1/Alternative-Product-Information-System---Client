@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import img1 from '../../assets/banner/5.jpg';
+import noDataImg from '../../assets/error/noDta.jpg';
 import MultyImgBanner from '../../components/MultyImgBanner/MultyImgBanner';
 import useAuth from '../../Hooks/useAuth';
 import useAxiosSec from '../../Hooks/useAxiosSec';
@@ -97,6 +98,22 @@ const MyQueries = () => {
         </div>
         {isLoading ? (
           <QuerySkeleton />
+        ) : myData.length < 1 ? (
+          <div className="flex flex-col justify-center items-center">
+            <div className="h-[450px]">
+              <img
+                className="max-h-full mx-auto rounded-md"
+                src={noDataImg}
+                alt=""
+              />
+            </div>
+
+            <Link to={'/add-queries'}>
+              <button className="px-9 py-2 hover:scale-110 duration-200 border-2 bg-mClr text-white text-center rounded-md text-xl my-5">
+                Add New Query
+              </button>
+            </Link>
+          </div>
         ) : (
           <div className="">
             <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">

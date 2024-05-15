@@ -16,7 +16,7 @@ import { ContextAuth } from '../../provider/Provider';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Loding from '../Loding/Loding';
-import axios from 'axios';
+import useAxiosSec from '../../Hooks/useAxiosSec';
 
 const Register = () => {
   const [eye, setEye] = useState(false);
@@ -27,6 +27,7 @@ const Register = () => {
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
   const [confPassErr, setConfPassErr] = useState(null);
+  const axiosSecu = useAxiosSec();
 
   // Firebase data
   const {
@@ -85,7 +86,15 @@ const Register = () => {
     }
     // Email password Register
     emlPassRegister(email, pass)
-      .then(() => {
+      .then((res) => {
+        const user = res.user;
+        const jwtRequet = async () => {
+          const { data } = await axiosSecu.post(`/jwt`, {
+            email: user?.email,
+          });
+          console.log('JWT Token,', data);
+        };
+        jwtRequet();
         // Update Profile
         profileUpdate(name, photo)
           .then(() => {
@@ -134,18 +143,15 @@ const Register = () => {
     socialLogin()
       .then((result) => {
         const user = result.user;
-        naviget(location?.state ? location.state : '/');
         const jwtRequet = async () => {
-          const { data } = await axios.post(
-            `${import.meta.env.VITE_API_URL}/jwt`,
-            {
-              email: user?.email,
-            },
-            { withCredentials: true }
-          );
+          const { data } = await axiosSecu.post(`/jwt`, {
+            email: user?.email,
+          });
           console.log('JWT Token,', data);
         };
         jwtRequet();
+
+        naviget(location?.state ? location.state : '/');
         console.log(user);
         Swal.fire({
           title: 'Good job!',

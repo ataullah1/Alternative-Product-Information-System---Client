@@ -10,12 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
 import Loding from '../Loding/Loding';
-import axios from 'axios';
+import useAxiosSec from '../../Hooks/useAxiosSec';
 
 const Login = () => {
   // Naviget, login done then go to Home
   const naviget = useNavigate();
   const location = useLocation();
+  const axiosSecu = useAxiosSec();
   // console.log(location);
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -67,13 +68,9 @@ const Login = () => {
         const user = userCredential.user;
         naviget(location?.state ? location.state : '/');
         const jwtRequet = async () => {
-          const { data } = await axios.post(
-            `${import.meta.env.VITE_API_URL}/jwt`,
-            {
-              email: user?.email,
-            },
-            { withCredentials: true }
-          );
+          const { data } = await axiosSecu.post(`/jwt`, {
+            email: user?.email,
+          });
           console.log('JWT Token,', data);
         };
         jwtRequet();
@@ -112,13 +109,9 @@ const Login = () => {
         const user = result.user;
         naviget(location?.state ? location.state : '/');
         const jwtRequet = async () => {
-          const { data } = await axios.post(
-            `${import.meta.env.VITE_API_URL}/jwt`,
-            {
-              email: user?.email,
-            },
-            { withCredentials: true }
-          );
+          const { data } = await axiosSecu.post(`/jwt`, {
+            email: user?.email,
+          });
           console.log('JWT Token,', data);
         };
         jwtRequet();

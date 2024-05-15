@@ -15,6 +15,7 @@ import { RiLayoutBottom2Fill } from 'react-icons/ri';
 import QueryCardMeadium from './QueryCardMeadium';
 import QueryCardLarge from './QueryCardLarge';
 import { TbReload } from 'react-icons/tb';
+import { Tooltip } from '@mui/material';
 const AllQuerys = () => {
   const [serr, setSerr] = useState(null);
   const [searchs, setSearch] = useState('');
@@ -134,11 +135,12 @@ const AllQuerys = () => {
     setSearch('');
     setReload(!reload);
     setSortDta('default');
+    setPerPage(6);
   };
   // document.getElementById('reloadData').style.rotate = '50px';
 
   return (
-    <div className="">
+    <div className="mb-16">
       <div className="mb-10">
         {/* Banner Part */}
         <div className="h-64 sm:h-72 w-full bg-red-200 relative">
@@ -208,13 +210,15 @@ const AllQuerys = () => {
                 </Dropdown.Item>
               </Dropdown>
 
-              <button
-                id="reloadData"
-                onClick={handleReload}
-                className="text-[27px] p-1 border-2 text-white"
-              >
-                <TbReload />
-              </button>
+              <Tooltip title="Reset Layout">
+                <button
+                  id="reloadData"
+                  onClick={handleReload}
+                  className="text-[27px] p-1 border-2 text-white"
+                >
+                  <TbReload />
+                </button>
+              </Tooltip>
             </div>
             {/* End Sorting dropdown  */}
 
