@@ -92,7 +92,7 @@ const MyQueries = () => {
       </div>
       <div className="w-11/12 mx-auto">
         <div className="text-center">
-          <h1 className="text-3xl sm:text-5xl text-center my-12 text-slate-900 dark:text-white border-b-2 px-4 md:border-b-4 border-mClr inline-block">
+          <h1 className="text-3xl sm:text-4xl text-center my-12 text-slate-900 dark:text-white border-b-2 px-4 md:border-b-4 border-mClr inline-block">
             My added queries
           </h1>
         </div>

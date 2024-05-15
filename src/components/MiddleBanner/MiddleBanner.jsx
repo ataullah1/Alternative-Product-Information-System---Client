@@ -1,6 +1,6 @@
 const MiddleBanner = () => {
   return (
-    <div className="relative mt-32 mb-36 h-[500px] sm:h-[600px] w-full">
+    <div className="relative mt-32 mb-20 h-[500px] sm:h-[600px] w-full">
       <div
         className="bg-gradient-to-r from-[#0de46eca] to-[#07f81b8b] bg-cover bg-no-repeat bg-bottom h-full w-full"
         style={{
@@ -83,15 +83,24 @@ const MiddleBanner = () => {
       </div>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#22342a28] to-[#bef2bc24]">
         <div className="w-11/12 max-w-[1700px] mx-auto h-full flex flex-col justify-center">
-          <h1 className="text-3xl sm:text-5xl text-slate-50 max-w-[800px] leading-[1.320]">
+          <h1
+            data-aos="fade-right"
+            className="text-3xl sm:text-5xl text-slate-50 max-w-[800px] leading-[1.320]"
+          >
             Discover Better Alternatives with AltQuery!
           </h1>
-          <p className="max-w-[600px] py-8 text-base sm:text-lg text-slate-100">
+          <p
+            data-aos="fade-right"
+            className="max-w-[600px] py-8 text-base sm:text-lg text-slate-100"
+          >
             Explore, share, and find superior product options. Post your
             queries, get recommendations, and tailor your browsing experience.
             Join us in revolutionizing how you shop!
           </p>
-          <button className="px-10 py-2 max-w-40 sm:max-w-44 shadow-lg rounded-md text-xl bg-mClr text-white hover:translate-x-4 sm:hover:translate-x-6 duration-300">
+          <button
+            data-aos="fade-right"
+            className="px-10 py-2 max-w-40 sm:max-w-44 shadow-lg rounded-md text-xl bg-mClr text-white hover:translate-x-4 sm:hover:translate-x-6 duration-300"
+          >
             Explore
           </button>
         </div>

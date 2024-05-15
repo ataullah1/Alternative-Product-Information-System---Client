@@ -15,7 +15,10 @@ const QueryCard = ({ dta }) => {
 
   console.log(Math.floor(Math.random() * 10));
   return (
-    <div className="min-w-full max-w-[500px] rounded-lg bg-slate-100 font-sans shadow-lg dark:bg-slate-800">
+    <div
+      data-aos="zoom-in-up"
+      className="min-w-full max-w-[500px] rounded-lg bg-slate-100 font-sans shadow-lg dark:bg-slate-800"
+    >
       <div className="sm:min-h-[600px] flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between gap-0 px-4 py-4">

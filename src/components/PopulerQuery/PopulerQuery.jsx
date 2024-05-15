@@ -3,15 +3,21 @@
 const PopulerQuery = () => {
   return (
     <div>
-      <h1 className="text-2xl sm:text-4xl text-slate-800 dark:text-slate-100 text-center pt-28 pb-5">
+      <h1
+        data-aos="fade-right"
+        className="text-2xl sm:text-4xl text-slate-800 dark:text-slate-100 text-center pt-28 pb-5"
+      >
         Trending Query Products
       </h1>
-      <p className="text-slate-600 dark:text-slate-200 text-center max-w-[650px] mx-auto pb-10">
+      <p
+        data-aos="fade-left"
+        className="text-slate-600 dark:text-slate-200 text-center max-w-[650px] mx-auto pb-10"
+      >
         Explore trending products recommended by users. Stay ahead with the
         latest in-demand alternatives gaining traction within our community.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md">
+        <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md hover:scale-105 duration-300">
           <div
             className="h-full w-full rounded-md bg-cover bg-center bg-no-repeat bg-gray-200"
             style={{
@@ -22,7 +28,7 @@ const PopulerQuery = () => {
             What car can be taken without alternative words?
           </h1>
         </div>
-        <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md">
+        <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md hover:scale-105 duration-300">
           <div
             className="h-full w-full rounded-md bg-cover bg-center bg-no-repeat bg-gray-200"
             style={{
@@ -33,7 +39,7 @@ const PopulerQuery = () => {
             Healthier substitutes for Fast Food Burgers?
           </h1>
         </div>
-        <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md">
+        <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md hover:scale-105 duration-300">
           <div
             className="h-full w-full rounded-md bg-cover bg-center bg-no-repeat bg-gray-200"
             style={{
@@ -44,7 +50,7 @@ const PopulerQuery = () => {
             Any better alternatives to Dell XPS 13 ultrabooks?
           </h1>
         </div>
-        <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md">
+        <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md hover:scale-105 duration-300">
           <div
             className="h-full w-full rounded-md bg-cover bg-center bg-no-repeat bg-gray-200"
             style={{

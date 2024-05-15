@@ -163,10 +163,10 @@ const Nav = () => {
                 About Us
               </NavLink>
               <NavLink
-                to={'/contact'}
+                to={'/services'}
                 className="block lg:hidden text-black hover:bg-mClr py-1.5 hover:text-white font-semibold border-b"
               >
-                Contact Us
+                Services
               </NavLink>
             </div>
           </div>
@@ -178,9 +178,9 @@ const Nav = () => {
           </NavLink>
           <NavLink
             className="hidden lg:block border-2 w-24 py-1.5 text-center text-white hover:border-mainColor duration-200"
-            to={'/contact'}
+            to={'/services'}
           >
-            Contact
+            Services
           </NavLink>
         </ul>
         <div className="hidden md:flex items-center gap-2">

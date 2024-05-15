@@ -4,10 +4,16 @@ const LatestBlogs = () => {
   return (
     <div className="mb-24">
       <div className="text-center">
-        <h1 className="text-center text-slate-800 dark:text-slate-100 text-3xl md:text-4xl pt-20 pb-5 inline-block">
+        <h1
+          data-aos="fade-right"
+          className="text-center text-slate-800 dark:text-slate-100 text-3xl md:text-4xl pt-20 pb-5 inline-block"
+        >
           Insightful Reads Await!
         </h1>
-        <p className="text-slate-600 dark:text-slate-200 text-center max-w-[650px] mx-auto pb-14">
+        <p
+          data-aos="fade-left"
+          className="text-slate-600 dark:text-slate-200 text-center max-w-[650px] mx-auto pb-14"
+        >
           Explore our latest blog posts for valuable insights, tips, and news on
           alternative products. Stay informed and inspired with our curated
           content.

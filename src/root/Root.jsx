@@ -14,7 +14,7 @@ const Root = () => {
     return <Loding />;
   }
   return (
-    <div className="bg-white dark:bg-[#353b48]">
+    <div className="bg-white dark:bg-[#353b48] overflow-x-hidden">
       <Nav />
       <Outlet />
       <Footer />
