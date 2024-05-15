@@ -3,9 +3,13 @@
 const PopulerQuery = () => {
   return (
     <div>
-      <h1 className="text-2xl sm:text-4xl text-slate-800 dark:text-slate-100 text-center pt-28 pb-10">
+      <h1 className="text-2xl sm:text-4xl text-slate-800 dark:text-slate-100 text-center pt-28 pb-5">
         Trending Query Products
       </h1>
+      <p className="text-slate-600 dark:text-slate-200 text-center max-w-[650px] mx-auto pb-10">
+        Explore trending products recommended by users. Stay ahead with the
+        latest in-demand alternatives gaining traction within our community.
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md">
           <div

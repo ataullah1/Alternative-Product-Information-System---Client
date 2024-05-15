@@ -38,7 +38,14 @@ const ResentQuerys = () => {
     return <AllQuerySkeleton crt={[1, 2, 3, 4, 5, 6]} h={40} w={'20%'} />;
   }
   return (
-    <div className="mt-10">
+    <div className="mt-16">
+      <h1 className="text-4xl text-slate-800 dark:text-slate-100 text-center pt-10 pb-4">
+        Resent Posted Query
+      </h1>
+      <p className="text-center text-slate-600 dark:text-slate-200 max-w-[650px] mx-auto pb-14">
+        Catch up on the newest queries from users. Stay updated and lend your
+        expertise to those seeking alternatives. Join the conversation!
+      </p>
       <div className="max-w-[500px] mx-auto sm:max-w-max grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 xl:gap-6">
         {datas.slice(0, view).map((dta) => (
           <QueryCard dta={dta} key={dta._id} />
