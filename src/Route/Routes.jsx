@@ -13,6 +13,7 @@ import QueryDetails from '../pages/QueryDetails/QueryDetails';
 import AllQuerys from '../components/Querys/AllQuerys';
 import MyRecommendations from '../pages/MyRecommendations/MyRecommendations';
 import RecommendationsForMe from '../pages/RecommendationsForMe/RecommendationsForMe';
+import ServicePage from '../pages/ServicePage/ServicePage';
 
 const router = createBrowserRouter([
   {
@@ -81,8 +82,8 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: '/contact',
-        element: <About />,
+        path: '/services',
+        element: <ServicePage />,
       },
       {
         path: '/login',
