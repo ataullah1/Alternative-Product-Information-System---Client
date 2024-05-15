@@ -5,13 +5,13 @@ export default function PratnerCompany() {
         <div className="flex flex-col items-center justify-center">
           <h1
             data-aos="fade-up-left"
-            className="lg:text-4xl md:text-4xl text-2xl font-bold leading-10 text-gray-800"
+            className="lg:text-4xl md:text-4xl text-2xl font-bold leading-10 text-gray-800 dark:text-slate-100"
           >
             Our Trusted Partners
           </h1>
           <p
             data-aos="fade-up-right"
-            className="text-base leading-normal text-center text-gray-600 mt-4 xl:w-1/2 w-10/12"
+            className="text-base leading-normal text-center text-gray-600 dark:text-slate-200 mt-4 xl:w-1/2 w-10/12"
           >
             We just got featured in the following magazines and it has been the
             most incredible journey. We work with the best fashion magazines

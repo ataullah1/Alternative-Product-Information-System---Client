@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import Banner from '../../components/Banner/Banner';
 import LatestBlogs from '../../components/LatestBlogs/LatestBlogs';
 import MiddleBanner from '../../components/MiddleBanner/MiddleBanner';
@@ -7,6 +8,9 @@ import ResentQuerys from '../../components/Querys/ResentQuerys';
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Alt Query || Home</title>
+      </Helmet>
       <Banner />
       <div className="w-11/12 mx-auto max-w-[1700px]">
         <PopulerQuery />

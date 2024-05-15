@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSec from '../../Hooks/useAxiosSec';
 import useAuth from '../../Hooks/useAuth';
 import { AiFillCaretRight } from 'react-icons/ai';
+import { Helmet } from 'react-helmet';
 
 const RecommendationsForMe = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -29,6 +30,9 @@ const RecommendationsForMe = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Alt Query|| Recommendation For Me</title>
+      </Helmet>
       {/* Banner Part */}
       <div className="h-64 sm:h-72 w-full bg-red-200 relative">
         <MultyImgBanner img1={img1} />

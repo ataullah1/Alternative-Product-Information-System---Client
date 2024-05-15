@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import AllQuerySkeleton from '../../pages/Loding/AllQuerySkeleton';
 import MultyImgBanner from '../MultyImgBanner/MultyImgBanner';
 import { Link } from 'react-router-dom';
-import img1 from '../../assets/banner/1.jpg';
+import img1 from '../../assets/banner/6.jpg';
 import { Search } from '@mui/icons-material';
 import { Dropdown } from 'flowbite-react';
 import { useEffect, useState } from 'react';
@@ -16,6 +16,7 @@ import QueryCardMeadium from './QueryCardMeadium';
 import QueryCardLarge from './QueryCardLarge';
 import { TbReload } from 'react-icons/tb';
 import { Tooltip } from '@mui/material';
+import { Helmet } from 'react-helmet';
 const AllQuerys = () => {
   const [serr, setSerr] = useState(null);
   const [searchs, setSearch] = useState('');
@@ -141,6 +142,9 @@ const AllQuerys = () => {
 
   return (
     <div className="mb-16">
+      <Helmet>
+        <title>Alt Query || Queries</title>
+      </Helmet>
       <div className="mb-10">
         {/* Banner Part */}
         <div className="h-64 sm:h-72 w-full bg-red-200 relative">

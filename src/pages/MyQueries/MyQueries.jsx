@@ -9,6 +9,7 @@ import QuerySkeleton from '../Loding/QuerySkeleton';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import MyQuery from './MyQuery';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 const MyQueries = () => {
   const [viewAll, setViewAll] = useState(9);
   const axiosSecure = useAxiosSec();
@@ -73,7 +74,10 @@ const MyQueries = () => {
   }
 
   return (
-    <div>
+    <div className='pb-14'>
+      <Helmet>
+        <title>Alt Query|| My Queries</title>
+      </Helmet>
       {/*Banner part  */}
       <div className="h-72 sm:h-96 relative">
         <MultyImgBanner img1={img1} />

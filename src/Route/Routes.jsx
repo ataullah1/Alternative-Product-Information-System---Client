@@ -14,6 +14,7 @@ import AllQuerys from '../components/Querys/AllQuerys';
 import MyRecommendations from '../pages/MyRecommendations/MyRecommendations';
 import RecommendationsForMe from '../pages/RecommendationsForMe/RecommendationsForMe';
 import ServicePage from '../pages/ServicePage/ServicePage';
+import MyProfile from '../pages/Profile/MyProfile';
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: '/services',
         element: <ServicePage />,
+      },
+      {
+        path: '/profile',
+        element: <MyProfile />,
       },
       {
         path: '/login',

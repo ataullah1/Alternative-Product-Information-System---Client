@@ -110,7 +110,7 @@ const Register = () => {
             setLoading(false);
             Swal.fire({
               title: 'Oops...!',
-              text: 'Sorry, your account could not be Created !',
+              text: 'Sorry, your Profile is not updated !',
               icon: 'error',
             });
           });

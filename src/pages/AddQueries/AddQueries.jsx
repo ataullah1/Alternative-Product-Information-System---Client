@@ -6,6 +6,7 @@ import img1 from '../../assets/banner/6.jpg';
 import MultyImgBanner from '../../components/MultyImgBanner/MultyImgBanner';
 import useAxiosSec from '../../Hooks/useAxiosSec';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet';
 
 const AddQueries = () => {
   const axiosSecure = useAxiosSec();
@@ -78,6 +79,9 @@ const AddQueries = () => {
 
   return (
     <div className="">
+      <Helmet>
+        <title>Alt Query|| Add Query</title>
+      </Helmet>
       {/* Banner Part */}
       <div className="h-64 sm:h-72 w-full bg-red-200 relative">
         <MultyImgBanner img1={img1} />

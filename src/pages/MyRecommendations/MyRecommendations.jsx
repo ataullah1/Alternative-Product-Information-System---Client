@@ -7,6 +7,7 @@ import useAxiosSec from '../../Hooks/useAxiosSec';
 import useAuth from '../../Hooks/useAuth';
 import Swal from 'sweetalert2';
 import { AiFillCaretRight } from 'react-icons/ai';
+import { Helmet } from 'react-helmet';
 
 const MyRecommendations = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -88,6 +89,9 @@ const MyRecommendations = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Alt Query|| My Recommendation</title>
+      </Helmet>
       {/* Banner Part */}
       <div className="h-64 sm:h-72 w-full bg-red-200 relative">
         <MultyImgBanner img1={img1} />
