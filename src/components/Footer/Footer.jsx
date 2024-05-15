@@ -67,20 +67,26 @@ const Footer = () => {
               <Link className="hover:text-white hover:translate-x-2 duration-200">
                 All Qureries
               </Link>
-              <Link className="hover:text-white hover:translate-x-2 duration-200">
+              <Link
+                to={'/add-queries'}
+                className="hover:text-white hover:translate-x-2 duration-200"
+              >
                 Added New Queries
               </Link>
-              <Link className="hover:text-white hover:translate-x-2 duration-200">
+              <Link
+                to={'/my-queries'}
+                className="hover:text-white hover:translate-x-2 duration-200"
+              >
                 My Added Queries
               </Link>
               <Link
-                to={'/'}
+                to={'/my-recommendations'}
                 className="hover:text-white hover:translate-x-2 duration-200"
               >
                 My Recommendations
               </Link>
               <Link
-                to={'/'}
+                to={'/recommendations-for-me'}
                 className="hover:text-white hover:translate-x-2 duration-200"
               >
                 Recommendation For Me
@@ -158,19 +164,19 @@ const Footer = () => {
               Home
             </Link>
             <div className="h-6 w-[1px] bg-white"></div>
-            <Link className="hover:text-white" to={'/all-art-craft-items'}>
+            <Link className="hover:text-white" to={'/queries'}>
               All Queries
             </Link>
             <div className="h-6 w-[1px] bg-white"></div>
-            <Link className="hover:text-white" to={'/add-craft-item'}>
+            <Link className="hover:text-white" to={'/about'}>
               About Us
             </Link>
             <div className="h-6 w-[1px] bg-white"></div>
-            <Link className="hover:text-white" to={'/my-art-craft-list'}>
+            <Link className="hover:text-white" to={'/services'}>
               Our Services
             </Link>{' '}
             <div className="h-6 w-[1px] bg-white"></div>
-            <Link className="hover:text-white" to={'/my-art-craft-list'}>
+            <Link className="hover:text-white" to={'/blog'}>
               Blog
             </Link>
           </div>
