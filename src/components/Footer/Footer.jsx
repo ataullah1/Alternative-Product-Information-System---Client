@@ -144,10 +144,10 @@ const Footer = () => {
                 <input
                   type="email"
                   placeholder="Your Email"
-                  className="w-full sm:w-2/3 py-3 outline-none rounded-l-md rounded-r-full placeholder-slate-100 sm:rounded-r-none border-2 border-white bg-[#354765] px-5 text-white"
+                  className="w-full sm:w-2/3 py-3 outline-none rounded-md sm:rounded-r-none sm:rounded-l-md placeholder-slate-100 border-2 border-white bg-[#354765] px-5 text-white"
                 />
                 <button
-                  className="w-full sm:w-1/3 py-2 text-white border-secondColor border-2 bg-mClr hover:bg-firstColor sm:rounded-l-none rounded-l-full rounded-r-md active:bg-transparent duration-200 font-semibold"
+                  className="w-full sm:w-1/3 py-2 text-white border-secondColor border-2 bg-mClr hover:bg-firstColor rounded-md sm:rounded-l-none sm:rounded-r-md active:bg-transparent duration-200 font-semibold"
                   onClick={subscribe}
                 >
                   Subscribe

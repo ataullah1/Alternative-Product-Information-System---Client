@@ -5,7 +5,7 @@ const LatestBlogs = () => {
   return (
     <div className="">
       <div className="text-center">
-        <h1 className="text-center text-slate-800 dark:text-slate-100 text-3xl md:text-5xl pt-20 mb-16 border-b-2 border-mClr inline-block">
+        <h1 className="text-center text-slate-800 dark:text-slate-100 text-3xl md:text-4xl pt-20 mb-16 border-b-2 border-mClr inline-block">
           Latest Blog
         </h1>
       </div>
