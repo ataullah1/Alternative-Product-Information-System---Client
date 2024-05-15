@@ -8,6 +8,7 @@ import useAuth from '../../Hooks/useAuth';
 import Swal from 'sweetalert2';
 import { AiFillCaretRight } from 'react-icons/ai';
 import { Helmet } from 'react-helmet';
+import noDataImg from '../../assets/error/noDta.jpg';
 
 const MyRecommendations = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -16,7 +17,12 @@ const MyRecommendations = () => {
   const { userDta } = useAuth();
   const queryClient = useQueryClient();
   // My Recommendations data get
-  const { data, isLoading, isError, error } = useQuery({
+  const {
+    data = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryFn: () => dataGeting(),
     queryKey: ['my-recommendation'],
   });
@@ -133,65 +139,75 @@ const MyRecommendations = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.map((dta) => (
-                <tr
-                  key={dta._id}
-                  className="hover:bg-gray-200 dark:hover:bg-gray-900 border-b transition duration-300"
-                >
-                  <td
-                    onClick={() => setOpenModal(true)}
-                    className="flex justify-start"
+              {data.length < 1 ? (
+                <div className="h-[450px] text-center mx-auto w-full">
+                  <img
+                    className="max-h-full mx-auto rounded-md"
+                    src={noDataImg}
+                    alt=""
+                  />
+                </div>
+              ) : (
+                data?.map((dta) => (
+                  <tr
+                    key={dta._id}
+                    className="hover:bg-gray-200 dark:hover:bg-gray-900 border-b transition duration-300"
                   >
-                    <div
-                      onClick={() => setModalDta(dta)}
-                      className="h-24 w-32"
-                      style={{
-                        backgroundImage: `url(${dta.recImage})`,
-                        backgroundPosition: 'center',
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                      }}
-                    ></div>
-                  </td>
-                  <td
-                    onClick={() => setOpenModal(true)}
-                    className="px-3 border-b border-r text-xl font-medium min-w-48"
-                  >
-                    <p onClick={() => setModalDta(dta)}>
-                      {dta.recName.slice(0, 18)}
-                      {dta.recName.length > 18 && '...'}
-                    </p>
-                  </td>
-                  <td
-                    onClick={() => setOpenModal(true)}
-                    className=" px-1 border-b border-r text-xl font-medium min-w-56"
-                  >
-                    <p onClick={() => setModalDta(dta)}>
-                      {dta.recTitle.slice(0, 32)}
-                      {dta.recTitle.length > 32 && '...'}
-                    </p>
-                  </td>
-                  <td
-                    onClick={() => setOpenModal(true)}
-                    className=" px-3 border-b border-r text-base font-medium min-w-80"
-                  >
-                    <p onClick={() => setModalDta(dta)}>
-                      {dta.recReson.slice(0, 95)}
-                      {dta.recReson.length > 95 && '...'}
-                    </p>
-                  </td>
-                  <td className=" px-5 border-b text-end">
-                    <span onClick={() => handleDelete(dta._id)}>
-                      <button
-                        onClick={() => decreasesCount(dta?.queryId)}
-                        className="bg-error hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-8 rounded-md"
-                      >
-                        Delete
-                      </button>
-                    </span>
-                  </td>
-                </tr>
-              ))}
+                    <td
+                      onClick={() => setOpenModal(true)}
+                      className="flex justify-start"
+                    >
+                      <div
+                        onClick={() => setModalDta(dta)}
+                        className="h-24 w-32"
+                        style={{
+                          backgroundImage: `url(${dta.recImage})`,
+                          backgroundPosition: 'center',
+                          backgroundSize: 'cover',
+                          backgroundRepeat: 'no-repeat',
+                        }}
+                      ></div>
+                    </td>
+                    <td
+                      onClick={() => setOpenModal(true)}
+                      className="px-3 border-b border-r text-xl font-medium min-w-48"
+                    >
+                      <p onClick={() => setModalDta(dta)}>
+                        {dta.recName.slice(0, 18)}
+                        {dta.recName.length > 18 && '...'}
+                      </p>
+                    </td>
+                    <td
+                      onClick={() => setOpenModal(true)}
+                      className=" px-1 border-b border-r text-xl font-medium min-w-56"
+                    >
+                      <p onClick={() => setModalDta(dta)}>
+                        {dta.recTitle.slice(0, 32)}
+                        {dta.recTitle.length > 32 && '...'}
+                      </p>
+                    </td>
+                    <td
+                      onClick={() => setOpenModal(true)}
+                      className=" px-3 border-b border-r text-base font-medium min-w-80"
+                    >
+                      <p onClick={() => setModalDta(dta)}>
+                        {dta.recReson.slice(0, 95)}
+                        {dta.recReson.length > 95 && '...'}
+                      </p>
+                    </td>
+                    <td className=" px-5 border-b text-end">
+                      <span onClick={() => handleDelete(dta._id)}>
+                        <button
+                          onClick={() => decreasesCount(dta?.queryId)}
+                          className="bg-error hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-8 rounded-md"
+                        >
+                          Delete
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

@@ -7,6 +7,7 @@ import useAxiosSec from '../../Hooks/useAxiosSec';
 import useAuth from '../../Hooks/useAuth';
 import { AiFillCaretRight } from 'react-icons/ai';
 import { Helmet } from 'react-helmet';
+import noDataImg from '../../assets/error/noDta.jpg';
 
 const RecommendationsForMe = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -16,7 +17,12 @@ const RecommendationsForMe = () => {
   const axiosSecure = useAxiosSec();
   const { userDta } = useAuth();
   // My Recommendations data get
-  const { data, isLoading, isError, error } = useQuery({
+  const {
+    data = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryFn: () => dataGeting(),
     queryKey: ['recommendation-for-me'],
   });
@@ -74,52 +80,62 @@ const RecommendationsForMe = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.map((dta) => (
-                <tr
-                  key={dta._id}
-                  className="hover:bg-gray-200 dark:hover:bg-gray-900 border-b transition duration-300"
-                >
-                  <td
-                    className="flex justify-start"
-                    onClick={() => setMdlImg(dta.recImage)}
+              {data.length < 1 ? (
+                <div className="h-[450px] text-center mx-auto w-full">
+                  <img
+                    className="max-h-full mx-auto rounded-md"
+                    src={noDataImg}
+                    alt=""
+                  />
+                </div>
+              ) : (
+                data?.map((dta) => (
+                  <tr
+                    key={dta._id}
+                    className="hover:bg-gray-200 dark:hover:bg-gray-900 border-b transition duration-300"
                   >
-                    <div
-                      onClick={() => setOpenModal2(true)}
-                      className="h-24 w-32"
-                      style={{
-                        backgroundImage: `url(${dta.recImage})`,
-                        backgroundPosition: 'center',
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                      }}
-                    ></div>
-                  </td>
-                  <td className="px-3 border-b border-r text-xl font-medium min-w-48">
-                    <p>
-                      {dta.recName.slice(0, 18)}
-                      {dta.recName.length > 18 && '...'}
-                    </p>
-                  </td>
-                  <td className=" px-1 border-b border-r text-xl font-medium min-w-56">
-                    {dta.recTitle.slice(0, 32)}
-                    {dta.recTitle.length > 32 && '...'}
-                  </td>
-                  <td className=" px-3 border-b border-r text-base font-medium min-w-80">
-                    {dta.recReson.slice(0, 95)}
-                    {dta.recReson.length > 95 && '...'}
-                  </td>
-                  <td className=" px-5 border-b text-end">
-                    <span onClick={() => setModalDta(dta)}>
-                      <button
-                        onClick={() => setOpenModal(true)}
-                        className="bg-mClr hover:bg-[#278dc8] hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-8 rounded-md"
-                      >
-                        Details
-                      </button>
-                    </span>
-                  </td>
-                </tr>
-              ))}
+                    <td
+                      className="flex justify-start"
+                      onClick={() => setMdlImg(dta.recImage)}
+                    >
+                      <div
+                        onClick={() => setOpenModal2(true)}
+                        className="h-24 w-32"
+                        style={{
+                          backgroundImage: `url(${dta.recImage})`,
+                          backgroundPosition: 'center',
+                          backgroundSize: 'cover',
+                          backgroundRepeat: 'no-repeat',
+                        }}
+                      ></div>
+                    </td>
+                    <td className="px-3 border-b border-r text-xl font-medium min-w-48">
+                      <p>
+                        {dta.recName.slice(0, 18)}
+                        {dta.recName.length > 18 && '...'}
+                      </p>
+                    </td>
+                    <td className=" px-1 border-b border-r text-xl font-medium min-w-56">
+                      {dta.recTitle.slice(0, 32)}
+                      {dta.recTitle.length > 32 && '...'}
+                    </td>
+                    <td className=" px-3 border-b border-r text-base font-medium min-w-80">
+                      {dta.recReson.slice(0, 95)}
+                      {dta.recReson.length > 95 && '...'}
+                    </td>
+                    <td className=" px-5 border-b text-end">
+                      <span onClick={() => setModalDta(dta)}>
+                        <button
+                          onClick={() => setOpenModal(true)}
+                          className="bg-mClr hover:bg-[#278dc8] hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-8 rounded-md"
+                        >
+                          Details
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

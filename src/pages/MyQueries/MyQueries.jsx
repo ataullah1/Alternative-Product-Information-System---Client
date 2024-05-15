@@ -74,7 +74,7 @@ const MyQueries = () => {
   }
 
   return (
-    <div className='pb-14'>
+    <div className="pb-14">
       <Helmet>
         <title>Alt Query|| My Queries</title>
       </Helmet>
