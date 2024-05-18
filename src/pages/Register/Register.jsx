@@ -1,10 +1,4 @@
-import {
-  FaEye,
-  FaEyeSlash,
-  FaGithub,
-  FaImage,
-  FaUserAlt,
-} from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaGithub, FaUserAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { TbPasswordFingerprint } from 'react-icons/tb';
@@ -17,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Loding from '../Loding/Loding';
 import useAxiosSec from '../../Hooks/useAxiosSec';
+import axios from 'axios';
 
 const Register = () => {
   const [eye, setEye] = useState(false);
@@ -52,7 +47,7 @@ const Register = () => {
   }, [userDta, naviget]);
 
   // const [imgNam, setImgNam] = useState({});
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     setNameErr(null);
     setImgErr(null);
     setEmailErr(null);
@@ -61,12 +56,14 @@ const Register = () => {
     e.preventDefault();
     const formDta = new FormData(e.currentTarget);
     const name = formDta.get('name');
-    const photo = formDta.get('img');
+    const photo = formDta.get('profile');
     // setImgNam({ nam: name, pic: photo });
     const email = formDta.get('email');
     const pass = formDta.get('password');
     const confPass = formDta.get('confirmPass');
-    // console.log(name, photo, imgNam, email, pass, confPass);
+    const fromDtaImg = new FormData();
+    fromDtaImg.append('image', photo);
+    // console.log(name, photo, email, pass, confPass);
 
     if (name.length < 2) {
       setNameErr('Please enter your valid name.');
@@ -84,49 +81,74 @@ const Register = () => {
       setConfPassErr('Password is not matched.');
       return;
     }
-    // Email password Register
-    emlPassRegister(email, pass)
-      .then((res) => {
-        const user = res.user;
-        const jwtRequet = async () => {
-          const { data } = await axiosSecu.post(`/jwt`, {
-            email: user?.email,
-          });
-          console.log('JWT Token,', data);
-        };
-        jwtRequet();
-        // Update Profile
-        profileUpdate(name, photo)
-          .then(() => {
-            Swal.fire({
-              title: 'Good job!',
-              text: 'Your account has been successfully created. Please login now.',
-              icon: 'success',
-            });
-            naviget(location?.state ? location.state : '/');
-          })
-          .catch((err) => {
-            console.log(err);
-            setLoading(false);
-            Swal.fire({
-              title: 'Oops...!',
-              text: 'Sorry, your Profile is not updated !',
-              icon: 'error',
-            });
-          });
-        // logOutAcc();
-        // naviget('/login');
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
-        setLoading(false);
-        Swal.fire({
-          title: 'Oops...!',
-          text: 'Sorry, your account could not be Created !',
-          icon: 'error',
+
+    try {
+      const { data } = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API}`,
+        fromDtaImg
+      );
+      const imageProfile = data.data.display_url;
+      console.log(imageProfile);
+
+      const result = await emlPassRegister(email, pass);
+      console.log(result);
+      const jwtRequet = async () => {
+        const { data } = await axiosSecu.post(`/jwt`, {
+          email: result?.user.email,
         });
-      });
+        console.log('JWT Token,', data);
+      };
+      jwtRequet();
+      // Update Profile
+      await profileUpdate(name, imageProfile);
+      naviget(location?.state ? location.state : '/');
+
+      // Email password Register
+      // emlPassRegister(email, pass)
+      //   .then((res) => {
+      //     const user = res.user;
+      //     const jwtRequet = async () => {
+      //       const { data } = await axiosSecu.post(`/jwt`, {
+      //         email: user?.email,
+      //       });
+      //       console.log('JWT Token,', data);
+      //     };
+      //     jwtRequet();
+      //     // Update Profile
+      //     profileUpdate(name, imageProfile)
+      //       .then(() => {
+      //         Swal.fire({
+      //           title: 'Good job!',
+      //           text: 'Your account has been successfully created. Please login now.',
+      //           icon: 'success',
+      //         });
+      //         naviget(location?.state ? location.state : '/');
+      //       })
+      //       .catch((err) => {
+      //         console.log(err);
+      //         setLoading(false);
+      //         Swal.fire({
+      //           title: 'Oops...!',
+      //           text: 'Sorry, your Profile is not updated !',
+      //           icon: 'error',
+      //         });
+      //       });
+      // logOutAcc();
+      // naviget('/login');
+      // })
+      // .catch((error) => {
+      //   const errorMessage = error.message;
+      //   console.log(errorMessage);
+      //   setLoading(false);
+      //   Swal.fire({
+      //     title: 'Oops...!',
+      //     text: 'Sorry, your account could not be Created !',
+      //     icon: 'error',
+      //   });
+      // });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // all Social Login
@@ -168,10 +190,6 @@ const Register = () => {
           icon: 'error',
         });
       });
-  };
-
-  const handleClick = () => {
-    document.getElementById('getFile').click();
   };
 
   if (userDta || isLoading) {
@@ -216,22 +234,21 @@ const Register = () => {
               </div>
               {/* Image Fild */}
               <div className="">
-                <div>
-                  <button
-                    className="border w-full"
-                    style={{ display: 'block', width: '120px', height: '30px' }}
-                    onClick={handleClick}
+                <div className="relative">
+                  <label
+                    htmlFor="small_size"
+                    className="absolute bg-slate-800 dark:bg-slate-400 dark:text-slate-800 dark:font-medium text-white px-3 rounded-l-md py-[11px] border-slate-400 dark:border-slate-100 text-base botder"
                   >
-                    Your Profile
-                  </button>
-                  <input className='w-full border border-red-500' type="file" id="getFile" style={{ display: 'none' }} />
+                    Choose Profile
+                  </label>
+                  <input
+                    className="pl-5 block w-full mb-5 text-gray-900 border border-slate-400 dark:border-slate-100 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 text-base dark:placeholder-gray-400"
+                    id="small_size"
+                    type="file"
+                    name="profile"
+                    placeholder="Choose Profile"
+                  />
                 </div>
-                <input
-                  className="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                  id="small_size"
-                  type="file"
-                  placeholder="Chose Profile"
-                />
 
                 {imgErr && (
                   <p className="text-sm text-red-500 italic pt-1">{imgErr}</p>
