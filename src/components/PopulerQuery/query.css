@@ -1,0 +1,9 @@
+.cardAnim {
+  /* background-color: #11d4a3; */
+
+  animation-name: cardAnimation;
+}
+
+@keyframes animaton-name{
+    0%{}
+}
