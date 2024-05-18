@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
 import Loding from '../Loding/Loding';
 import useAxiosSec from '../../Hooks/useAxiosSec';
+import { ImSpinner9 } from 'react-icons/im';
 
 const Login = () => {
   // Naviget, login done then go to Home
@@ -95,15 +96,6 @@ const Login = () => {
 
   // all Social Login
   const socialLogin = (socialLogin) => {
-    if (userDta) {
-      Swal.fire({
-        title: 'Oops...!',
-        text: 'Your account is already logged in!',
-        icon: 'warning',
-      });
-      naviget('/');
-      return;
-    }
     socialLogin()
       .then((result) => {
         const user = result.user;
@@ -133,7 +125,7 @@ const Login = () => {
       });
   };
 
-  if (userDta || isLoading) {
+  if (userDta) {
     return <Loding />;
   }
   return (
@@ -212,11 +204,17 @@ const Login = () => {
 
               <p className="underline cursor-pointer">Forgot Password</p>
             </div>
-            <input
-              type="submit"
-              value="Login"
-              className="w-full py-2 px-4 rounded-md text-center text-white hover:text-mClr font-bold bg-mClr active:scale-95 duration-150 cursor-pointer hover:bg-transparent border-2 border-mClr"
-            />
+
+            <button
+              disabled={isLoading}
+              className={`w-full py-2 px-4 rounded-md text-center text-white hover:text-mClr font-bold bg-mClr active:scale-95 duration-150 cursor-pointer hover:bg-transparent border-2 border-mClr disabled:bg-mClr`}
+            >
+              {isLoading ? (
+                <ImSpinner9 className="animate-spin text-2xl mx-auto" />
+              ) : (
+                'Login'
+              )}
+            </button>
           </form>
           <p className="pt-3">
             {`Don't have an account? `}

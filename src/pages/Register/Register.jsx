@@ -4,6 +4,7 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { TbPasswordFingerprint } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
+import { ImSpinner9 } from 'react-icons/im';
 import img from '../../assets/banner/7.jpg';
 import { useContext, useEffect, useState } from 'react';
 import { ContextAuth } from '../../provider/Provider';
@@ -83,6 +84,7 @@ const Register = () => {
     }
 
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API}`,
         fromDtaImg
@@ -91,20 +93,24 @@ const Register = () => {
       console.log(imageProfile);
 
       const result = await emlPassRegister(email, pass);
-      console.log(result);
       const jwtRequet = async () => {
         const { data } = await axiosSecu.post(`/jwt`, {
-          email: result?.user.email,
+          email: result?.user?.email,
         });
         console.log('JWT Token,', data);
       };
       jwtRequet();
       // Update Profile
       await profileUpdate(name, imageProfile);
+      Swal.fire({
+        title: 'Good job!',
+        text: 'Your account has been successfully created.',
+        icon: 'success',
+      });
       naviget(location?.state ? location.state : '/');
 
       // Email password Register
-      // emlPassRegister(email, pass)
+      // await emlPassRegister(email, pass)
       //   .then((res) => {
       //     const user = res.user;
       //     const jwtRequet = async () => {
@@ -133,21 +139,27 @@ const Register = () => {
       //           icon: 'error',
       //         });
       //       });
-      // logOutAcc();
-      // naviget('/login');
-      // })
-      // .catch((error) => {
-      //   const errorMessage = error.message;
-      //   console.log(errorMessage);
-      //   setLoading(false);
-      //   Swal.fire({
-      //     title: 'Oops...!',
-      //     text: 'Sorry, your account could not be Created !',
-      //     icon: 'error',
+      //     // logOutAcc();
+      //     // naviget('/login');
+      //   })
+      //   .catch((error) => {
+      //     const errorMessage = error.message;
+      //     console.log(errorMessage);
+      //     setLoading(false);
+      //     Swal.fire({
+      //       title: 'Oops...!',
+      //       text: 'Sorry, your account could not be Created !',
+      //       icon: 'error',
+      //     });
       //   });
-      // });
     } catch (error) {
       console.log(error);
+      setLoading(false);
+      Swal.fire({
+        title: 'Oops...!',
+        text: `Sorry, your account could not be Created ! "${error.message}"`,
+        icon: 'error',
+      });
     }
   };
 
@@ -192,7 +204,7 @@ const Register = () => {
       });
   };
 
-  if (userDta || isLoading) {
+  if (userDta) {
     return <Loding />;
   }
   return (
@@ -336,12 +348,21 @@ const Register = () => {
                   Privacy Policy
                 </Link>
               </label>
-              <input
-                // onClick={handeleNameImg}
+              {/* <input
                 type="submit"
                 value="Register"
                 className="w-full py-2 px-4 rounded-md text-center text-white hover:text-mClr font-bold bg-mClr active:scale-95 duration-150 cursor-pointer hover:bg-transparent border-2 border-mClr"
-              />
+              /> */}
+              <button
+                disabled={isLoading}
+                className={`w-full py-2 px-4 rounded-md text-center text-white hover:text-mClr font-bold bg-mClr active:scale-95 duration-150 hover:bg-transparent border-2 border-mClr disabled:bg-mClr`}
+              >
+                {isLoading ? (
+                  <ImSpinner9 className="animate-spin text-2xl mx-auto" />
+                ) : (
+                  'Register'
+                )}
+              </button>
             </form>
             <p className="pt-3">
               Already have an account?{' '}
