@@ -6,6 +6,7 @@ import { HiPlus } from 'react-icons/hi';
 import { useEffect, useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
 import ProfileMenu from '../ProfleMenu/ProfileMenu';
+import { ImSpinner9 } from 'react-icons/im';
 const Nav = () => {
   // Dark mood Light mood implement
   const [theme, setTheme] = useState(
@@ -81,8 +82,11 @@ const Nav = () => {
     };
   }, []);
 
-  const { userDta } = useAuth();
+  const { userDta, isLoading } = useAuth();
   // console.log(userDta);
+  // if (isLoading) {
+  //   return <Loding />;
+  // }
   return (
     <div
       className={
@@ -219,7 +223,11 @@ const Nav = () => {
               </div>
             </div>
           </div>
-          {userDta ? (
+          {isLoading ? (
+            <div className="py-2 w-20 h-20 flex items-center justify-center text-5xl text-white">
+              <ImSpinner9 className="animate-spin" />
+            </div>
+          ) : userDta ? (
             <ProfileMenu />
           ) : (
             <Link to={'/login'}>
@@ -267,7 +275,11 @@ const Nav = () => {
               </div>
             </div>
           </div>
-          {userDta ? (
+          {isLoading ? (
+            <div className="py-2 w-20 h-20 flex items-center justify-center text-5xl text-white">
+              <ImSpinner9 className="animate-spin" />
+            </div>
+          ) : userDta ? (
             <ProfileMenu />
           ) : (
             <div className="group relative cursor-pointer py-1.5 w-34">

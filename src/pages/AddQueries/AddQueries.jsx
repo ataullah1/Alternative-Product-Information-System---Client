@@ -7,8 +7,12 @@ import MultyImgBanner from '../../components/MultyImgBanner/MultyImgBanner';
 import useAxiosSec from '../../Hooks/useAxiosSec';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
+import { useState } from 'react';
+import { ImSpinner9 } from 'react-icons/im';
 
 const AddQueries = () => {
+  const [saving, setSaving] = useState(false);
   const axiosSecure = useAxiosSec();
   const dateTime = new Date().toLocaleString('en-BD', {
     timeZone: 'Asia/Dhaka',
@@ -48,11 +52,14 @@ const AddQueries = () => {
   });
 
   const handleAddQuery = async (e) => {
+    setSaving(true);
     e.preventDefault();
     const dta = e.target;
     const productName = dta.productName.value;
     const productBrand = dta.productBrand.value;
-    const productImage = dta.productImage.value;
+    const image = dta.image.files[0];
+    const imgUrl = new FormData();
+    imgUrl.append('image', image);
     const queryTitle = dta.queryTitle.value;
     const details = dta.detail.value;
     const userName = userDta.displayName;
@@ -60,21 +67,33 @@ const AddQueries = () => {
     const userImg = userDta.photoURL;
     const recommendationCount = 0;
 
-    const formData = {
-      productName,
-      productBrand,
-      productImage,
-      queryTitle,
-      details,
-      userName,
-      userEmail,
-      userImg,
-      dateTime,
-      recommendationCount,
-    };
-    // console.log(formData);
-    await mutateAsync({ formData });
-    dta.reset();
+    try {
+      const { data } = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API}`,
+        imgUrl
+      );
+      const productImage = data.data.display_url;
+      // console.log(productImage);
+
+      const formData = {
+        productName,
+        productBrand,
+        productImage,
+        queryTitle,
+        details,
+        userName,
+        userEmail,
+        userImg,
+        dateTime,
+        recommendationCount,
+      };
+      // console.log(formData);
+      await mutateAsync({ formData });
+      dta.reset();
+      setSaving(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -134,14 +153,49 @@ const AddQueries = () => {
                 name="productBrand"
                 className="text-3xl"
               />
-              <TextField
+              {/* <TextField
                 id="outlined-textarea"
                 label="Product Image URL"
                 placeholder="Product Photo"
                 required
                 name="productImage"
                 className="text-3xl"
-              />
+              /> */}
+              {/* Image Fild */}
+              <div className="">
+                <div className="relative">
+                  <label
+                    htmlFor="small_size"
+                    className={`absolute left-0 top-0 bg-slate-800 dark:bg-slate-400  dark:font-medium px-5 py-[16.5px] rounded-l-md border-slate-400 dark:border-slate-100 text-base botder text-white dark:text-slate-800`}
+                  >
+                    Choose Image
+                  </label>
+                  <input
+                    className={`pl-8 py-[6px] block w-full text-gray-900  rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none bg-transparent text-base dark:placeholder-gray-400 border border-slate-400 dark:border-slate-800}`}
+                    id="small_size"
+                    type="file"
+                    name="image"
+                    placeholder="Choose image"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        const validImageTypes = [
+                          'image/jpeg',
+                          'image/png',
+                          'image/gif',
+                          'image/bmp',
+                          'image/webp',
+                        ];
+                        if (!validImageTypes.includes(file.type)) {
+                          alert('Please select a valid image file.');
+                          e.target.value = ''; // Clear the input
+                        }
+                      }
+                    }}
+                  />
+                </div>
+              </div>
               <TextField
                 id="outlined-textarea"
                 label="Query Title"
@@ -161,11 +215,16 @@ const AddQueries = () => {
                 className="text-3xl"
               />
 
-              <input
-                className="w-full py-1.5 bg-mClr rounded border-2 border-mClr text-white text-lg font-bold sm:text-xl mb-5 hover:-skew-x-12 duration-300 active:scale-95 hover:bg-transparent hover:text-mClr"
-                type="submit"
-                value="Add Query"
-              />
+              <button
+                disabled={saving}
+                className="w-full py-1.5 bg-mClr rounded border-2 border-mClr text-white text-lg font-bold sm:text-xl mb-5 hover:-skew-x-12 duration-300 active:scale-95 hover:bg-transparent hover:text-mClr disabled:text-white disabled:bg-mClr"
+              >
+                {saving ? (
+                  <ImSpinner9 className="animate-spin text-2xl mx-auto" />
+                ) : (
+                  'Add Query'
+                )}
+              </button>
             </form>
           </div>
         </div>

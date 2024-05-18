@@ -13,8 +13,11 @@ import { useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import { HiDotsVertical } from 'react-icons/hi';
+import axios from 'axios';
+import { ImSpinner9 } from 'react-icons/im';
 
 const QueryDetails = () => {
+  const [saving, setSaving] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [recResonlen, setRecResonlen] = useState(250);
   const queryClient = useQueryClient();
@@ -115,12 +118,16 @@ const QueryDetails = () => {
     hour12: true, // Include AM/PM indicator
   });
   const handleRecommendation = async (e) => {
+    setSaving(true);
     e.preventDefault();
     const dta = e.target;
     const recTitle = dta.recTitle.value;
     const recName = dta.recName.value;
     const recBrand = dta.recBrand.value;
-    const recImage = dta.recImage.value;
+    const imgL = dta.recImage.files[0];
+    const imageLink = new FormData();
+    imageLink.append('image', imgL);
+    console.log(imageLink);
     const recReson = dta.recReson.value;
     const queryId = data._id;
     const queryTitles = data.queryTitle;
@@ -131,26 +138,37 @@ const QueryDetails = () => {
     const recUserEmail = userDta.email;
     const recUserName = userDta.displayName;
     const recUserImg = userDta.photoURL;
-    const formData = {
-      recTitle,
-      recName,
-      recBrand,
-      recImage,
-      recReson,
-      queryId,
-      queryTitles,
-      queryImg,
-      queryNames,
-      userEmails,
-      userNames,
-      recUserEmail,
-      recUserName,
-      recUserImg,
-      dateTime,
-    };
-    // console.log(formData);
-    await mutateAsync({ formData });
-    dta.reset();
+    try {
+      const { data } = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API}`,
+        imageLink
+      );
+      const recImage = data.data.display_url;
+      const formData = {
+        recTitle,
+        recName,
+        recBrand,
+        recImage,
+        recReson,
+        queryId,
+        queryTitles,
+        queryImg,
+        queryNames,
+        userEmails,
+        userNames,
+        recUserEmail,
+        recUserName,
+        recUserImg,
+        dateTime,
+      };
+      // console.log(formData);
+
+      await mutateAsync({ formData });
+      setSaving(false);
+      dta.reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if ((error, isError)) {
@@ -337,14 +355,50 @@ const QueryDetails = () => {
                     required
                     name="recBrand"
                   />
-                  <TextField
+                  {/* <TextField
                     id="outlined-textarea"
                     label="Recommended Product Image URL"
                     placeholder="Recommended Product Photo"
                     required
                     name="recImage"
                     className="text-3xl"
-                  />
+                  /> */}
+
+                  {/* Image Fild */}
+                  <div className="w-full">
+                    <div className="relative">
+                      <label
+                        htmlFor="small_size"
+                        className={`absolute left-0 top-0 bg-slate-800 dark:bg-slate-400  dark:font-medium px-5 py-[16.5px] rounded-l-md border-slate-400 dark:border-slate-100 text-base botder text-white dark:text-slate-800`}
+                      >
+                        Choose Image
+                      </label>
+                      <input
+                        className={`pl-8 py-[6px] block w-full text-gray-900  rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none bg-transparent text-base dark:placeholder-gray-400 border border-slate-400 dark:border-slate-800}`}
+                        id="small_size"
+                        type="file"
+                        name="recImage"
+                        placeholder="Choose image"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            const validImageTypes = [
+                              'image/jpeg',
+                              'image/png',
+                              'image/gif',
+                              'image/bmp',
+                              'image/webp',
+                            ];
+                            if (!validImageTypes.includes(file.type)) {
+                              alert('Please select a valid image file.');
+                              e.target.value = ''; // Clear the input
+                            }
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
 
                   <TextField
                     id="outlined-textarea"
@@ -357,11 +411,21 @@ const QueryDetails = () => {
                     className="text-3xl"
                   />
 
-                  <input
+                  {/* <input
                     className="w-full py-1.5 bg-mClr rounded border-2 border-mClr text-white text-lg font-bold sm:text-xl mb-5 hover:-skew-x-[9deg] duration-300 active:scale-95 hover:bg-transparent hover:text-mClr dark:hover:text-white dark:hover:border-white"
                     type="submit"
                     value="Add Recommendation"
-                  />
+                  /> */}
+                  <button
+                    disabled={saving}
+                    className="w-full py-1.5 bg-mClr rounded border-2 border-mClr text-white text-lg font-bold sm:text-xl mb-5 hover:-skew-x-12 duration-300 active:scale-95 hover:bg-transparent hover:text-mClr disabled:text-white disabled:bg-mClr"
+                  >
+                    {saving ? (
+                      <ImSpinner9 className="animate-spin text-2xl mx-auto" />
+                    ) : (
+                      'Add Recommendation'
+                    )}
+                  </button>
                 </form>
               </div>
             </div>

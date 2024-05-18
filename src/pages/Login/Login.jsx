@@ -207,7 +207,7 @@ const Login = () => {
 
             <button
               disabled={isLoading}
-              className={`w-full py-2 px-4 rounded-md text-center text-white hover:text-mClr font-bold bg-mClr active:scale-95 duration-150 cursor-pointer hover:bg-transparent border-2 border-mClr disabled:bg-mClr`}
+              className={`w-full py-2 px-4 rounded-md text-center text-white hover:text-mClr disabled:hover:text-white font-bold bg-mClr active:scale-95 duration-150 cursor-pointer hover:bg-transparent border-2 border-mClr disabled:bg-mClr`}
             >
               {isLoading ? (
                 <ImSpinner9 className="animate-spin text-2xl mx-auto" />
@@ -227,6 +227,7 @@ const Login = () => {
           </div>
           <div className="flex flex-col lg:flex-row gap-3 w-full text-slate-900 dark:text-stone-100">
             <button
+              disabled={isLoading}
               onClick={() => socialLogin(googleLogin)}
               className="py-2 px-4 w-full font-medium border hover:shadow-lg shadow-indigo-900/20 rounded-md flex items-center justify-center gap-2 border-mClr"
             >
@@ -236,6 +237,7 @@ const Login = () => {
               Login With Google
             </button>
             <button
+              disabled={isLoading}
               onClick={() => socialLogin(gitHubLogin)}
               className="py-2 px-4 w-full font-medium border hover:shadow-lg shadow-blue-500/20 rounded-md  flex items-center justify-center gap-2 border-mClr"
             >

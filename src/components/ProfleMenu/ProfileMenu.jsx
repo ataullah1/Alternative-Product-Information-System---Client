@@ -2,9 +2,18 @@ import { NavLink } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import { GoPlus } from 'react-icons/go';
 import { LuLogOut } from 'react-icons/lu';
+import Swal from 'sweetalert2';
 
 const ProfileMenu = () => {
   const { userDta, logOutAcc } = useAuth();
+  const logout = () => {
+    logOutAcc();
+    Swal.fire({
+      title: 'Logged Out',
+      text: 'Your account has been successfully logged out.',
+      icon: 'success',
+    });
+  };
   return (
     <div className="group relative cursor-pointer py-1.5 w-34">
       <div className="flex items-center justify-between pl-2 lg:pl-0 pr-2 w-full py-1.5 text-center text-white duration-200">
@@ -79,7 +88,7 @@ const ProfileMenu = () => {
           My Profile
         </NavLink>
         <button
-          onClick={logOutAcc}
+          onClick={logout}
           className="hover:bg-[#c52323] hover:text-white font-semibold border-b bg-sClr  text-white py-3 tracking-widest flex items-center justify-center gap-3"
         >
           <span className="text-2xl">
