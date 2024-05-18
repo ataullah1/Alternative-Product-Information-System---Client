@@ -170,6 +170,10 @@ const Register = () => {
       });
   };
 
+  const handleClick = () => {
+    document.getElementById('getFile').click();
+  };
+
   if (userDta || isLoading) {
     return <Loding />;
   }
@@ -212,22 +216,23 @@ const Register = () => {
               </div>
               {/* Image Fild */}
               <div className="">
-                <div className="relative">
-                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none text-gray-600 dark:text-gray-200">
-                    <FaImage />
-                  </div>
-                  <input
-                    type="text"
-                    id="input-group-1"
-                    className={`bg-gray-50 py-2 text-base border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
-                      imgErr
-                        ? 'border-red-500 dark:border-red-500'
-                        : 'border-gray-400 dark:border-gray-200'
-                    }`}
-                    placeholder="Your Image URL"
-                    name="img"
-                  />
+                <div>
+                  <button
+                    className="border w-full"
+                    style={{ display: 'block', width: '120px', height: '30px' }}
+                    onClick={handleClick}
+                  >
+                    Your Profile
+                  </button>
+                  <input className='w-full border border-red-500' type="file" id="getFile" style={{ display: 'none' }} />
                 </div>
+                <input
+                  className="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                  id="small_size"
+                  type="file"
+                  placeholder="Chose Profile"
+                />
+
                 {imgErr && (
                   <p className="text-sm text-red-500 italic pt-1">{imgErr}</p>
                 )}
