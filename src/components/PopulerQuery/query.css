@@ -4,6 +4,8 @@
   animation-name: cardAnimation;
 }
 
-@keyframes animaton-name{
-    0%{}
+@keyframes animaton-name {
+  0% {
+    transform: translateY();
+  }
 }
