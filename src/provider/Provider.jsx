@@ -12,7 +12,6 @@ import {
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
 import auth from '../firebase/firebase.config';
-import Swal from 'sweetalert2';
 import axios from 'axios';
 
 export const ContextAuth = createContext();
@@ -29,6 +28,14 @@ const Provider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+  // Profile Update
+  const profileUpdate = (nam, photoUrl) => {
+    // setLoading(false);
+    return updateProfile(auth.currentUser, {
+      displayName: nam,
+      photoURL: photoUrl,
+    });
+  };
 
   // ============= Social Login ============
   // social login provider
@@ -36,11 +43,11 @@ const Provider = ({ children }) => {
   const gitHubProvider = new GithubAuthProvider();
 
   const googleLogin = () => {
-    // setIsLoading(true);
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
   const gitHubLogin = () => {
-    // setIsLoading(true);
+    setLoading(true);
     return signInWithPopup(auth, gitHubProvider);
   };
 
@@ -53,11 +60,6 @@ const Provider = ({ children }) => {
     return signOut(auth)
       .then(() => {
         // Sign-out successful.
-        Swal.fire({
-          title: 'Logged Out',
-          text: 'Your account has been successfully logged out.',
-          icon: 'success',
-        });
       })
       .catch((err) => {
         console.log(err.message);
@@ -74,12 +76,6 @@ const Provider = ({ children }) => {
     };
   }, []);
 
-  const profileUpdate = (nam, photoUrl) => {
-    return updateProfile(auth.currentUser, {
-      displayName: nam,
-      photoURL: photoUrl,
-    });
-  };
   const handleUpdateEmail = (email) => {
     return updateEmail(auth.currentUser, email);
   };

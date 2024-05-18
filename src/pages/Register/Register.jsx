@@ -1,15 +1,10 @@
-import {
-  FaEye,
-  FaEyeSlash,
-  FaGithub,
-  FaImage,
-  FaUserAlt,
-} from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaGithub, FaUserAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { TbPasswordFingerprint } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
+import { ImSpinner9 } from 'react-icons/im';
 import img from '../../assets/banner/7.jpg';
 import { useContext, useEffect, useState } from 'react';
 import { ContextAuth } from '../../provider/Provider';
@@ -17,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Loding from '../Loding/Loding';
 import useAxiosSec from '../../Hooks/useAxiosSec';
+import axios from 'axios';
 
 const Register = () => {
   const [eye, setEye] = useState(false);
@@ -34,7 +30,7 @@ const Register = () => {
     emlPassRegister,
     gitHubLogin,
     googleLogin,
-    // logOutAcc,
+    logOutAcc,
     userDta,
     profileUpdate,
     setLoading,
@@ -43,16 +39,17 @@ const Register = () => {
 
   // Naviget, login done then go to Login
   const naviget = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    if (userDta) {
+    if (userDta && !location.state) {
       naviget('/');
-      console.log('Register to home');
+      console.log('login to home');
     }
-  }, [userDta, naviget]);
+  }, [naviget, userDta, location.state]);
 
   // const [imgNam, setImgNam] = useState({});
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     setNameErr(null);
     setImgErr(null);
     setEmailErr(null);
@@ -61,17 +58,19 @@ const Register = () => {
     e.preventDefault();
     const formDta = new FormData(e.currentTarget);
     const name = formDta.get('name');
-    const photo = formDta.get('img');
+    const photo = formDta.get('profile');
     // setImgNam({ nam: name, pic: photo });
     const email = formDta.get('email');
     const pass = formDta.get('password');
     const confPass = formDta.get('confirmPass');
-    // console.log(name, photo, imgNam, email, pass, confPass);
+    const fromDtaImg = new FormData();
+    fromDtaImg.append('image', photo);
+    console.log(name, photo, email, pass, confPass);
 
     if (name.length < 2) {
       setNameErr('Please enter your valid name.');
       return;
-    } else if (photo.length < 10) {
+    } else if (photo.name === '' || photo.size === 0) {
       setImgErr('Please enter your valid photo.');
       return;
     } else if (!isValidEmail.test(email)) {
@@ -84,62 +83,47 @@ const Register = () => {
       setConfPassErr('Password is not matched.');
       return;
     }
-    // Email password Register
-    emlPassRegister(email, pass)
-      .then((res) => {
-        const user = res.user;
-        const jwtRequet = async () => {
-          const { data } = await axiosSecu.post(`/jwt`, {
-            email: user?.email,
-          });
-          console.log('JWT Token,', data);
-        };
-        jwtRequet();
-        // Update Profile
-        profileUpdate(name, photo)
-          .then(() => {
-            Swal.fire({
-              title: 'Good job!',
-              text: 'Your account has been successfully created. Please login now.',
-              icon: 'success',
-            });
-            naviget(location?.state ? location.state : '/');
-          })
-          .catch((err) => {
-            console.log(err);
-            setLoading(false);
-            Swal.fire({
-              title: 'Oops...!',
-              text: 'Sorry, your Profile is not updated !',
-              icon: 'error',
-            });
-          });
-        // logOutAcc();
-        // naviget('/login');
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
-        setLoading(false);
-        Swal.fire({
-          title: 'Oops...!',
-          text: 'Sorry, your account could not be Created !',
-          icon: 'error',
+
+    try {
+      setLoading(true);
+      const { data } = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API}`,
+        fromDtaImg
+      );
+      const imageProfile = data.data.display_url;
+      console.log(imageProfile);
+
+      const result = await emlPassRegister(email, pass);
+      const jwtRequet = async () => {
+        const { data } = await axiosSecu.post(`/jwt`, {
+          email: result?.user?.email,
         });
+        console.log('JWT Token,', data);
+      };
+      jwtRequet();
+      // Update Profile
+      await profileUpdate(name, imageProfile);
+      Swal.fire({
+        title: 'Good job!',
+        text: 'Your account has been successfully created. Please Login Now.',
+        icon: 'success',
       });
+      await logOutAcc();
+      await naviget('/login');
+      // naviget(location?.state ? location.state : '/');
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      Swal.fire({
+        title: 'Oops...!',
+        text: `Sorry, your account could not be Created ! "${error.message}"`,
+        icon: 'error',
+      });
+    }
   };
 
   // all Social Login
   const socialLogin = (socialLogin) => {
-    if (userDta) {
-      Swal.fire({
-        title: 'Oops...!',
-        text: 'Your account is already logged in!',
-        icon: 'warning',
-      });
-      naviget('/');
-      return;
-    }
     socialLogin()
       .then((result) => {
         const user = result.user;
@@ -170,7 +154,7 @@ const Register = () => {
       });
   };
 
-  if (userDta || isLoading) {
+  if (userDta) {
     return <Loding />;
   }
   return (
@@ -213,23 +197,48 @@ const Register = () => {
               {/* Image Fild */}
               <div className="">
                 <div className="relative">
-                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none text-gray-600 dark:text-gray-200">
-                    <FaImage />
-                  </div>
-                  <input
-                    type="text"
-                    id="input-group-1"
-                    className={`bg-gray-50 py-2 text-base border  text-gray-900 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md ${
+                  <label
+                    htmlFor="small_size"
+                    className={`absolute left-0 top-0 bg-slate-800 dark:bg-slate-400  dark:font-medium px-3 rounded-l-md py-[11px] border-slate-400 dark:border-slate-100 text-base botder ${
                       imgErr
-                        ? 'border-red-500 dark:border-red-500'
-                        : 'border-gray-400 dark:border-gray-200'
+                        ? 'text-red-500 dark:text-red-500'
+                        : 'text-white dark:text-slate-800'
                     }`}
-                    placeholder="Your Image URL"
-                    name="img"
+                  >
+                    Choose Profile
+                  </label>
+                  <input
+                    className={`pl-5 block w-full mb-1 text-gray-900  rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 text-base dark:placeholder-gray-400 ${
+                      imgErr
+                        ? 'border border-red-500 dark:border-red-500'
+                        : 'border border-slate-400 dark:border-slate-100'
+                    }`}
+                    id="small_size"
+                    type="file"
+                    name="profile"
+                    placeholder="Choose Profile"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        const validImageTypes = [
+                          'image/jpeg',
+                          'image/png',
+                          'image/gif',
+                          'image/bmp',
+                          'image/webp',
+                        ];
+                        if (!validImageTypes.includes(file.type)) {
+                          alert('Please select a valid image file.');
+                          e.target.value = ''; // Clear the input
+                        }
+                      }
+                    }}
                   />
                 </div>
+
                 {imgErr && (
-                  <p className="text-sm text-red-500 italic pt-1">{imgErr}</p>
+                  <p className="text-sm text-red-500 italic">{imgErr}</p>
                 )}
               </div>
               {/* Email Fild */}
@@ -314,12 +323,16 @@ const Register = () => {
                   Privacy Policy
                 </Link>
               </label>
-              <input
-                // onClick={handeleNameImg}
-                type="submit"
-                value="Register"
-                className="w-full py-2 px-4 rounded-md text-center text-white hover:text-mClr font-bold bg-mClr active:scale-95 duration-150 cursor-pointer hover:bg-transparent border-2 border-mClr"
-              />
+              <button
+                disabled={isLoading}
+                className={`w-full py-2 px-4 rounded-md text-center text-white hover:text-mClr disabled:hover:text-white font-bold bg-mClr active:scale-95 duration-150 hover:bg-transparent border-2 border-mClr disabled:bg-mClr`}
+              >
+                {isLoading ? (
+                  <ImSpinner9 className="animate-spin text-2xl mx-auto" />
+                ) : (
+                  'Register'
+                )}
+              </button>
             </form>
             <p className="pt-3">
               Already have an account?{' '}
@@ -332,6 +345,7 @@ const Register = () => {
             </div>
             <div className="flex flex-col lg:flex-row gap-3 w-full text-slate-900 dark:text-stone-100">
               <button
+                disabled={isLoading}
                 onClick={() => socialLogin(googleLogin)}
                 className="py-2 px-4 w-full font-medium border hover:shadow-lg shadow-indigo-900/20 rounded-md flex items-center justify-center gap-2 border-mClr"
               >
@@ -341,6 +355,7 @@ const Register = () => {
                 Login With Google
               </button>
               <button
+                disabled={isLoading}
                 onClick={() => socialLogin(gitHubLogin)}
                 className="py-2 px-4 w-full font-medium border hover:shadow-lg shadow-blue-500/20 rounded-md  flex items-center justify-center gap-2 border-mClr"
               >

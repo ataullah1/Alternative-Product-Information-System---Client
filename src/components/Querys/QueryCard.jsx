@@ -13,7 +13,7 @@ const QueryCard = ({ dta }) => {
     // console.log(e);
   };
 
-  console.log(Math.floor(Math.random() * 10));
+  // console.log(Math.floor(Math.random() * 10));
   return (
     <div
       data-aos="zoom-in-up"
