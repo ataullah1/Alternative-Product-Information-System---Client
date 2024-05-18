@@ -2,7 +2,7 @@ const MiddleBanner = () => {
   return (
     <div className="relative mt-32 mb-20 h-[500px] sm:h-[600px] w-full">
       <div
-        className="bg-gradient-to-r from-[#0de46eca] to-[#07f81b8b] bg-cover bg-no-repeat bg-bottom h-full w-full"
+        className="bg-fixed bg-gradient-to-r from-[#0de46eca] to-[#07f81b8b] bg-cover bg-no-repeat bg-bottom h-full w-full"
         style={{
           backgroundImage: `url('https://i.ibb.co/5R441Gz/434534ret.jpg')`,
         }}

@@ -392,7 +392,7 @@ const QueryDetails = () => {
                 >
                   <div className="flex items-center justify-between gap-0 mb-5">
                     {/* Avatar image  */}
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-3">
                       <img
                         className="h-12 w-12 rounded-full bg-black/40 border-2 border-mClr"
                         src={dta?.recUserImg}
@@ -400,7 +400,7 @@ const QueryDetails = () => {
                       />
                       <div className="flex flex-col">
                         <h2 className="text-xl font-semibold text-slate-800 dark:text-white/90 capitalize">
-                          {'Md Ataullah'}
+                          {dta.recUserName}
                         </h2>
                         <p className="text-gray-400">{dta.dateTime}</p>
                       </div>
@@ -463,7 +463,9 @@ const QueryDetails = () => {
               ))}
             </div>
           </div>
-          <div className="w-full md:w-[30%]"></div>
+          <div className="w-full md:w-[30%]">
+            
+          </div>
         </div>
       </div>
 
