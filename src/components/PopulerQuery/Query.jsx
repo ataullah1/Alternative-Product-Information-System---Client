@@ -1,8 +1,7 @@
 import { checkPropTypes as PropTypes } from 'prop-types';
-import './query.css';
 const Query = ({ img, text }) => {
   return (
-    <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md hover:scale-105 hover:-translate-y-4 duration-300 cardAnim">
+    <div className="relative h-64 sm:h-80 pb-10 w-full rounded-md hover:scale-105 hover:-translate-y-4 duration-300">
       <div
         className="h-full w-full rounded-md bg-cover bg-center bg-no-repeat bg-gray-200"
         style={{
