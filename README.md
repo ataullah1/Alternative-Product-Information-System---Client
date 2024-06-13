@@ -54,13 +54,13 @@ The project is structured to ensure clarity and maintainability. Here’s an ove
 1. Clone the repository:
 
    ```
-   git clone https://github.com/Porgramming-Hero-web-course/b9a11-client-side-ataullah1.git
+   git clone https://github.com/ataullah1/Alternative-Product-Information-System-Client.git
    ```
 
 2. file derectory:
 
    ```
-   cd b9a11-client-side-ataullah1
+   cd Alternative-Product-Information-System-Client
    ```
 
 3. Install All package:
